@@ -33,7 +33,7 @@ class UserController extends Controller
         //判断是否存在工号
         $user = User::where('user_id', $userid)->first();
         if (!$user) {
-            return response()->json(['status' => '401']);
+            return response()->json(['status' => '400']);
         } else {
             //判断密码是否正确
             if (!Hash::check($userPwd, $user->password)) {
