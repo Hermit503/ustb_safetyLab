@@ -25,12 +25,12 @@ class CreateUsersTable extends Migration
             $table->string('phone_number',11)->nullable();
             $table->string('title')->nullable()->comment('职称');
             $table->integer('unit_id')->unsigned()->nullable()->default(0)->comment('单位id,0:最高;1:校级;2:院级;3:实验室;4:教师');
-            $table->string('roles')->nullable()->comment('身份');
+            $table->integer('role_id')->nullable()->comment('身份id');
             $table->string('nickname')->nullable()->comment('微信昵称');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->bigInteger('parent_id')->unsigned()->default(0)->comment('上级id');
+            $table->bigInteger('parent_id')->unsigned()->nullable()->comment('上级id');
             $table->foreign('parent_id')->references('id')->on('users');
             $table->rememberToken();
             $table->timestamps();
