@@ -22,5 +22,6 @@ Route::post('/register','RegisterController@register')->name('register');
 Route::get('/sucess',function(){
     return view('sucess');
 });
+Route::get('/tool','ToolController@getUserRole');
 
 //小程序路由均在api.php
