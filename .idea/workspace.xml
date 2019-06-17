@@ -7,9 +7,8 @@
       <change afterPath="$PROJECT_DIR$/../laravel-admin/app/Admin/Models/Menu.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../laravel-admin/app/Admin/Models/Permission.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../laravel-admin/app/Admin/Models/Role.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/UserFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ToolController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ToolController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -68,7 +67,7 @@
           <entry key="cell" value="21" />
           <entry key="env" value="95" />
           <entry key="json" value="39" />
-          <entry key="php" value="2320" />
+          <entry key="php" value="3434" />
           <entry key="txt" value="21" />
         </counts>
       </usages-collector>
@@ -76,7 +75,7 @@
         <counts>
           <entry key=".env file" value="35" />
           <entry key="JSON" value="39" />
-          <entry key="PHP" value="2320" />
+          <entry key="PHP" value="3434" />
           <entry key="PLAIN_TEXT" value="81" />
           <entry key="Scratch" value="21" />
         </counts>
@@ -87,7 +86,7 @@
           <entry key="json" value="6" />
           <entry key="lock" value="2" />
           <entry key="migrations" value="1" />
-          <entry key="php" value="52" />
+          <entry key="php" value="53" />
           <entry key="sql" value="3" />
           <entry key="users" value="1" />
         </counts>
@@ -98,7 +97,7 @@
           <entry key="Blade" value="2" />
           <entry key="Database Element" value="2" />
           <entry key="JSON" value="8" />
-          <entry key="PHP" value="50" />
+          <entry key="PHP" value="51" />
           <entry key="PLAIN_TEXT" value="3" />
           <entry key="Scratch" value="3" />
         </counts>
@@ -110,8 +109,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ToolController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="11" column="62" lean-forward="true" selection-start-line="11" selection-start-column="62" selection-end-line="11" selection-end-column="62" />
+            <state relative-caret-position="442">
+              <caret line="20" column="34" lean-forward="true" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
               <folding>
                 <element signature="e#40#53#0#PHP" expanded="true" />
               </folding>
@@ -120,8 +119,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/console.php">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/app/User.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="505">
+              <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -157,8 +160,8 @@
         <option value="$PROJECT_DIR$/database/migrations/2019_06_17_205224_create_roles_table.php" />
         <option value="$PROJECT_DIR$/database/factories/UserFactory.php" />
         <option value="$PROJECT_DIR$/app/Role.php" />
-        <option value="$PROJECT_DIR$/app/User.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/app/User.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ToolController.php" />
       </list>
     </option>
@@ -457,7 +460,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
-    <property name="SearchEverywhereHistoryKey" value="web&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/routes/web.php&#10;api&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/routes/api.php&#10;User&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/app/User.php&#10;.en&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/.env&#10;.e&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/.env&#10;user&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/database/migrations/2014_10_12_000000_create_users_table.php&#10;Log&#9;null&#9;null&#10;.env&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/.env&#10;Eas&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/vendor/easywechat-composer/easywechat-composer/src/EasyWeChat.php&#10;EasyWe&#9;null&#9;null&#10;Easy&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/vendor/easywechat-composer/easywechat-composer/src/EasyWeChat.php&#10;EasyWeChat&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/vendor/easywechat-composer/easywechat-composer/src/EasyWeChat.php&#10;Auth&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/config/auth.php" />
+    <property name="SearchEverywhereHistoryKey" value="Us&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/app/User.php&#10;web&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/routes/web.php&#10;api&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/routes/api.php&#10;User&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/app/User.php&#10;.en&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/.env&#10;.e&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/.env&#10;user&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/database/migrations/2014_10_12_000000_create_users_table.php&#10;Log&#9;null&#9;null&#10;.env&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/.env&#10;Eas&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/vendor/easywechat-composer/easywechat-composer/src/EasyWeChat.php&#10;EasyWe&#9;null&#9;null&#10;Easy&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/vendor/easywechat-composer/easywechat-composer/src/EasyWeChat.php&#10;EasyWeChat&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/vendor/easywechat-composer/easywechat-composer/src/EasyWeChat.php&#10;Auth&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/config/auth.php" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../laravel-admin" />
@@ -505,7 +508,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39949000" />
+    <option name="totallyTimeSpent" value="44390000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -733,22 +736,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="32" column="6" lean-forward="true" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Role.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="12" column="42" lean-forward="true" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/console.php">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -757,10 +750,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/console.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="505">
+          <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ToolController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="11" column="62" lean-forward="true" selection-start-line="11" selection-start-column="62" selection-end-line="11" selection-end-column="62" />
+        <state relative-caret-position="442">
+          <caret line="20" column="34" lean-forward="true" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
           <folding>
             <element signature="e#40#53#0#PHP" expanded="true" />
           </folding>
