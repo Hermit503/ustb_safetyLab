@@ -111,6 +111,7 @@
                                         "unit_id":vs
                                     },
                                     success:function(data){
+                                        console.log(data);
                                         var result = eval("("+data+")");
                                         var length = result.length;
                                         if(length == 0){

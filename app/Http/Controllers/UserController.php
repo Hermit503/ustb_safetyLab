@@ -49,14 +49,13 @@ class UserController extends Controller
                 $createToken->token->expires_at = Carbon::now()->addDays(30);
                 $createToken->token->save();
                 $token = $createToken->accessToken;
-
                 return response()->json([
                     'access_token' => $token,
                     'token_type' => "Bearer",
                     'expires_in' => Carbon::now()->addDays(30),
                     'data' => $user,
                     'roles'=>$user->roles,
-                    'permission'=>$user->permissions,
+                    'permissions'=>$user->permissions,
                 ],200);
             }
         }

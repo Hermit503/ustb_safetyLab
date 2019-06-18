@@ -28,4 +28,5 @@ class ToolController extends Controller
         }
         return response()->json($allUser);
     }
+
 }
