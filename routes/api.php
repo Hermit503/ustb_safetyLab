@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use App\User;
+use App\Http\Resources\UserCollection;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,4 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::group(['prefix' => '/v1'], function () {
     Route::any('/user/login', 'UserController@wxLogin');
+    Route::get('/user',function (Request $request){
+        return new UserCollection(User::where('unit_id','=','1')->get());
+    });
 });

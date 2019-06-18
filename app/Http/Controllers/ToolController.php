@@ -17,7 +17,7 @@ class ToolController extends Controller
     public function getUserRole()
     {
         $allUser = array();
-        $user = User::where('unit_id', '=', '2')->get();
+        $user = User::where('unit_id', '=', '1')->get();
         foreach ($user as $item) {
             foreach ($item->roles as $getUser) {
                 if ($getUser->role == "校级管理员" || $getUser->role == "院级管理员") {

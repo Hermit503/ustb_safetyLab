@@ -55,6 +55,8 @@ class UserController extends Controller
                     'token_type' => "Bearer",
                     'expires_in' => Carbon::now()->addDays(30),
                     'data' => $user,
+                    'roles'=>$user->roles,
+                    'permission'=>$user->permissions,
                 ],200);
             }
         }

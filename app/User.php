@@ -9,14 +9,14 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens,Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $guarded=[];
+    protected $guarded = [];
 
 
     /**
@@ -40,5 +40,9 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->hasMany(Role::class);
+    }
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class);
     }
 }
