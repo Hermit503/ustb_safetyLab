@@ -14,17 +14,18 @@ class ToolController extends Controller
      * @
      *
      * */
-    public function getUserRole()
+    public function getUserRole(Request $request)
     {
-        $allUser = array();
-        $user = User::where('unit_id', '=', '1')->get();
+        $unit_id = $request->unit_id;
+        $allUser = [];
+        $user = User::where('unit_id', '=', $unit_id)->get(['id','name']);
         foreach ($user as $item) {
             foreach ($item->roles as $getUser) {
                 if ($getUser->role == "校级管理员" || $getUser->role == "院级管理员") {
-                    array_push($allUser,$item->name);
+                    $allUser[$item->id] = $item->name;
                 }
             }
         }
-        return response()->json(array_unique($allUser));
+        return response()->json($allUser);
     }
 }

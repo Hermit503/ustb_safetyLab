@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Hash;
 class RegisterController extends Controller
 {
     public function getRegister(){
-        return view('register');
+        $app_url = getenv('APP_URL');
+        return view('register',['app_url' => $app_url]);
     }
     public function register(Request $request){
         $name = $request->name;
@@ -17,9 +18,10 @@ class RegisterController extends Controller
         $sex = $request->sex;
         $phone_number = $request->phone_number;
         $title = $request->title;
-        $unit_name = $request->unit_name;
+        $unit_id = $request->unit_id;
         $email = $request->email;
         $password = $request->password;
+        $parent_id = $request->parent_id;
 
         //表单验证
         //TODO:工号不知道几位，问一下
@@ -29,7 +31,7 @@ class RegisterController extends Controller
             'user_id'=>'required|max:12',
             'phone_number'=>'required|max:11|min:11',
             'title'=>'required',
-            'unit_name'=>'required',
+            'unit_id'=>'required',
             'email'=>'email',
             'password'=>'min:6',
             'password_confirmation'=>'required|same:password'
@@ -43,7 +45,7 @@ class RegisterController extends Controller
             'phone_number.min' => '手机号码格式不正确',
             'phone_number.max' => '手机号码格式不正确',
             'title.required' => '职称不能为空',
-            'unit_name.required' => '单位名称不能为空',
+            'unit_id.required' => '单位名称不能为空',
             'email.email' => 'Email格式不正确',
             'password.min' => '密码最少为8位',
             'password_confirmation.required'=>"确认密码不能为空",
@@ -67,14 +69,16 @@ class RegisterController extends Controller
         $user->sex = $sex;
         $user->phone_number = $phone_number;
         $user->title = $title;
-        $user->unit_name = $unit_name;
+        $user->unit_id = $unit_id;
         $user->email = $email;
         $user->password = Hash::make($password);
+        $user->parent_id = $parent_id;
 
         $user->save();
 
-        return view('sucess')->with('msg','注册成功');
-
+        return view('sucess',[
+            'msg' => '注册成功'
+        ]);
 
     }
 }

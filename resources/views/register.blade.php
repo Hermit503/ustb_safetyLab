@@ -43,7 +43,6 @@
                             <label for="sex" class="col-md-4 col-form-label text-md-right">{{ __('性别') }}</label>
 
                             <div class="col-md-6">
-{{--                                <input id="sex" type="text" class="form-control @error('sex') is-invalid @enderror" name="sex" value="{{ old('sex') }}" required>--}}
                                 <select class="form-control @error('sex') is-invalid @enderror" id="sex" name="sex" value="{{old('sex')}}">
                                     <option name="man">男</option>
                                     <option name="woman">女</option>
@@ -83,15 +82,68 @@
                         </div>
                         <!--TODO:单位没定，可以设置为select-->
                         <div class="form-group row">
-                            <label for="unit_name" class="col-md-4 col-form-label text-md-right">{{ __('单位名称') }}</label>
+                            <label for="unit_id" class="col-md-4 col-form-label text-md-right">{{ __('单位名称') }}</label>
 
                             <div class="col-md-6">
-                                <input id="unit_name" type="text" class="form-control @error('unit_name') is-invalid @enderror" name="unit_name" value="{{ old('unit_name') }}" required>
-                                @error('unit_name')
+                                {{--TODO:单位应该从数据库取，方便修改--}}
+                                <select class="form-control @error('unit_id') is-invalid @enderror" id="unit_id" name="unit_id" value="{{old('unit_id')}}" onchange="getUnit()">
+                                    <option name="index" value="0">--------请选择---------</option>
+                                    <option name="index" value="1">网络中心</option>
+                                    <option name="index" value="2">实验室管理中心</option>
+                                    <option name="index" value="3">信息工程学院</option>
+                                    <option name="index" value="4">城建学院</option>
+                                    <option name="index" value="5">材料系</option>
+                                </select>
+                                @error('unit_id')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+                        </div>
+                        <script>
+                            function getUnit(){
+                                var vs = $("#unit_id").val();
+                                $("#parent_id").empty();
+                                $.ajax({
+                                    url:'{{$app_url}}/tool',
+                                    data:{
+                                        "unit_id":vs
+                                    },
+                                    success:function(data){
+                                        var result = eval("("+data+")");
+                                        var length = result.length;
+                                        if(length == 0){
+                                            $("#parent_id").append("<option>该部门暂无领导</option>")
+                                            $("#parent_id").attr("disabled","true");
+                                        } else{
+                                            $("#parent_id").removeAttr("disabled");
+                                            for(var index in result){
+                                                $("#parent_id").append("<option value='"+index+"'>"+result[index]+"</option>")
+                                            }
+                                        }
+                                        $('#parent').css('display','block');
+                                    },
+                                    dataType:"text"
+                                });
+                            }
+                        </script>
+                        {{-- 上级领导--}}
+                        <div id="parent" name="parent" style="display: none">
+                            <div class="form-group row">
+                                <label for="parent_id" class="col-md-4 col-form-label text-md-right">{{ __('上级领导') }}</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control @error('parent_id') is-invalid @enderror" id="parent_id" name="parent_id" value="{{old('parent_id')}}">
+                                        {{-- for循环输出选择单位的领导（ 1.所属单位与选择的一致; 2.看角色，角色不是教师）--}}
+
+                                    </select>
+                                    @error('unit_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
 
