@@ -61,4 +61,14 @@ class UserController extends Controller
         }
 
     }
+    /* @ author lj
+     * @ time 2019-06-13
+     *  delete wx openid,session_key in users_table
+     *
+     * */
+    public function wxLogout(Request $request){
+        $id = $request->id;
+        User::where('id',$id)
+            ->update(['open_id' => null , 'session_key' => null]);
+    }
 }
