@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserCollection;
 use Illuminate\Http\Request;
 use App\User;
 use Carbon\Carbon;
@@ -11,11 +12,14 @@ use Laravel\Passport\HasApiTokens;
 
 class UserController extends Controller
 {
-    /* hzj
-     * 2019-06-13
-     *  get wx openid,session_key save in users_table
-     *
-     * */
+
+    /**
+     * wx openid,session_key save in users_table
+     * @author hzj
+     * @time 2019-06-13
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function wxLogin(Request $request)
     {
         $code = $request->code;
@@ -61,4 +65,21 @@ class UserController extends Controller
         }
 
     }
+
+    /**
+     * get user information
+     * @author hzj
+     * @date 2019-6-16
+     * @param Request $request
+     * @return UserCollection
+     */
+    public function getUser(Request $request)
+    {
+        if (strpos($request->role, '校级管理员')!==false) {
+            return new UserCollection(User::all());
+        } elseif (strpos($request->role, '院级管理员') !==false) {
+            return new UserCollection(User::where('unit_id', '=', $request->unit_id)->where('parent_id','=',$request->id)->get());
+        }
+    }
+
 }

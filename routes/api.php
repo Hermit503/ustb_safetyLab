@@ -17,11 +17,8 @@ use App\Http\Resources\UserCollection;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::group(['prefix' => '/v1'], function () {
     Route::any('/user/login', 'UserController@wxLogin');
-    Route::get('/users',function (Request $request){
-        if($request->unit_id=='1'){
-        return new UserCollection(User::all());
-        }
-    });
+    Route::post('/users', 'UserController@getUser');
 });
