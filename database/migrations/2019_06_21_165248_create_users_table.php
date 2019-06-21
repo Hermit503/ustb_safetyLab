@@ -24,7 +24,10 @@ class CreateUsersTable extends Migration
             $table->enum('sex',['男','女'])->default('男')->nullable();
             $table->string('phone_number',11)->nullable();
             $table->string('title')->nullable()->comment('职称');
-            $table->integer('unit_id')->unsigned()->nullable()->default(0)->comment('单位id,0:最高;1:校级;2:院级;3:实验室;4:教师');
+
+            $table->bigInteger('unit_id')->unsigned()->nullable()->comment('单位id,0:最高;1:校级;2:院级;3:实验室;4:教师');
+            $table->foreign('unit_id')->references('id')->on('units');
+
             $table->string('nickname')->nullable()->comment('微信昵称');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
