@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Role;
+use App\Unit;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,23 @@ class ToolController extends Controller
             }
         }
         return false;
+    }
+
+    /**
+     * 获取单位列表
+     * @author lj
+     * @time 2019-06-21
+     * @param null
+     * @return json单位列表
+     *
+     */
+    public function getUnitList(){
+        $units = Unit::all();
+        $allUnit = [];
+        foreach ($units as $item) {
+            $allUnit[$item->id] = $item->unit_name;
+        }
+        return response()->json($allUnit);
     }
 
     /*

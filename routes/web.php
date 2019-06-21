@@ -23,5 +23,6 @@ Route::get('/sucess',function(){
     return view('sucess');
 });
 Route::get('/tool','ToolController@getUserRole');
+Route::get('/units','ToolController@getUnitList');
 
 //小程序路由均在api.php

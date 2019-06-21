@@ -87,12 +87,7 @@
                             <div class="col-md-6">
                                 {{--TODO:单位应该从数据库取，方便修改--}}
                                 <select class="form-control @error('unit_id') is-invalid @enderror" id="unit_id" name="unit_id" value="{{old('unit_id')}}" onchange="getUnit()">
-                                    <option name="index" value="0">--------请选择---------</option>
-                                    <option name="index" value="1">网络中心</option>
-                                    <option name="index" value="2">实验室管理中心</option>
-                                    <option name="index" value="3">信息工程学院</option>
-                                    <option name="index" value="4">城建学院</option>
-                                    <option name="index" value="5">材料系</option>
+
                                 </select>
                                 @error('unit_id')
                                 <span class="invalid-feedback" role="alert">
@@ -102,6 +97,25 @@
                             </div>
                         </div>
                         <script>
+                            $.ajax({
+                                url:'{{$app_url}}/units',
+                                data:{},
+                                dataType:"text",
+                                success:function(data){
+                                    var result = eval("("+data+")");
+                                    var length = result.length;
+                                    console.log(result);
+                                    if(length == 0){
+                                        $("#unit_id").append("<option>暂无部门</option>")
+                                        $("#unit_id").attr("disabled","true");
+                                    } else{
+                                        $("#unit_id").removeAttr("disabled");
+                                        for(var index in result){
+                                            $("#unit_id").append("<option value='"+index+"'>"+result[index]+"</option>")
+                                        }
+                                    }
+                                },
+                            });
                             function getUnit(){
                                 var vs = $("#unit_id").val();
                                 $("#parent_id").empty();
