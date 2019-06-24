@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Unit;
+use App\User;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class UserCollection extends ResourceCollection
@@ -16,6 +18,7 @@ class UserCollection extends ResourceCollection
     {
         return [
             'data'=>$this->collection,
+            'unit'=>User::with('unit'),
         ];
     }
 }

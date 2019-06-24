@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserCollection;
+use App\Unit;
 use function foo\func;
 use Illuminate\Http\Request;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
@@ -77,12 +79,13 @@ class UserController extends Controller
     public function getUser(Request $request)
     {
         if (strpos($request->role, '校级管理员')!==false) {
-            return new UserCollection(User::all());
+            return User::with('unit')->get();
+
         } elseif (strpos($request->role, '院级管理员') !==false) {
-            return new UserCollection(User::where('unit_id', '=', $request->unit_id)
+            return User::where('unit_id', '=', $request->unit_id)
                 ->where('parent_id','=',$request->id)
-//                ->with('roles')
-                ->get());
+                ->with('unit')
+                ->get()->toArray();
         }
     }
 
