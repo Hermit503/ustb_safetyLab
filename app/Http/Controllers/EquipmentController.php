@@ -20,9 +20,24 @@ class EquipmentController extends Controller
     }
 
     /**
+     * 获取实验室地址
      * @author lj
      * @param Request $request
-     * @return true/false
+     * @return Object
+     * @time 2019-07-06
+     */
+    public function getLaboratory(Request $request){
+        $id = $request->laboratory_id;
+        $msg = Laboratory::where('id',$id)->get();
+        return $msg;
+    }
+
+    /**
+     * 添加设备
+     * @author lj
+     * @param Request $request
+     * @return string
+     * @time 2019-07-05
      */
     public function addEquipment(Request $request){
         $asset_number = $request->asset_number;
@@ -51,5 +66,68 @@ class EquipmentController extends Controller
         $equipment->scrap_time = $scrap_time;
 
         return "上传成功";
+    }
+
+    /**
+     * 获取修改前的设备信息
+     * @author lj
+     * @param Request $request
+     * @return Object
+     * @time 2019-07-06
+     */
+    public function oldEquipment(Request $request){
+        $id = $request->id;
+        $result = Equipment::where('id',$id)->get();
+        return $result;
+    }
+
+    /**
+     * 修改设备信息
+     * @author lj
+     * @param Request $request
+     * @return string
+     * @time 2019-07-06
+     */
+    public function updateEquipment(Request $request){
+        $id = $request->id;
+        $asset_number = $request->asset_number;
+        $equipment_name = $request->equipment_name;
+        $equipment_type = $request->equipment_type;
+        $laboratory_name = $request->laboratory_id;
+        $build_id = $request->build_id;
+        $unit_id = $request->unit_id;
+        $status = $request->status;
+        $storage_time = $request->storage_time;
+        $scrap_time = $request->scrap_time;
+
+        $laboratory = Laboratory::where('laboratory_name',$laboratory_name)->get();
+        $laboratory_id = $laboratory[0]['id'];
+
+        Equipment::where('id','=', $id)
+            ->update([
+                'asset_number' => $asset_number,
+                'equipment_name' => $equipment_name,
+                'equipment_type' => $equipment_type,
+                'laboratory_id' => $laboratory_id,
+                'build_id' => $build_id,
+                'unit_id' => $unit_id,
+                'status' => $status,
+                'storage_time' => $storage_time,
+                'scrap_time' => $scrap_time
+            ]);
+        return "修改成功";
+    }
+
+    /**
+     * 删除设备
+     * @author lj
+     * @param Request $request
+     * @return string
+     * @time 2019-07-05
+     */
+    public function deleteEquipment(Request $request){
+        $id = $request->id;
+        Equipment::destroy($id);
+        return "删除成功";
     }
 }

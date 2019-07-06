@@ -24,4 +24,8 @@ Route::group(['prefix' => '/v1'], function () {
     Route::post('/user/logout', 'UserController@wxLogout');
     Route::post('/equipments', 'EquipmentController@getEquipment');
     Route::post('/equipment/add', 'EquipmentController@addEquipment');
+    Route::get('/equipment/getold', 'EquipmentController@oldEquipment');
+    Route::get('/equipment/getlaboratory', 'EquipmentController@getLaboratory');
+    Route::post('/equipment/update', 'EquipmentController@updateEquipment');
+    Route::get('/equipment/delete', 'EquipmentController@deleteEquipment');
 });
