@@ -22,4 +22,6 @@ Route::group(['prefix' => '/v1'], function () {
     Route::any('/user/login', 'UserController@wxLogin');
     Route::post('/users', 'UserController@getUser');
     Route::post('/user/logout', 'UserController@wxLogout');
+    Route::get('/user/{id}','UserController@getOneUser');
+    Route::put('/user/{id}','UserController@updateUser');
 });
