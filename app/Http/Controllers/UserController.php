@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserCollection;
+use App\Permission;
 use App\Unit;
 use function foo\func;
 use Illuminate\Http\Request;
@@ -137,15 +138,40 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->phone_number = $request->phone;
         $user->unit_id = $request->unit_id;
+        $user->title = $request->title;
         $user->save();
-//        Log::info($user);
-        Log::alert('有数据更新 ',$request->all());
+        $str_permission = $request->permission;
+        $permissions = explode(",",$str_permission);
+        foreach ($permissions as $permission){
+            Permission::updateOrCreate(
+                ['user_id'=>$request->user_id,'permission'=>$permission]
+            );
+        }
+        Log::alert('All',$request->all());
+        Log::info($permission);
         return response()->json([],200);
     }
 
 
+    /***
+     * 删除人员
+     * @date 2019-07-07
+     * @author hzj
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function deleteUser(Request $request)
+    {
+        $user = User::where('user_id', '=', $request->userId)->first();
+        $user->permissions()->delete();
+        $user->roles()->delete();
+        $user->delete();
+        return response([],204);
+//        $user->delete();
+//        $user->unit->delete();
 
 
+    }
 
 
 
