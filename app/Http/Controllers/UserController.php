@@ -80,10 +80,11 @@ class UserController extends Controller
     public function getUser(Request $request)
     {
         if (strpos($request->role, '校级管理员')!==false) {
-            return User::with('unit')->get();
+            return User::where('isDelete','1')->with('unit')->get();
 
         } elseif (strpos($request->role, '院级管理员') !==false) {
             return User::where('unit_id', $request->unit_id)
+                ->where('isDelete','1')
                 ->where('parent_id',$request->id)
                 ->with('unit')
                 ->get()->toArray();
@@ -141,6 +142,22 @@ class UserController extends Controller
 //        Log::info($user);
         Log::alert('有数据更新 ',$request->all());
         return response()->json([],200);
+    }
+
+    /**
+     * 人员信息修改
+     * @author lj
+     * @date 2019-07-07
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteUser(Request $request)
+    {
+        $id = $request->id;
+        User::where('id','=', $id)
+            ->update(['isDelete' => '0']);
+        Log::alert('有用户信息被删除 ',$request->all());
+        return "删除成功";
     }
 
 
