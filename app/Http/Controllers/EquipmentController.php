@@ -15,7 +15,9 @@ class EquipmentController extends Controller
      */
     public function getEquipment(Request $request){
         $unit_id = $request->unit_id;
-        $equipments = Equipment::where('unit_id',$unit_id)->get();
+        $equipments = Equipment::where('unit_id',$unit_id)
+            ->where('isDelete','=','1')
+            ->get();
         return $equipments;
     }
 
@@ -64,6 +66,8 @@ class EquipmentController extends Controller
         $equipment->status = $status;
         $equipment->storage_time = $storage_time;
         $equipment->scrap_time = $scrap_time;
+
+        $equipment->save();
 
         return "上传成功";
     }
@@ -124,10 +128,14 @@ class EquipmentController extends Controller
      * @param Request $request
      * @return string
      * @time 2019-07-05
+     * 新增字段isDelete,删除时为0,默认为1
+     * @author lj
+     * @time 2019-07-07
      */
     public function deleteEquipment(Request $request){
         $id = $request->id;
-        Equipment::destroy($id);
+        Equipment::where('id','=', $id)
+            ->update(['isDelete' => '0']);
         return "删除成功";
     }
 }

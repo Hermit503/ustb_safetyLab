@@ -34,6 +34,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->bigInteger('parent_id')->unsigned()->nullable()->comment('上级id');
             $table->foreign('parent_id')->references('id')->on('users');
+
+            //软删除，删除时为0，默认为1
+            $table->enum('isDelete',[0,1])->default(1)->nullable()->comment('软删除字段，删除为0，默认为1');
+
             $table->rememberToken();
             $table->timestamps();
         });
