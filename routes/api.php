@@ -28,11 +28,22 @@ Route::group(['prefix' => '/v1'], function () {
     Route::get('/user/{id}','UserController@getOneUser');
     //修改用户信息
     Route::put('/user/{id}','UserController@updateUser');
+    //删除用户
+    Route::delete('/user/{id}','UserController@deleteUser');
 
+    //获取设备列表
     Route::get('/equipments', 'EquipmentController@getEquipment');
+    //新增设备
     Route::post('/equipment/add', 'EquipmentController@addEquipment');
-    Route::get('/equipment/getold', 'EquipmentController@oldEquipment');
-    Route::get('/equipment/getlaboratory', 'EquipmentController@getLaboratory');
-    Route::put('/equipment/update', 'EquipmentController@updateEquipment');
-    Route::delete('/equipment/delete', 'EquipmentController@deleteEquipment');
+    //获取单个设备信息
+    Route::get('/equipment/{id}', 'EquipmentController@getOneEquipment');
+    //通过实验室id获取实验室名称TODO:可优化
+    Route::get('/equipment/getlaboratory/{id}', 'EquipmentController@getLaboratory');
+    //修改设备信息
+    Route::put('/equipment/{id}', 'EquipmentController@updateEquipment');
+    //删除设备信息
+    Route::delete('/equipment/{id}', 'EquipmentController@deleteEquipment');
+
+    //获取实验室地址列表
+    Route::get('/getlaboratory/List/{unit_id}', 'EquipmentController@getLaboratoryList');
 });
