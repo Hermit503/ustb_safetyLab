@@ -10,6 +10,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
 
@@ -40,11 +41,11 @@ class UserController extends Controller
         //判断是否存在工号
         $user = User::where('user_id', $userid)->first();
         if (!$user) {
-            return response()->json(['status' => '400']);
+            return response()->json([],400);
         } else {
             //判断密码是否正确
             if (!Hash::check($userPwd, $user->password)) {
-                return response()->json(['status' => '401']);
+                return response()->json([],401);
             } else {
                 //覆盖用户之前登录信息
                 $user->open_id = $openId;
@@ -82,12 +83,71 @@ class UserController extends Controller
             return User::with('unit')->get();
 
         } elseif (strpos($request->role, '院级管理员') !==false) {
-            return User::where('unit_id', '=', $request->unit_id)
-                ->where('parent_id','=',$request->id)
+            return User::where('unit_id', $request->unit_id)
+                ->where('parent_id',$request->id)
                 ->with('unit')
                 ->get()->toArray();
         }
     }
+
+
+    /***
+     * wx add user
+     * @author hzj
+     * @date 2019-6-25
+     * @param Request $request
+     */
+    public function addUser(Request $request)
+    {
+        //
+    }
+
+    /**
+     * 更新用户所需要的信息
+     * @author hzj
+     * @date 2019-07-05
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getOneUser(Request $request)
+    {
+        $user_id = $request->id;
+        $user = User::where('user_id', $user_id)
+            ->with('unit')
+            ->with('permissions')
+            ->first();
+        $units = Unit::all();
+        return response()->json([
+            'userInfo'=>$user,
+            'units'=>$units
+        ],200);
+    }
+
+    /**
+     * 人员信息修改
+     * @author hzj
+     * @date 2019-07-06
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateUser(Request $request)
+    {
+        $user = User::where('user_id', $request->user_id)->first();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone_number = $request->phone;
+        $user->unit_id = $request->unit_id;
+        $user->save();
+//        Log::info($user);
+        Log::alert('有数据更新 ',$request->all());
+        return response()->json([],200);
+    }
+
+
+
+
+
+
 
     /* @ author lj
      * @ time 2019-06-13
