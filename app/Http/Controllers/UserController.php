@@ -42,11 +42,11 @@ class UserController extends Controller
         //判断是否存在工号
         $user = User::where('user_id', $userid)->first();
         if (!$user) {
-            return response()->json([],400);
+            return response()->json([], 400);
         } else {
             //判断密码是否正确
             if (!Hash::check($userPwd, $user->password)) {
-                return response()->json([],401);
+                return response()->json([], 401);
             } else {
                 //覆盖用户之前登录信息
                 $user->open_id = $openId;
@@ -63,9 +63,9 @@ class UserController extends Controller
                     'token_type' => "Bearer",
                     'expires_in' => Carbon::now()->addDays(30),
                     'data' => $user,
-                    'roles'=>$user->roles,
-                    'permissions'=>$user->permissions,
-                ],200);
+                    'roles' => $user->roles,
+                    'permissions' => $user->permissions,
+                ], 200);
             }
         }
 
@@ -80,16 +80,38 @@ class UserController extends Controller
      */
     public function getUser(Request $request)
     {
-        if (strpos($request->role, '校级管理员')!==false) {
-            return User::where('isDelete','1')->with('unit')->get();
+        if (strpos($request->role, '校级管理员') !== false) {
+            return User::where('isDelete', '0')->with('unit')->get();
 
-        } elseif (strpos($request->role, '院级管理员') !==false) {
+        } elseif (strpos($request->role, '院级管理员') !== false) {
             return User::where('unit_id', $request->unit_id)
-                ->where('isDelete','1')
-                ->where('parent_id',$request->id)
+                ->where('isDelete', '0')
+                ->where('parent_id', $request->id)
                 ->with('unit')
                 ->get()->toArray();
         }
+    }
+
+    public function hasPermission(Request $request)
+    {
+        $userPermission = Permission::where('user_id', $request->user_id)
+            ->where('permission', 'like', '%' . $request->permission)->get()->toArray();
+        if ($userPermission) {
+            return response()->json([
+                'hasPermission' => 1,
+                'permission' => $userPermission
+            ], 200);
+        } else {
+            return response()->json([
+                'hasPermission' => 0
+            ], 200);
+        }
+//        Log::info($userPermission);
+
+
+//        return response()->json([
+//            'req'=>$request->permission
+//        ]);
     }
 
 
@@ -120,9 +142,9 @@ class UserController extends Controller
             ->first();
         $units = Unit::all();
         return response()->json([
-            'userInfo'=>$user,
-            'units'=>$units
-        ],200);
+            'userInfo' => $user,
+            'units' => $units
+        ], 200);
     }
 
     /**
@@ -142,15 +164,15 @@ class UserController extends Controller
         $user->title = $request->title;
         $user->save();
         $str_permission = $request->permission;
-        $permissions = explode(",",$str_permission);
-        foreach ($permissions as $permission){
+        $permissions = explode(",", $str_permission);
+        foreach ($permissions as $permission) {
             Permission::updateOrCreate(
-                ['user_id'=>$request->user_id,'permission'=>$permission]
+                ['user_id' => $request->user_id, 'permission' => $permission]
             );
         }
-        Log::alert('All',$request->all());
+        Log::alert('All', $request->all());
         Log::info($permission);
-        return response()->json([],200);
+        return response()->json([], 200);
     }
 
     /**
@@ -163,9 +185,9 @@ class UserController extends Controller
     public function deleteUser(Request $request)
     {
         $id = $request->id;
-        User::where('id','=', $id)
-            ->update(['isDelete' => '0']);
-        Log::alert('有用户信息被删除 ',$request->all());
+        User::where('id', '=', $id)
+            ->update(['isDelete' => '1']);
+        Log::alert('有用户信息被删除 ', $request->all());
         return "删除成功";
     }
 
@@ -177,19 +199,18 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function deleteUser(Request $request)
-    {
-        $user = User::where('user_id', '=', $request->userId)->first();
-        $user->permissions()->delete();
-        $user->roles()->delete();
-        $user->delete();
-        return response([],204);
+//    public function deleteUser(Request $request)
+//    {
+//        $user = User::where('user_id', '=', $request->userId)->first();
+//        $user->permissions()->delete();
+//        $user->roles()->delete();
+//        $user->delete();
+//        return response([],204);
 //        $user->delete();
 //        $user->unit->delete();
-
-
-    }
-
+//
+//
+//    }
 
 
     /* @ author lj
@@ -197,9 +218,10 @@ class UserController extends Controller
      *  delete wx openid,session_key in users_table
      *
      * */
-    public function wxLogout(Request $request){
+    public function wxLogout(Request $request)
+    {
         $id = $request->id;
-        User::where('id',$id)
-            ->update(['open_id' => null , 'session_key' => null]);
+        User::where('id', $id)
+            ->update(['open_id' => null, 'session_key' => null]);
     }
 }

@@ -31,6 +31,8 @@ Route::group(['prefix' => '/v1'], function () {
     Route::put('/users/{id}','UserController@updateUser');
     //删除用户
     Route::delete('/users/{id}','UserController@deleteUser');
+    //判断用户权限
+    Route::get('/users/permissions/{id}','UserController@hasPermission');
 
 
     //获取设备列表
