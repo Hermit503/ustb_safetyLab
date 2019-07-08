@@ -36,7 +36,7 @@ class CreateUsersTable extends Migration
             $table->foreign('parent_id')->references('id')->on('users');
 
             //软删除，删除时为0，默认为1
-            $table->enum('isDelete',[0,1])->default(0)->nullable()->comment('软删除字段，删除为0，默认为1');
+            $table->enum('isDelete',[0,1])->default(0)->nullable()->comment('软删除字段，删除为1，默认为0');
 
             $table->rememberToken();
             $table->timestamps();

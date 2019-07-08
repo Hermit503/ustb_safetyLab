@@ -30,7 +30,7 @@ class CreateEquipmentTable extends Migration
             $table->enum('status',['正常','维修','报废'])->nullable()->comment('状态');
 
             //软删除，删除时为0，默认为1
-            $table->enum('isDelete',[0,1])->default(1)->nullable()->comment('软删除字段，删除为0，默认为1');
+            $table->enum('isDelete',[0,1])->default(0)->nullable()->comment('软删除字段，删除为1，默认为0');
 
             $table->date('fix_time')->nullable()->comment('最近检修时间');
             $table->date('storage_time')->comment('入库时间');

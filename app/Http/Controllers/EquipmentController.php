@@ -16,7 +16,7 @@ class EquipmentController extends Controller
     public function getEquipment(Request $request){
         $unit_id = $request->unit_id;
         $equipments = Equipment::where('unit_id',$unit_id)
-            ->where('isDelete','=','1')
+            ->where('isDelete','=','0')
             ->get();
         return $equipments;
     }
@@ -29,7 +29,7 @@ class EquipmentController extends Controller
      * @time 2019-07-06
      */
     public function getLaboratory(Request $request){
-        $id = $request->laboratory_id;
+        $id = $request->id;
         $msg = Laboratory::where('id',$id)->get();
         return $msg;
     }
@@ -79,7 +79,7 @@ class EquipmentController extends Controller
      * @return Object
      * @time 2019-07-06
      */
-    public function oldEquipment(Request $request){
+    public function getOneEquipment(Request $request){
         $id = $request->id;
         $result = Equipment::where('id',$id)->get();
         return $result;
@@ -128,14 +128,14 @@ class EquipmentController extends Controller
      * @param Request $request
      * @return string
      * @time 2019-07-05
-     * 新增字段isDelete,删除时为0,默认为1
+     * 新增字段isDelete,删除时为1,默认为0
      * @author lj
      * @time 2019-07-07
      */
     public function deleteEquipment(Request $request){
         $id = $request->id;
         Equipment::where('id','=', $id)
-            ->update(['isDelete' => '0']);
+            ->update(['isDelete' => '1']);
         return "删除成功";
     }
 }
