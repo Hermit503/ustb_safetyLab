@@ -6,6 +6,7 @@ use App\Http\Resources\UserCollection;
 use App\Permission;
 use App\Unit;
 use function foo\func;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use App\User;
 use Carbon\Carbon;
@@ -170,8 +171,8 @@ class UserController extends Controller
                 ['user_id' => $request->user_id, 'permission' => $permission]
             );
         }
-        Log::alert('All', $request->all());
-        Log::info($permission);
+//        Log::alert('All', $request->all());
+//        Log::info($permission);
         return response()->json([], 200);
     }
 
@@ -184,33 +185,11 @@ class UserController extends Controller
      */
     public function deleteUser(Request $request)
     {
-        $id = $request->id;
-        User::where('id', '=', $id)
+        User::where('user_Id', '=', $request->user_Id)
             ->update(['isDelete' => '1']);
         Log::alert('有用户信息被删除 ', $request->all());
-        return "删除成功";
+        return response('Deleted',204);
     }
-
-
-    /***
-     * 删除人员
-     * @date 2019-07-07
-     * @author hzj
-     * @param Request $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     */
-//    public function deleteUser(Request $request)
-//    {
-//        $user = User::where('user_id', '=', $request->userId)->first();
-//        $user->permissions()->delete();
-//        $user->roles()->delete();
-//        $user->delete();
-//        return response([],204);
-//        $user->delete();
-//        $user->unit->delete();
-//
-//
-//    }
 
 
     /* @ author lj

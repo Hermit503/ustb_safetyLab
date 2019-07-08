@@ -7,11 +7,7 @@
       <change afterPath="$PROJECT_DIR$/../laravel-admin/app/Admin/Models/Menu.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../laravel-admin/app/Admin/Models/Permission.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../laravel-admin/app/Admin/Models/Role.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/factories/UserFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_06_21_165248_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_06_21_165248_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +72,7 @@
           <entry key="env" value="95" />
           <entry key="json" value="39" />
           <entry key="log" value="13" />
-          <entry key="php" value="9183" />
+          <entry key="php" value="9270" />
           <entry key="txt" value="21" />
         </counts>
       </usages-collector>
@@ -85,7 +81,7 @@
           <entry key=".env file" value="35" />
           <entry key="Blade" value="22" />
           <entry key="JSON" value="39" />
-          <entry key="PHP" value="9161" />
+          <entry key="PHP" value="9248" />
           <entry key="PLAIN_TEXT" value="94" />
           <entry key="Scratch" value="21" />
         </counts>
@@ -98,7 +94,7 @@
           <entry key="lock" value="2" />
           <entry key="log" value="13" />
           <entry key="migrations" value="1" />
-          <entry key="php" value="124" />
+          <entry key="php" value="125" />
           <entry key="sql" value="3" />
           <entry key="users" value="1" />
           <entry key="xml" value="1" />
@@ -110,7 +106,7 @@
           <entry key="Blade" value="3" />
           <entry key="Database Element" value="2" />
           <entry key="JSON" value="8" />
-          <entry key="PHP" value="121" />
+          <entry key="PHP" value="122" />
           <entry key="PLAIN_TEXT" value="18" />
           <entry key="Scratch" value="3" />
           <entry key="XML" value="1" />
@@ -123,8 +119,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="553">
-              <caret line="106" column="20" lean-forward="true" selection-start-line="106" selection-start-column="20" selection-end-line="106" selection-end-column="20" />
+            <state relative-caret-position="241">
+              <caret line="187" column="54" lean-forward="true" selection-start-line="187" selection-start-column="54" selection-end-line="187" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -132,8 +128,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/storage/logs/laravel-2019-07-08.log">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="26">
-              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="130">
+              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/api.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="31" column="10" lean-forward="true" selection-start-line="31" selection-start-column="10" selection-end-line="32" selection-end-column="22" />
+              <folding>
+                <element signature="e#7#35#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -479,12 +487,6 @@
               <item name="saftyLab" type="462c0819:PsiDirectoryNode" />
               <item name="storage" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="saftyLab" type="b2602c69:ProjectViewProjectNode" />
-              <item name="saftyLab" type="462c0819:PsiDirectoryNode" />
-              <item name="storage" type="462c0819:PsiDirectoryNode" />
-              <item name="logs" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -547,12 +549,12 @@
       <workItem from="1562327642325" duration="2777000" />
       <workItem from="1562421963144" duration="6359000" />
       <workItem from="1562463710485" duration="13174000" />
-      <workItem from="1562553259260" duration="8907000" />
+      <workItem from="1562553259260" duration="11508000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122560000" />
+    <option name="totallyTimeSpent" value="125161000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1913" y="-7" width="1550" height="838" extended-state="6" />
@@ -840,8 +842,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="39" />
+        <state relative-caret-position="375">
+          <caret line="31" column="10" lean-forward="true" selection-start-line="31" selection-start-column="10" selection-end-line="32" selection-end-column="22" />
           <folding>
             <element signature="e#7#35#0#PHP" expanded="true" />
           </folding>
@@ -850,15 +852,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/storage/logs/laravel-2019-07-08.log">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="130">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="106" column="20" lean-forward="true" selection-start-line="106" selection-start-column="20" selection-end-line="106" selection-end-column="20" />
+        <state relative-caret-position="241">
+          <caret line="187" column="54" lean-forward="true" selection-start-line="187" selection-start-column="54" selection-end-line="187" selection-end-column="54" />
         </state>
       </provider>
     </entry>
