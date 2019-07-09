@@ -17,7 +17,8 @@ class CreateLaboratoriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('laboratory_name')->comment('实验室名称');
             $table->enum('laboratory_type',['物理','化学'])->comment('实验室类别');
-            $table->string('laboratory_address')->comment('实验室地址');
+            $table->string('building_name')->comment('教学楼名称');
+            $table->string('classroom_num')->comment('教室名称');
 
             $table->bigInteger('unit_id')->unsigned()->comment('实验室管理单位id');
             $table->foreign('unit_id')->references('id')->on('units');

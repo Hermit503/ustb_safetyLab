@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Equipment;
 use App\Laboratory;
+use App\Permission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class EquipmentController extends Controller
 {
@@ -32,6 +34,72 @@ class EquipmentController extends Controller
         $id = $request->id;
         $msg = Laboratory::where('id',$id)->get();
         return $msg;
+    }
+
+    /**
+     * 获取实验室地址列表
+     * @author lj
+     * @param Request $request
+     * @return json
+     * @time 2019-07-09
+     */
+    public function getLaboratoryList(Request $request){
+        $unit_id = $request->unit_id;
+        $laboratory = Laboratory::where('unit_id',$unit_id)->get();
+        $laboratoryAll = [];
+        $laboratoryBuild = [];
+        $laboratoryClassroom = [];
+        $i = 0;
+        foreach ($laboratory as $item) {
+            $laboratoryBuild[$i] = $item->building_name;
+            $laboratoryClassroom[$i] = $item->classroom_num;
+            $i = $i+1;
+        }
+
+        $length=count($laboratoryBuild);
+        $length2=count($laboratoryClassroom);
+
+        for($i = 0 ; $i < $length ; $i++){
+            if(array_key_exists($i,$laboratoryBuild)){
+                for($j = $i+1; $j < $length ; $j++){
+                    if(strcmp($laboratoryBuild[$j] , $laboratoryBuild[$i]) == 0){
+                        unset($laboratoryBuild[$j]);
+                    }else{
+                        continue;
+                    }
+                }
+            }else{
+                continue;
+            }
+        }
+
+        for($x = 0 ; $x < $length2 ; $x++){
+            if(array_key_exists($x,$laboratoryClassroom)){
+                for($y = $x+1; $y < $length2 ; $y++){
+                    if(strcmp($laboratoryClassroom[$y] , $laboratoryClassroom[$x]) == 0){
+                        unset($laboratoryClassroom[$y]);
+                    }else{
+                        continue;
+                    }
+                }
+            }else{
+                continue;
+            }
+        }
+
+        $q = 0;
+        $w = 0;
+        foreach ($laboratoryBuild as $item1){
+            $laboratoryAll[0][$q] = $item1;
+            $q += 1;
+        }
+
+        foreach ($laboratoryClassroom as $item2){
+            $laboratoryAll[1][$w] = $item2;
+            $w += 1;
+        }
+
+        return $laboratoryAll;
     }
 
     /**
@@ -82,7 +150,9 @@ class EquipmentController extends Controller
     public function getOneEquipment(Request $request){
         $id = $request->id;
         $result = Equipment::where('id',$id)->get();
-        return $result;
+        return response()->json([
+            'result'=>$result
+        ],200);
     }
 
     /**
@@ -119,7 +189,7 @@ class EquipmentController extends Controller
                 'storage_time' => $storage_time,
                 'scrap_time' => $scrap_time
             ]);
-        return "修改成功";
+        return response()->json([], 200);
     }
 
     /**
@@ -136,6 +206,7 @@ class EquipmentController extends Controller
         $id = $request->id;
         Equipment::where('id','=', $id)
             ->update(['isDelete' => '1']);
-        return "删除成功";
+        Log::alert('有设备信息被删除 ', $request->all());
+        return response('Deleted',204);
     }
 }
