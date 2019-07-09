@@ -49,4 +49,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Unit::class);
     }
+    public function hiddens()
+    {
+        return $this->belongsTo(Hidden::class,'user_id','user_id');
+    }
 }

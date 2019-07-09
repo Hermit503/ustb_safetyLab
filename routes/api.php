@@ -22,7 +22,7 @@ Route::group(['prefix' => '/v1'], function () {
     //用户微信登录
     Route::any('/user/login', 'UserController@wxLogin');
     //获取用户信息
-    Route::post('/users', 'UserController@getUser');
+    Route::get('/users', 'UserController@getUser');
     //用户注销
     Route::post('/user/logout', 'UserController@wxLogout');
     //获取单个用户
@@ -50,4 +50,7 @@ Route::group(['prefix' => '/v1'], function () {
 
     //获取实验室地址列表
     Route::get('/getlaboratory/List/{unit_id}', 'EquipmentController@getLaboratoryList');
+
+    //隐患上传
+    Route::post('/hiddens','HiddenController@addHidden');
 });
