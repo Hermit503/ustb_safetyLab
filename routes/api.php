@@ -53,4 +53,8 @@ Route::group(['prefix' => '/v1'], function () {
 
     //隐患上传
     Route::post('/hiddens','HiddenController@addHidden');
+    //获取隐患列表
+    Route::get('/hiddens','HiddenController@getHidden');
+    //保存隐患照片
+    Route::post('/hiddens/upload','HiddenController@saveHiddenImage');
 });
