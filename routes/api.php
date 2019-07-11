@@ -33,7 +33,8 @@ Route::group(['prefix' => '/v1'], function () {
     Route::delete('/users/{id}','UserController@deleteUser');
     //判断用户权限
     Route::get('/users/permissions/{id}','UserController@hasPermission');
-
+    //用户搜索
+    Route::get('/searchUser','UserController@searchUser');
 
     //获取设备列表
     Route::get('/equipments', 'EquipmentController@getEquipment');
@@ -47,6 +48,8 @@ Route::group(['prefix' => '/v1'], function () {
     Route::put('/equipment/{id}', 'EquipmentController@updateEquipment');
     //删除设备信息
     Route::delete('/equipment/{id}', 'EquipmentController@deleteEquipment');
+    //设备搜索
+    Route::get('/searchEquipment','EquipmentController@searchEquipment');
 
     //获取实验室地址列表
     Route::get('/getlaboratory/List/{unit_id}', 'EquipmentController@getLaboratoryList');

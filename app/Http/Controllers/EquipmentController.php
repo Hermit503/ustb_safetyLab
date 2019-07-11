@@ -209,4 +209,22 @@ class EquipmentController extends Controller
         Log::alert('有设备信息被删除 ', $request->all());
         return response('Deleted',204);
     }
+
+    /**
+     * 搜索设备
+     * @author lj
+     * @param Request $request
+     * @return Object/string
+     * @time 2019-07-11
+     */
+    public function searchEquipment(Request $request)
+    {
+        $keyword = $request->keyword;
+        $result = Equipment::where('equipment_name',$keyword)->get()->toArray();
+        if($result){
+            return $result;
+        }else{
+            return "您管辖的部门暂无此设备";
+        }
+    }
 }

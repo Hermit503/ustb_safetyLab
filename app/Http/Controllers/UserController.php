@@ -203,4 +203,23 @@ class UserController extends Controller
         User::where('id', $id)
             ->update(['open_id' => null, 'session_key' => null]);
     }
+
+    /**
+     * 搜索人员
+     * @author lj
+     * @param Request $request
+     * @return Object/string
+     * @time 2019-07-11
+     */
+    public function searchUser(Request $request)
+    {
+        $keyword = $request->keyword;
+        $result = User::where('name',$keyword)->with('unit')->get()->toArray();
+        if($result){
+            return $result;
+        }else{
+            return "您管辖的部门暂无此人";
+        }
+
+    }
 }
