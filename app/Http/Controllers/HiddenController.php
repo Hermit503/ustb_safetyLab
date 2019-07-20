@@ -26,7 +26,7 @@ class HiddenController extends Controller
 
     public function getHidden(Request $request)
     {
-        return Hidden::all();
+        return Hidden::paginate(10);
     }
 
     public function saveHiddenImage(Request $request)
