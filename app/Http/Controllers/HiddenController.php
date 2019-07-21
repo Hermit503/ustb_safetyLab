@@ -27,7 +27,10 @@ class HiddenController extends Controller
 
     public function getHidden(Request $request)
     {
-        return Hidden::paginate(10);
+        $hidden = Hidden::orderBy('created_at','desc')->paginate(10);
+        return response()->json([
+            'hidden'=>$hidden
+        ],200);
     }
 
     /**
@@ -43,14 +46,25 @@ class HiddenController extends Controller
         return Storage::url($path);///storage/hiddensImage/sPgs2P4lIkfaphxymlrF2dRj4rshfQMFxJ3clkZy.jpeg
     }
 
+    /**
+     * 获取隐患详情  、
+     * @date 2019-07-21
+     * @author hzj
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getHiddenDetail(Request $request)
     {
-        $detail = Hidden::where('user_id',$request->user_id)
-            ->where('title',$request->title)
+        $detail = Hidden::where('user_id', $request->user_id)
+            ->where('title', $request->title)
             ->get();
+        $user = User::where('user_id', $request->user_id)->first();
 //        Log::info($request);
-
-        return $detail;
+        Log::info(Hidden::all());
+        return response()->json([
+            'detail' => $detail,
+            'user' => $user
+        ], 200);
 //        Log::info($detail);
 //        return response()->json([
 //            'detail'=>$detail,
