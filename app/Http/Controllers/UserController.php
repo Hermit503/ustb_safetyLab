@@ -107,12 +107,6 @@ class UserController extends Controller
                 'hasPermission' => 0
             ], 200);
         }
-//        Log::info($userPermission);
-
-
-//        return response()->json([
-//            'req'=>$request->permission
-//        ]);
     }
 
 

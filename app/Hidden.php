@@ -12,5 +12,11 @@ class Hidden extends Model
     {
         return $this->hasMany(User::class);
     }
+    public function hiddens_logs()
+    {
+        return $this->hasMany(HiddensLog::class,'hidden_id','id');
+    }
+
+
 }
 

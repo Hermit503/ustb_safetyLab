@@ -74,4 +74,6 @@ Route::group(['prefix' => '/v1'], function () {
 
     //获取隐患详情
     Route::put('/hiddens/{id}','HiddenController@getHiddenDetail');
+    //隐患处理Log
+    Route::post('/hiddensLog','HiddenController@addHiddenLog');
 });
