@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\ToolController;
 use App\Hidden;
 use App\HiddensLog;
 use App\User;
@@ -12,9 +13,14 @@ use Illuminate\Support\Facades\Storage;
 
 class HiddenController extends Controller
 {
+    /** 隐患上传
+     * @author hzj
+     * @date 2019-07-10
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function addHidden(Request $request)
     {
-
         $hidden = new Hidden();
         $hidden->user_id = $request->user_id;
         $hidden->position = $request->position;
@@ -27,6 +33,12 @@ class HiddenController extends Controller
         return response('', 201);
     }
 
+    /**返回隐患列表 倒序输出
+     * @author hzj
+     * @date 2019-07-22
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getHidden(Request $request)
     {
         $hidden = Hidden::orderBy('created_at', 'desc')->paginate(10);
@@ -35,7 +47,7 @@ class HiddenController extends Controller
         ], 200);
     }
 
-    /**
+    /**保存图片 返回路径
      * @author hzj
      * @date 2019-07-11
      * @param Request $request
@@ -43,13 +55,13 @@ class HiddenController extends Controller
      */
     public function saveHiddenImage(Request $request)
     {
-        Log::info($request);
+//        Log::info($request);
         $path = $request->file('file')->store('public/hiddensImage');
         return Storage::url($path);//storage/hiddensImage/sPgs2P4lIkfaphxymlrF2dRj4rshfQMFxJ3clkZy.jpeg
     }
 
     /**
-     * 获取隐患详情  、
+     * 获取单个隐患详情
      * @date 2019-07-21
      * @author hzj
      * @param Request $request
@@ -57,12 +69,12 @@ class HiddenController extends Controller
      */
     public function getHiddenDetail(Request $request)
     {
+
         $detail = Hidden::where('user_id', $request->user_id)
             ->where('title', $request->title)
             ->with('hiddens_logs')
             ->get();
         $user = User::where('user_id', $request->user_id)->first();
-
         Log::info($detail);
         return response()->json([
             'detail' => $detail,
@@ -71,6 +83,7 @@ class HiddenController extends Controller
     }
 
     /***
+     * 处理隐患  生成记录
      * @date 2019-07-24
      * @author hzj
      * @param Request $request
@@ -82,19 +95,25 @@ class HiddenController extends Controller
             ->where('title', $request->title)
             ->get('id');
         //判断改变状态
-        if (strlen($request->solveStatus)==4){
+        if ($request->solveStatus == "true") {
             $hidden = Hidden::where('user_id', $request->reportPerson)
                 ->where('title', $request->title)->first();
-            $hidden->isSolve =1;
+            $hidden->isSolve = 1;
             $hidden->save();
         }
         //添加log到数据库
+        $name = (new ToolController)->getUsername($request->user_id);
         $hiddenLog = new HiddensLog();
         $hiddenLog->hidden_id = $hidden_id[0]->id;
-        $hiddenLog->user_id = $request->user_id;
+        $hiddenLog->user_name = $name;
         $hiddenLog->reason = $request->reason;
-        $hiddenLog->image = $request->image;
+        if ($request->image!=null) {
+            $hiddenLog->image = env('APP_URL') .$request->image;
+            $hiddenLog->isSolve = '1';
+        } else{
+            $hiddenLog->image = null;
+        }
         $hiddenLog->save();
-        return response()->json([],201);
+        return response()->json([], 201);
     }
 }

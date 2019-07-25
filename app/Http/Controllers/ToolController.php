@@ -6,6 +6,7 @@ use App\Role;
 use App\Unit;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ToolController extends Controller
 {
@@ -62,6 +63,12 @@ class ToolController extends Controller
             }
         }
         return response()->json($allUser);
+    }
+
+    public function getUserName($user_id)
+    {
+        $name = User::where('user_id',$user_id)->get('name');
+        return $name[0]->name;
     }
 
 }
