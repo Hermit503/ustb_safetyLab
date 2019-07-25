@@ -65,6 +65,13 @@ Route::group(['prefix' => '/v1'], function () {
     Route::get('/mail','MailController@sendEmail');
 
     //短信发送
+
+    //下发通知
+    Route::get('/notice','NoticeController@getList');
+    Route::get('/noticeIndex','NoticeController@getIndex');
+    Route::post('/notice/imgUpload','NoticeController@saveImage');
+    Route::post('/notice/fileUpload','NoticeController@saveFile');
+
     //获取隐患详情
     Route::put('/hiddens/{id}','HiddenController@getHiddenDetail');
     //隐患处理Log
