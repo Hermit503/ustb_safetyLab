@@ -29,7 +29,7 @@ class HiddenController extends Controller
 
     public function getHidden(Request $request)
     {
-        $hidden = Hidden::orderBy('created_at', 'desc')->paginate(10);
+        $hidden = Hidden::orderBy('created_at', 'desc')->paginate(15);
         return response()->json([
             'hidden' => $hidden
         ], 200);

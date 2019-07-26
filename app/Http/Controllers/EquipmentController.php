@@ -19,7 +19,7 @@ class EquipmentController extends Controller
         $unit_id = $request->unit_id;
         $equipments = Equipment::where('unit_id',$unit_id)
             ->where('isDelete','=','0')
-            ->paginate(10);
+            ->paginate(15);
         return $equipments;
     }
 
