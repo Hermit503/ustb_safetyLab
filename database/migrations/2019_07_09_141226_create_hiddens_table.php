@@ -17,6 +17,7 @@ class CreateHiddensTable extends Migration
             $table->bigIncrements('id');
             $table->string('user_id',20);
             $table->foreign('user_id')->references('user_id')->on('users');
+            $table->enum('type',['hidden','issue'])->default('hidden')->comment('类型');
             $table->string('position')->nullable()->comment('位置');
             $table->string('title')->nullable()->comment('标题');
             $table->string('detail')->nullable()->comment('详情');

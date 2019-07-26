@@ -23,13 +23,14 @@ class HiddenController extends Controller
     {
         $hidden = new Hidden();
         $hidden->user_id = $request->user_id;
+        $hidden->type = $request->type;
         $hidden->position = $request->position;
         $hidden->title = $request->title;
         $hidden->detail = $request->detail;
         $hidden->image = env('APP_URL') . $request->image;
         $hidden->occurrence_time = now();
         $hidden->save();
-        Log::info($request);
+//        Log::info($request);
         return response('', 201);
     }
 
@@ -75,7 +76,7 @@ class HiddenController extends Controller
             ->with('hiddens_logs')
             ->get();
         $user = User::where('user_id', $request->user_id)->first();
-        Log::info($detail);
+//        Log::info($detail);
         return response()->json([
             'detail' => $detail,
             'user' => $user
