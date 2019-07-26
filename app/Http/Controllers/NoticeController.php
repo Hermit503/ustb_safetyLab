@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Notice;
 use App\Role;
-use App\Unit;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -70,9 +70,31 @@ class NoticeController extends Controller
 
     public function saveFile(Request $request)
     {
-//        Log::info($request);
+        Log::info($request);
         $path = $request->file('file')->store('public/noticeFile');
         return Storage::url($path);
 //        return $request->file;
+    }
+
+    public function saveData(Request $request){
+        $title = $request->title;
+        $users = implode(',',$request->users);
+        $comment = $request->comment;
+        $build_id = $request->build_id;
+        $pictures = implode(',',$request->pictures);
+        $file = $request->file;
+
+        $notice = new Notice();
+        $notice->title = $title;
+        $notice->users = $users;
+        $notice->comment = $comment;
+        $notice->build_id = $build_id;
+        $notice->pictures = $pictures;
+        $notice->file = $file;
+
+        $notice->save();
+
+        return "上传成功";
+
     }
 }
