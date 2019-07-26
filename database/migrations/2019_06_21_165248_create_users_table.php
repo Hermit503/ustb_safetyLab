@@ -16,8 +16,8 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->string('open_id')->nullable()->unique()->comment('微信开放id');
-            $table->string('session_key')->nullable()->unique();
+            $table->string('open_id',50)->nullable()->unique()->comment('微信开放id');
+            $table->string('session_key',50)->nullable()->unique();
 
             $table->string('user_id',20)->nullable()->unique()->comment('工号');
             $table->string('name');
@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->foreign('unit_id')->references('id')->on('units');
 
             $table->string('nickname')->nullable()->comment('微信昵称');
-            $table->string('email')->unique();
+            $table->string('email',30)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->bigInteger('parent_id')->unsigned()->nullable()->comment('上级id');
