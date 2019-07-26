@@ -13,7 +13,7 @@ class CreateEquipmentTable extends Migration
      */
     public function up()
     {
-        Schema::create('equipment', function (Blueprint $table) {
+        Schema::create('equipments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('asset_number')->comment('资产编号');
             $table->string('equipment_name')->comment('设备名称');
