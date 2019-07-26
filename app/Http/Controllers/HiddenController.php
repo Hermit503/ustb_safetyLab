@@ -55,8 +55,8 @@ class HiddenController extends Controller
      */
     public function saveHiddenImage(Request $request)
     {
-//        Log::info($request);
         $path = $request->file('file')->store('public/hiddensImage');
+//        Log::info(Storage::url($path));
         return Storage::url($path);//storage/hiddensImage/sPgs2P4lIkfaphxymlrF2dRj4rshfQMFxJ3clkZy.jpeg
     }
 

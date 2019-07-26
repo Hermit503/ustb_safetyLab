@@ -15,7 +15,7 @@ class CreatePermissionsTable extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_id');
+            $table->string('user_id',20);
             $table->foreign('user_id')->references('user_id')->on('users');
             $table->string('permission')->comment('权限');
             $table->timestamps();

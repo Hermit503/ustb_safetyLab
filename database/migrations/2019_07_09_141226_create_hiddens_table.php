@@ -15,7 +15,7 @@ class CreateHiddensTable extends Migration
     {
         Schema::create('hiddens', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_id');
+            $table->string('user_id',20);
             $table->foreign('user_id')->references('user_id')->on('users');
             $table->string('position')->nullable()->comment('位置');
             $table->string('title')->nullable()->comment('标题');
