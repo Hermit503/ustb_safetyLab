@@ -18,11 +18,11 @@ class CreateNoticesTable extends Migration
             $table->string('title')->comment('标题');
             $table->text('users')->comment('通知对象');
             $table->text('comment')->comment('通知概述');
-            $table->string('pictures')->comment('通知图片');
-            $table->string('file')->comment('附件');
+            $table->string('pictures')->nullable()->comment('通知图片');
+            $table->string('file')->nullable()->comment('附件');
 
-            $table->bigInteger('build_id')->unsigned()->comment('创建人工号');
-            $table->foreign('build_id')->references('id')->on('users');
+            $table->string('build_id')->comment('创建人工号');
+            $table->foreign('build_id')->references('user_id')->on('users');
 
             $table->timestamps();
         });
