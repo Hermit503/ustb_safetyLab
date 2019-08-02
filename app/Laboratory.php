@@ -12,6 +12,6 @@ class Laboratory extends Model
     }
     public function equipments()
     {
-        return $this->hasMany(Equipment::class,'id','laboratory_id');
+        return $this->hasMany(Equipments::class,'id','laboratory_id');
     }
 }
