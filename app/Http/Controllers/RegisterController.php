@@ -31,7 +31,7 @@ class RegisterController extends Controller
             'user_id'=>'required|max:12',
             'phone_number'=>'required|max:11|min:11',
             'title'=>'required',
-            'unit_id'=>'required',
+//            'unit_id'=>'required',
             'email'=>'email',
             'password'=>'min:6',
             'password_confirmation'=>'required|same:password'
