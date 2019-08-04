@@ -51,6 +51,19 @@ Route::group(['prefix' => '/v1'], function () {
     //设备搜索
     Route::get('/searchEquipment','EquipmentController@searchEquipment');
 
+
+    /**
+     * Chemical Route List
+     */
+    //获取药品列表
+    Route::get('/chemical','ChemicalController@getChemical');
+    //药品入库
+    Route::post('/chemical/inout','ChemicalController@inout');
+
+
+
+
+
     //获取实验室地址列表
     Route::get('/getlaboratory/List/{unit_id}', 'EquipmentController@getLaboratoryList');
 

@@ -15,4 +15,9 @@ class Unit extends Model
     {
         return $this->hasMany(User::class,'unit_id','id');
     }
+
+    public function chemicals()
+    {
+        return $this->hasMany(Chemical::class,'unit_id','id');
+    }
 }

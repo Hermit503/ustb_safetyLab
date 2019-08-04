@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Hidden::class,'user_id','user_id');
     }
+    public function chemicals()
+    {
+        return $this->hasMany(Chemical::class,'user_id','user_id');
+    }
+
 }
