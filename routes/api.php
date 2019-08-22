@@ -85,6 +85,9 @@ Route::group(['prefix' => '/v1'], function () {
     Route::post('/notice/imgUpload','NoticeController@saveImage');
     Route::post('/notice/fileUpload','NoticeController@saveFile');
     Route::post('/notice/saveData','NoticeController@saveData');
+    Route::get('/notice/getSomeoneNoticeList','NoticeController@getOwnerList');
+    Route::get('/notice/getTime','NoticeController@getTime');
+    Route::get('/notice/getOneNotice','NoticeController@getOneNotice');
 
     //获取隐患详情
     Route::put('/hiddens/{id}','HiddenController@getHiddenDetail');
