@@ -30,23 +30,22 @@ class ChemicalController extends Controller
      */
     public function inout(Request $request)
     {
-        if($request->chemicalType=="medcine"){
-            $chemical = Chemical::where('chemical_id',$request->chemicalId)->first();
-            if (($chemical->stock+$request->stock)<0){
-                return response()->json('库存不够了哦  无法取出哦！',200);
-            }else{
+        Log::info($request);
+        if ($request->chemicalType == "medcine") {
+            $chemical = Chemical::where('chemical_id', $request->chemicalId)->first();
+            if (($chemical->stock + $request->stock) < 0) {
+                return response()->json('库存不够了哦  无法取出哦！', 200);
+            } else {
                 $chemical->stock += $request->stock;
                 $chemical->save();
-                if ($request->stock>0){
-                    return response()->json('入库完成！',200);
-                }elseif($request->stock<0){
-                    return response()->json('出库完成！',200);
+                if ($request->stock > 0) {
+                    return response()->json('入库完成！', 200);
+                } elseif ($request->stock < 0) {
+                    return response()->json('出库完成！', 200);
                 }
             }
-        }elseif($request->chemicalType=="chemical"){
-            return response()->json('需要完成双人入库操作',200);
+        } elseif ($request->chemicalType == "chemical") {
+            return response()->json('需要完成双人入库操作', 200);
         }
-
-
     }
 }
