@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Equipment extends Model
+class Equipments extends Model
 {
     protected $guarded=[];
     public function laboratory()
