@@ -93,4 +93,7 @@ Route::group(['prefix' => '/v1'], function () {
     Route::put('/hiddens/{id}','HiddenController@getHiddenDetail');
     //隐患处理Log
     Route::post('/hiddensLog','HiddenController@addHiddenLog');
+
+
+    Route::get('/notice/test','NoticeController@test');
 });

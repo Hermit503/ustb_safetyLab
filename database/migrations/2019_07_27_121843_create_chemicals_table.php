@@ -18,9 +18,9 @@ class CreateChemicalsTable extends Migration
             $table->string('chemical_id')->unique()->comment('危化品id编号');
             $table->bigInteger('unit_id')->unsigned()->comment('所在单位id');
             $table->foreign('unit_id')->references('id')->on('units');
-            $table->string('user_id',20)->comment('管理者');
+            $table->string('user_id',20)->comment('管理员');
             $table->foreign('user_id')->references('user_id')->on('users');
-            $table->string('monitor_id',20)->comment('监督者');
+            $table->string('monitor_id',20)->comment('管理者');
 //            $table->foreign('user_id')->references('user_id')->on('users');
             $table->enum('type',['medcine','chemical'])->comment('类型');
             $table->string('name',40)->comment('药品名称');
