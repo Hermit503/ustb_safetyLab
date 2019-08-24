@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Equipment;
+use App\Equipments;
 use App\Laboratory;
 use App\Permission;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ class EquipmentController extends Controller
      */
     public function getEquipment(Request $request){
         $unit_id = $request->unit_id;
-        $equipments = Equipment::where('unit_id',$unit_id)
+        $equipments = Equipments::where('unit_id',$unit_id)
             ->where('isDelete','=','0')
             ->paginate(15);
         return $equipments;
@@ -99,7 +99,7 @@ class EquipmentController extends Controller
             $w += 1;
         }
 
-        return $laboratoryAll;
+        dd($laboratoryAll);
     }
 
     /**
@@ -123,7 +123,7 @@ class EquipmentController extends Controller
         $laboratory = Laboratory::where('laboratory_name',$laboratory_name)->get();
         $laboratory_id = $laboratory[0]['id'];
 
-        $equipment = new Equipment();
+        $equipment = new Equipments();
 
         $equipment->asset_number = $asset_number;
         $equipment->equipment_name = $equipment_name;
@@ -149,7 +149,7 @@ class EquipmentController extends Controller
      */
     public function getOneEquipment(Request $request){
         $id = $request->id;
-        $result = Equipment::where('id',$id)->get();
+        $result = Equipments::where('id',$id)->get();
         return response()->json([
             'result'=>$result
         ],200);
@@ -177,7 +177,7 @@ class EquipmentController extends Controller
         $laboratory = Laboratory::where('laboratory_name',$laboratory_name)->get();
         $laboratory_id = $laboratory[0]['id'];
 
-        Equipment::where('id','=', $id)
+        Equipments::where('id','=', $id)
             ->update([
                 'asset_number' => $asset_number,
                 'equipment_name' => $equipment_name,
@@ -204,7 +204,7 @@ class EquipmentController extends Controller
      */
     public function deleteEquipment(Request $request){
         $id = $request->id;
-        Equipment::where('id','=', $id)
+        Equipments::where('id','=', $id)
             ->update(['isDelete' => '1']);
         Log::alert('有设备信息被删除 ', $request->all());
         return response('Deleted',204);
@@ -220,7 +220,7 @@ class EquipmentController extends Controller
     public function searchEquipment(Request $request)
     {
         $keyword = $request->keyword;
-        $result = Equipment::where('equipment_name',$keyword)->get()->toArray();
+        $result = Equipments::where('equipment_name',$keyword)->get()->toArray();
         if($result){
             return $result;
         }else{
