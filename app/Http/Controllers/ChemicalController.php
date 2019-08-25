@@ -17,12 +17,12 @@ class ChemicalController extends Controller
      */
     public function getChemical(Request $request)
     {
-        $chemocalList = Chemical::where('unit_id', $request->unit_id)
+        $chemicalList = Chemical::where('unit_id', $request->unit_id)
             ->with('unit')
             ->with('user')
             ->get();
         return response()->json([
-            'chemicalList' => $chemocalList
+            'chemicalList' => $chemicalList
         ], 200);
     }
 
@@ -56,7 +56,7 @@ class ChemicalController extends Controller
             $chemicalNotice->user_id_1 = $request->userId;
             $chemicalNotice->user_name_1 = $request->userName;
             $chemicalNotice->user_id_2 = $request->monitorId;
-            $chemicalNotice->user_name_2 =User::where("user_id",$request->monitorId)->get("name")[0]["name"];
+            $chemicalNotice->user_name_2 =User::where("user_id",$request->userId)->get("name")[0]["name"];
             $chemicalNotice->chemical_id = $request->chemicalId;
             $chemicalNotice->chemical_name = Chemical::where("chemical_id",$request->chemicalId)->get("name")[0]["name"];
             if ($request->stock>0){
