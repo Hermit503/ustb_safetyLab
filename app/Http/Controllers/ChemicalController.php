@@ -47,6 +47,10 @@ class ChemicalController extends Controller
                 }
             }
         } elseif ($request->chemicalType == "chemical") {
+            $chemical = Chemical::where('chemical_id', $request->chemicalId)->first();
+            if (($chemical->stock + $request->stock) < 0) {
+                return response()->json('库存不够了哦  无法取出哦！', 200);
+            } else{
             $chemicalNotice = new ChemicalsNotice();
             $chemicalNotice->unit_id = $request->unitId;
             $chemicalNotice->user_id_1 = $request->userId;
@@ -55,10 +59,16 @@ class ChemicalController extends Controller
             $chemicalNotice->user_name_2 =User::where("user_id",$request->monitorId)->get("name")[0]["name"];
             $chemicalNotice->chemical_id = $request->chemicalId;
             $chemicalNotice->chemical_name = Chemical::where("chemical_id",$request->chemicalId)->get("name")[0]["name"];
-            $chemicalNotice->stock = $request->stock;
+            if ($request->stock>0){
+                $chemicalNotice->type = "入库";
+            }elseif($request->stock<0){
+                $chemicalNotice->type = "出库";
+            }
+            $chemicalNotice->stock = abs($request->stock);
             $chemicalNotice->remarks = $request->remarks;
             $chemicalNotice->save();
             return response()->json('需要完成双人入库操作', 200);
+            }
         }
     }
 }

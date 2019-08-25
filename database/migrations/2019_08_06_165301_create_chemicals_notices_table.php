@@ -22,7 +22,8 @@ class CreateChemicalsNoticesTable extends Migration
             $table->string("user_name_2")->comment("确认者姓名");
             $table->string("chemical_id")->comment("药品id");
             $table->string("chemical_name")->comment("药品名字");
-            $table->integer("stock")->comment("数量");
+            $table->enum("type",["出库","入库"])->comment("出入库类型");
+            $table->unsignedInteger("stock")->comment("数量");
             $table->string("remarks")->nullable()->comment("备注");
             $table->enum("isConfirm_1",[0,1])->default(1)->comment("1是否确认");
             $table->enum("isConfirm_2",[0,1])->default(0)->comment("2是否确认");
