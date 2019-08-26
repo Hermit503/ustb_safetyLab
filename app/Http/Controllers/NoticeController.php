@@ -268,25 +268,6 @@ class NoticeController extends Controller
     }
 
 
-    public function inoutConfirm(Request $request)
-    {
-        $chemicalNotice = ChemicalsNotice::where("id",$request->id)->first();
-        //出库入确认
-        $chemicalNotice->isConfirm_2 = "1";
-        $chemicalNotice->save();
-        //出入库操作
-        $chemical=Chemical::where("chemical_id",$request->chemicalId)->first();
-        if($request->type=="入库"){
-            $chemical->stock += abs($request->stock);
-            $chemical->save();
-            return response()->json("入库成功",200);
-        }elseif($request->type=="出库"){
-            $chemical->stock += -abs($request->stock);
-            $chemical->save();
-            return response()->json("出库成功",200);
-        }
-
-    }
 
     /**
      * 获取消息列表
