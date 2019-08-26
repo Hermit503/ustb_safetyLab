@@ -316,15 +316,28 @@ class NoticeController extends Controller
             $users[$item['id']] = json_decode($item['users']);
         }
         //遍历users
-        $num = 0;
+        $count = 0;
         foreach( $users as $key=>$user ){
             for($i = 0 ; $i < count($user) ; $i++){
                 if($user[$i] == $request->user_id){
                     $tmp = Notice::where('id',$key)->get();
+                    //已收到信息的人
+                    $received_users = explode(" ", $tmp[0]['received_users']);
                     $tmpName = User::where('user_id',$tmp[0]['build_id'])->get('name')->first();
                     $tmp[0]['name'] = $tmpName['name'];
                     $tmp[0]['noticeType'] = "notice";
-                    array_push($noticeList,$tmp[0]);
+                    $tmp_received = [];
+                    foreach($received_users as $key=>$received_user){
+                        //如果相等的话表示已提交，不push
+                        if($received_user != $request->user_id){
+                            array_push($tmp_received,$received_user);
+                        }else{
+
+                        }
+                    }
+                    if(count($tmp_received) == count($received_users)){
+                        array_push($noticeList,$tmp[0]);
+                    }
                 }
             }
         }
@@ -350,4 +363,28 @@ class NoticeController extends Controller
         return $result;
     }
 
+    /**
+     * 收到消息之后确认收到
+     * @param Request $request
+     * @return string
+     * @uses lj
+     * @time 2019-08-26
+     */
+    public function receiveNotice(Request $request)
+    {
+        $id = $request->id; //notice表的id
+        $user = $request->user; //收到通知用户的id
+        $tmp_received_users = Notice::where('id',$id)->get('received_users');
+
+        $received_users = $tmp_received_users[0]['received_users'];
+        if($received_users!=null){
+            $received_users = $received_users.' '.$user; // 0001 0002 0003
+        }else{
+            $received_users = $user;
+        }
+
+        Notice::where('id',$id)->update(['received_users' => $received_users]);
+
+        return '提交成功';
+    }
 }
