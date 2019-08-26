@@ -267,24 +267,6 @@ class NoticeController extends Controller
         return $results;
     }
 
-    /**
-     * 获取药品消息列表
-     * @author hzj
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     *
-     */
-    public function getChemicalNoticeList(Request $request)
-    {
-        $chemicalList = ChemicalsNotice::where([
-            ['user_id_1', "!=", $request->userId],
-            ['user_id_2', $request->userId],
-            ['isConfirm_2', "0"],
-        ])->get();
-        return response()->json([
-            'chemicalNoticesList' => $chemicalList,
-        ], 200);
-    }
 
     public function inoutConfirm(Request $request)
     {
@@ -306,5 +288,66 @@ class NoticeController extends Controller
 
     }
 
+    /**
+     * 获取消息列表
+     * @param Request $request
+     * @return array
+     * @author lj
+     * @time 2019-8-25
+     */
+    public function getAllMessage(Request $request)
+    {
+        //最终结果
+        $result = [];
+
+        $chemicalList = ChemicalsNotice::where([
+            ["user_id_2",$request->user_id],
+            ["isConfirm_2","0"]
+        ])->get();
+        foreach ($chemicalList as $item){
+            $item['noticeType'] = "chemical";
+            array_push($result,$item);
+        }
+
+        $tmplist = Notice::all();
+        $users = [];
+        $noticeList = [];
+        foreach ($tmplist as $item){
+            $users[$item['id']] = json_decode($item['users']);
+        }
+        //遍历users
+        $num = 0;
+        foreach( $users as $key=>$user ){
+            for($i = 0 ; $i < count($user) ; $i++){
+                if($user[$i] == $request->user_id){
+                    $tmp = Notice::where('id',$key)->get();
+                    $tmpName = User::where('user_id',$tmp[0]['build_id'])->get('name')->first();
+                    $tmp[0]['name'] = $tmpName['name'];
+                    $tmp[0]['noticeType'] = "notice";
+                    array_push($noticeList,$tmp[0]);
+                }
+            }
+        }
+        foreach ($noticeList as $item){
+            array_push($result,$item);
+        }
+
+        $len = count($result);
+        for($k = 0 ; $k <= $len ; $k++) {
+            for($j=$len-1;$j>$k;$j--){
+
+                if($result[$j]['created_at']->gt($result[$j-1]['created_at'])){
+//                    echo $result[$j]['created_at']."比".$result[$j-1]['created_at']."大<br>";
+                    $temp = $result[$j];
+                    $result[$j] = $result[$j-1];
+                    $result[$j-1] = $temp;
+                }else{
+//                    echo $result[$j]['created_at']."比".$result[$j-1]['created_at']."小<br>";
+                }
+            }
+        }
+
+        return $result;
+    }
 
 }

@@ -95,7 +95,6 @@ Route::group(['prefix' => '/v1'], function () {
     Route::post('/hiddensLog','HiddenController@addHiddenLog');
 
 
-    //药品出入库消息
-    Route::get('/notice/test','NoticeController@getChemicalNoticeList');
-    Route::put('/notice/test','NoticeController@inoutConfirm');
+    //消息列表
+    Route::get('/notice/notices','NoticeController@getAllMessage');
 });
