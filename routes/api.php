@@ -98,5 +98,5 @@ Route::group(['prefix' => '/v1'], function () {
 
     //消息列表
     Route::get('/notice/notices','NoticeController@getAllMessage');
-
+    Route::get('/notice/receiveNotice','NoticeController@receiveNotice');
 });

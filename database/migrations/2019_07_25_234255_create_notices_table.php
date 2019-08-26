@@ -24,6 +24,8 @@ class CreateNoticesTable extends Migration
             $table->string('build_id')->comment('创建人工号');
             $table->foreign('build_id')->references('user_id')->on('users');
 
+            $table->text('received_users')->nullable()->comment('已收到的人');
+
             $table->timestamps();
         });
     }
