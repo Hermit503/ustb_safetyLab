@@ -86,14 +86,17 @@ class EquipmentController extends Controller
         $asset_number = $request->asset_number;
         $equipment_name = $request->equipment_name;
         $equipment_type = $request->equipment_type;
-        $laboratory_name = $request->laboratory_id;
+        $laboratory_build = $request->laboratory_build;
+        $laboratory_class = $request->laboratory_class;
         $build_id = $request->build_id;
         $unit_id = $request->unit_id;
         $status = $request->status;
         $storage_time = $request->storage_time;
         $scrap_time = $request->scrap_time;
 
-        $laboratory = Laboratory::where('laboratory_name',$laboratory_name)->get();
+        $laboratory = Laboratory::where('building_name',$laboratory_build)
+            ->where('classroom_num',$laboratory_class)
+            ->get();
         $laboratory_id = $laboratory[0]['id'];
 
         $equipment = new Equipments();
