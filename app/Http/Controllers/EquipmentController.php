@@ -42,64 +42,37 @@ class EquipmentController extends Controller
      * @param Request $request
      * @return json
      * @time 2019-07-09
+     * 修改列表获取方式
+     * @author lj
+     * @time 2019-08-27
      */
     public function getLaboratoryList(Request $request){
         $unit_id = $request->unit_id;
+        $result = [];
         $laboratory = Laboratory::where('unit_id',$unit_id)->get();
-        $laboratoryAll = [];
-        $laboratoryBuild = [];
+        $laboratoryBuild  = [];
         $laboratoryClassroom = [];
+        foreach ($laboratory as $item){
+            array_push($laboratoryBuild ,$item['building_name']);
+            array_push($laboratoryClassroom ,$item['classroom_num']);
+        }
+        $tmp_build = [];
+        $tmp_classroom = [];
         $i = 0;
-        foreach ($laboratory as $item) {
-            $laboratoryBuild[$i] = $item->building_name;
-            $laboratoryClassroom[$i] = $item->classroom_num;
+        foreach (array_unique($laboratoryBuild ) as $item){
+            $tmp_build[$i] = $item;
             $i = $i+1;
         }
 
-        $length=count($laboratoryBuild);
-        $length2=count($laboratoryClassroom);
-
-        for($i = 0 ; $i < $length ; $i++){
-            if(array_key_exists($i,$laboratoryBuild)){
-                for($j = $i+1; $j < $length ; $j++){
-                    if(strcmp($laboratoryBuild[$j] , $laboratoryBuild[$i]) == 0){
-                        unset($laboratoryBuild[$j]);
-                    }else{
-                        continue;
-                    }
-                }
-            }else{
-                continue;
-            }
+        $i = 0;
+        foreach (array_unique($laboratoryClassroom ) as $item){
+            $tmp_classroom[$i] = $item;
+            $i = $i+1;
         }
 
-        for($x = 0 ; $x < $length2 ; $x++){
-            if(array_key_exists($x,$laboratoryClassroom)){
-                for($y = $x+1; $y < $length2 ; $y++){
-                    if(strcmp($laboratoryClassroom[$y] , $laboratoryClassroom[$x]) == 0){
-                        unset($laboratoryClassroom[$y]);
-                    }else{
-                        continue;
-                    }
-                }
-            }else{
-                continue;
-            }
-        }
-
-        $q = 0;
-        $w = 0;
-        foreach ($laboratoryBuild as $item1){
-            $laboratoryAll[0][$q] = $item1;
-            $q += 1;
-        }
-
-        foreach ($laboratoryClassroom as $item2){
-            $laboratoryAll[1][$w] = $item2;
-            $w += 1;
-        }
-
-        dd($laboratoryAll);
+        array_push($result,$tmp_build);
+        array_push($result,$tmp_classroom);
+        return $result;
     }
 
     /**
