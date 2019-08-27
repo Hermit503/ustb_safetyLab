@@ -59,7 +59,8 @@ Route::group(['prefix' => '/v1'], function () {
     Route::get('/chemical','ChemicalController@getChemical');
     //药品入库
     Route::post('/chemical/inout','ChemicalController@inout');
-
+    //出入库确认
+    Route::put('/chemical/confirm','ChemicalController@inoutConfirm');
 
 
 

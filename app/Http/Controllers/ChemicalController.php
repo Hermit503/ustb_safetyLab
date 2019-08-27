@@ -71,4 +71,39 @@ class ChemicalController extends Controller
             }
         }
     }
+
+    /**
+     * 确认出入库
+     * @author hzj
+     * @date 2019-8-26 15：12
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function inoutConfirm(Request $request)
+    {
+        $chemicalNotice = ChemicalsNotice::where("id",$request->id)->first();
+        $chemical=Chemical::where("chemical_id",$request->chemicalId)->first();
+        //出库入确认
+        $chemicalNotice->isConfirm_2 = "1";
+        $chemicalNotice->save();
+        if ($request->status=="同意"){
+            //出入库操作
+            if($request->type=="入库"){
+                $chemical->stock += abs($request->stock);
+                $chemical->save();
+                return response()->json("入库成功",200);
+            }elseif($request->type=="出库") {
+                $chemical->stock += -abs($request->stock);
+                $chemical->save();
+                return response()->json("出库成功", 200);
+            }
+        }else{
+            return response()->json("驳回申请完成", 200);
+        }
+    }
+
+
+
+
+
 }
