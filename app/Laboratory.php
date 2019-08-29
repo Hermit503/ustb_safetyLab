@@ -10,8 +10,15 @@ class Laboratory extends Model
     {
         return $this->belongsTo(Unit::class);
     }
+
     public function equipments()
     {
-        return $this->hasMany(Equipments::class,'id','laboratory_id');
+        return $this->hasMany(Equipments::class);
     }
+
+    public function chemicals()
+    {
+        return $this->hasMany(Chemical::class);
+    }
+
 }

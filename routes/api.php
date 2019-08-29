@@ -52,17 +52,12 @@ Route::group(['prefix' => '/v1'], function () {
     Route::get('/searchEquipment','EquipmentController@searchEquipment');
 
 
-    /**
-     * Chemical Route List
-     */
     //获取药品列表
     Route::get('/chemical','ChemicalController@getChemical');
     //药品入库
     Route::post('/chemical/inout','ChemicalController@inout');
     //出入库确认
     Route::put('/chemical/confirm','ChemicalController@inoutConfirm');
-
-
 
 
     //获取实验室地址列表
@@ -99,4 +94,9 @@ Route::group(['prefix' => '/v1'], function () {
     //消息列表
     Route::get('/notice/notices','NoticeController@getAllMessage');
     Route::get('/notice/receiveNotice','NoticeController@receiveNotice');
+
+    //电子巡检
+    Route::get('/inspections','InspectionController@getInspections');
+
+
 });

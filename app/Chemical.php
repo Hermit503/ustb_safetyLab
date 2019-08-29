@@ -15,4 +15,8 @@ class Chemical extends Model
     {
         return $this->belongsTo(User::class,'user_id','user_id');
     }
+    public function laboratories()
+    {
+        return $this->belongsTo(Laboratory::class,'laboratory_id','id');
+    }
 }
