@@ -37,6 +37,40 @@ class EquipmentController extends Controller
     }
 
     /**
+     * 获取指定教学楼的教室
+     * @param $unit_id
+     * @param $building_name
+     * @return array
+     * @author lj
+     * @time 2019-8-28
+     */
+    public function getClassroom($unit_id,$building_name)
+    {
+        $tmp = Laboratory::where('unit_id',$unit_id)
+            ->where('building_name',$building_name)
+            ->get();
+        $result = [];
+        foreach ($tmp as $item){
+            array_push($result,$item['classroom_num']);
+        }
+        return $result;
+    }
+
+    public function getClassroomName($unit_id,$build_name,$classroom)
+    {
+        $tmp_class = Laboratory::where('building_name',$build_name)
+            ->where('classroom_num',$classroom)
+            ->where('unit_id',$unit_id)
+            ->get()
+            ->toArray();
+        $result = [];
+        foreach ($tmp_class as $item){
+            array_push($result,$item['laboratory_name']);
+        }
+        return $result;
+    }
+
+    /**
      * 获取实验室地址列表
      * @author lj
      * @param Request $request
@@ -51,27 +85,63 @@ class EquipmentController extends Controller
         $result = [];
         $laboratory = Laboratory::where('unit_id',$unit_id)->get();
         $laboratoryBuild  = [];
-        $laboratoryClassroom = [];
+
+        //获取教学楼名儿
         foreach ($laboratory as $item){
             array_push($laboratoryBuild ,$item['building_name']);
-            array_push($laboratoryClassroom ,$item['classroom_num']);
         }
+
         $tmp_build = [];
-        $tmp_classroom = [];
+        $tmp_class = [];
+        $tmp_class_name = [];
+
         $i = 0;
+        //教学楼去重 源：$laboratoryBuild 去重后：$tmp_build
         foreach (array_unique($laboratoryBuild ) as $item){
             $tmp_build[$i] = $item;
             $i = $i+1;
         }
 
         $i = 0;
-        foreach (array_unique($laboratoryClassroom ) as $item){
-            $tmp_classroom[$i] = $item;
+        //遍历教学楼，获取教学楼对应的教室号 $classroom
+        foreach ($tmp_build as $key=>$item){
+//            echo $item."<br/>";
+            //获取教室号
+            $classroom = $this->getClassroom($unit_id,$item);
+            //教师号去重 源：$classroom 去重后：$tmp_class
+            $j = 0;
+            foreach (array_unique($classroom) as $key_2 => $class){
+//                //把实验室教室号放入数组中
+                $arr = [];
+                array_push($arr,$class);
+                $tmp_class[$i][$j][0] = $arr;
+//                var_dump($tmp_class[$j][0]);
+                //获取实验室名称 $classroomName
+                $classroomName = $this->getClassroomName($unit_id,$item,$class);
+//
+//                //将实验室名称放入数组中 $tmp_class_name
+                $z = 0;
+                foreach ($classroomName as $name){
+////                    var_dump($result[$i][1]);
+                    $tmp_class_name[$z] = $name;
+//
+                    $tmp_class[$i][$j]['children'][$z] = $name;
+                    $z = $z + 1;
+                }
+                $j = $j+1;
+            }
+
+            $arr = [];
+            //将字符串放入数组中
+            array_push($arr,$item);
+            //二维数组
+            array_push($result,$arr);
+            //三维的
+//            $arr['children'] = [];
+            $result[$i]['children'] = $tmp_class[$i];
             $i = $i+1;
         }
-
-        array_push($result,$tmp_build);
-        array_push($result,$tmp_classroom);
+//        return $tmp_class;
         return $result;
     }
 
