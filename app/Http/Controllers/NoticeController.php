@@ -358,6 +358,91 @@ class NoticeController extends Controller
     }
 
     /**
+     * 获取某时间段的消息
+     * @param Request $request
+     * @return array
+     * @author lj
+     * @time 2019-08-29
+     */
+    public function getHistoryMessage(Request $request)
+    {
+        //传入的参数到月份 如2019-09
+        $startDate = $request->startDate;
+        $endDate = $request->endDate;
+
+        $result = [];
+
+        $chemicalList = ChemicalsNotice::where([
+            ["user_id_2",$request->user_id],
+            ["receive","!=","0"]
+        ])
+            ->whereDate('updated_at','>=',$startDate)
+            ->whereDate('updated_at','<=',$endDate)
+            ->get();
+        foreach ($chemicalList as $item){
+            $item['noticeType'] = "chemical";
+            array_push($result,$item);
+        }
+
+        //被驳回已了解的
+        $chemicaldisagreeList = ChemicalsNotice::where([
+            ["user_id_1",$request->user_id],
+            ["isConfirm_2","0"],
+            ["receive","2"]
+        ])
+            ->whereDate('updated_at','>=',$startDate)
+            ->whereDate('updated_at','<=',$endDate)
+            ->get();
+        foreach($chemicaldisagreeList as $item){
+            $item['noticeType'] = "chemical";
+            array_push($result,$item);
+        }
+
+        $tmplist = Notice::all();
+        $users = [];
+        $noticeList = [];
+        foreach ($tmplist as $item){
+            $users[$item['id']] = json_decode($item['users']);
+        }
+        //遍历users
+        $count = 0;
+        foreach( $users as $key=>$user ){
+            for($i = 0 ; $i < count($user) ; $i++){
+                if($user[$i] == $request->user_id){
+                    $tmp = Notice::where('id',$key)
+                        ->whereDate('updated_at','>=',$startDate)
+                        ->whereDate('updated_at','<=',$endDate)
+                        ->get();
+                    if(count($tmp) != 0){
+                        array_push($noticeList,$tmp[0]);
+                    }
+                }
+            }
+        }
+        foreach ($noticeList as $item){
+            $item['noticeType'] = "notice";
+            array_push($result,$item);
+        }
+
+        $len = count($result);
+        for($k = 0 ; $k <= $len ; $k++) {
+            for($j=$len-1;$j>$k;$j--){
+
+                if($result[$j]['updated_at']->gt($result[$j-1]['updated_at'])){
+//                    echo $result[$j]['created_at']."比".$result[$j-1]['created_at']."大<br>";
+                    $temp = $result[$j];
+                    $result[$j] = $result[$j-1];
+                    $result[$j-1] = $temp;
+                }else{
+//                    echo $result[$j]['created_at']."比".$result[$j-1]['created_at']."小<br>";
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * 收到消息之后确认收到
      * @param Request $request
      * @return string
