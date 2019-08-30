@@ -24,9 +24,11 @@ class CreateChemicalsNoticesTable extends Migration
             $table->string("chemical_name")->comment("药品名字");
             $table->enum("type",["出库","入库"])->comment("出入库类型");
             $table->unsignedInteger("stock")->comment("数量");
+            $table->string('unit_type')->comment('单位');
             $table->string("remarks")->nullable()->comment("备注");
             $table->enum("isConfirm_1",[0,1])->default(1)->comment("1是否确认");
             $table->enum("isConfirm_2",[0,1])->default(0)->comment("2是否确认");
+            $table->enum("receive",[0,1,2])->default(0)->comment('是否收到,2代表被驳回者已收到信息');
             $table->timestamps();
         });
     }
