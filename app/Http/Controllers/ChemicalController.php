@@ -64,7 +64,8 @@ class ChemicalController extends Controller
             }elseif($request->stock<0){
                 $chemicalNotice->type = "出库";
             }
-            $chemicalNotice->stock = abs($request->stock);
+            $chemicalNotice->stock = abs($request->stock);//量
+            $chemicalNotice->unit_type = $request->unitType;//单位
             $chemicalNotice->remarks = $request->remarks;
             $chemicalNotice->save();
             return response()->json('需要完成双人入库操作', 200);
@@ -81,26 +82,46 @@ class ChemicalController extends Controller
      */
     public function inoutConfirm(Request $request)
     {
-        $chemicalNotice = ChemicalsNotice::where("id",$request->id)->first();
-        $chemical=Chemical::where("chemical_id",$request->chemicalId)->first();
-        //出库入确认
-        $chemicalNotice->isConfirm_2 = "1";
-        $chemicalNotice->save();
-        if ($request->status=="同意"){
+        $chemicalNotice = ChemicalsNotice::where("id", $request->id)->first();
+        $chemical = Chemical::where("chemical_id", $request->chemicalId)->first();
+
+        if ($request->status == "同意") {
             //出入库操作
-            if($request->type=="入库"){
+            if ($request->type == "入库") {
+                //出库入确认
+                $chemicalNotice->isConfirm_2 = "1";
+                $chemicalNotice->receive = "1"; //已收到
+                $chemicalNotice->save();
                 $chemical->stock += abs($request->stock);
                 $chemical->save();
-                return response()->json("入库成功",200);
-            }elseif($request->type=="出库") {
+                return response()->json("入库成功", 200);
+            } elseif ($request->type == "出库") {
+                //出库入确认
+                $chemicalNotice->isConfirm_2 = "1";
+                $chemicalNotice->receive = "1"; //已收到
+                $chemicalNotice->save();
                 $chemical->stock += -abs($request->stock);
                 $chemical->save();
                 return response()->json("出库成功", 200);
             }
-        }else{
+        } else {
+            //给谁发 发什么
+            $chemicalNotice->receive = "1"; //已收到未确认
+            $chemicalNotice->save();
             return response()->json("驳回申请完成", 200);
         }
     }
+
+    public function know(Request $request)
+    {
+        $id = $request->id;
+        $chemicalsNotice =ChemicalsNotice::where('id',$id)->first();
+        $chemicalsNotice->receive = "2";
+        $chemicalsNotice->save();
+        return response('yes',200);
+    }
+
+
 
 
 

@@ -281,11 +281,24 @@ class NoticeController extends Controller
         //最终结果
         $result = [];
 
+        //未处理
         $chemicalList = ChemicalsNotice::where([
             ["user_id_2",$request->user_id],
-            ["isConfirm_2","0"]
+            ["isConfirm_2","0"],
+            ["receive","0"]
         ])->get();
         foreach ($chemicalList as $item){
+            $item['noticeType'] = "chemical";
+            array_push($result,$item);
+        }
+
+        //1已处理2被驳回
+        $chemicalDisagreeList = ChemicalsNotice::where([
+            ["user_id_1",$request->user_id],
+            ["isConfirm_2","0"],
+            ["receive","1"]
+        ])->get();
+        foreach ($chemicalDisagreeList as $item){
             $item['noticeType'] = "chemical";
             array_push($result,$item);
         }

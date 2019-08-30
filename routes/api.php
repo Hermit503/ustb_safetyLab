@@ -58,6 +58,8 @@ Route::group(['prefix' => '/v1'], function () {
     Route::post('/chemical/inout','ChemicalController@inout');
     //出入库确认
     Route::put('/chemical/confirm','ChemicalController@inoutConfirm');
+    //2驳回后1收到信息后确认
+    Route::put('/chemical/know','ChemicalController@know');
 
 
     //获取实验室地址列表
@@ -94,6 +96,7 @@ Route::group(['prefix' => '/v1'], function () {
     //消息列表
     Route::get('/notice/notices','NoticeController@getAllMessage');
     Route::get('/notice/receiveNotice','NoticeController@receiveNotice');
+    Route::get('/notice/getHistoryMessage','NoticeController@getHistoryMessage');
 
     //电子巡检
     Route::get('/inspections','InspectionController@getInspections');
