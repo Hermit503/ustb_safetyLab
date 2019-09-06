@@ -222,7 +222,7 @@ class NoticeController extends Controller
     public function getTime(Request $request)
     {
         $user_id = $request->user_id;
-        $time_list = Notice::where('build_id', $user_id)->paginate(15);
+        $time_list = Notice::where('build_id', $user_id)->orderBy('created_at', 'desc')->paginate(15);
         $result = [];
         $i = 0;
         foreach ($time_list as $time) {
