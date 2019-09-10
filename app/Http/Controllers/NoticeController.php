@@ -402,7 +402,8 @@ class NoticeController extends Controller
         $users = [];
         $noticeList = [];
         foreach ($tmplist as $item){
-            $users[$item['id']] = json_decode($item['users']);
+            //将0062 0061转为数组
+            $users[$item['id']] = explode(" ", $item['received_users']);
         }
         //遍历users
         $count = 0;
@@ -421,6 +422,8 @@ class NoticeController extends Controller
         }
         foreach ($noticeList as $item){
             $item['noticeType'] = "notice";
+            $name = [$item['build_id']];
+            $item['name'] = $this->getNames($name);
             array_push($result,$item);
         }
 
