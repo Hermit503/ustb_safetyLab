@@ -222,7 +222,7 @@ class NoticeController extends Controller
     public function getTime(Request $request)
     {
         $user_id = $request->user_id;
-        $time_list = Notice::where('build_id', $user_id)->paginate(15);
+        $time_list = Notice::where('build_id', $user_id)->orderBy('created_at', 'desc')->paginate(15);
         $result = [];
         $i = 0;
         foreach ($time_list as $time) {
@@ -402,7 +402,8 @@ class NoticeController extends Controller
         $users = [];
         $noticeList = [];
         foreach ($tmplist as $item){
-            $users[$item['id']] = json_decode($item['users']);
+            //将0062 0061转为数组
+            $users[$item['id']] = explode(" ", $item['received_users']);
         }
         //遍历users
         $count = 0;
@@ -421,6 +422,8 @@ class NoticeController extends Controller
         }
         foreach ($noticeList as $item){
             $item['noticeType'] = "notice";
+            $name = [$item['build_id']];
+            $item['name'] = $this->getNames($name);
             array_push($result,$item);
         }
 
