@@ -31,9 +31,9 @@ class CreateChemicalsTable extends Migration
             $table->string('CAS',20)->comment('CAS编号');
             $table->double('stock')->comment('库存量');
             $table->enum('unit_type',['g','kg','mL','L'])->comment('计量单位');
-            
-            $table->string('remarks')->nullable()->comment('备注');
 
+            $table->string('remarks')->nullable()->comment('备注');
+            $table->date('fix_time')->nullable()->comment('最近检修时间');
             $table->timestamps();
         });
     }
