@@ -19,6 +19,9 @@ class ChemicalController extends Controller
     {
         $chemicalList = Chemical::where('unit_id', $request->unit_id)
             ->with('unit')
+
+
+
             ->with('user')
             ->get();
         return response()->json([

@@ -20,4 +20,8 @@ class Unit extends Model
     {
         return $this->hasMany(Chemical::class,'unit_id','id');
     }
+    public function inspection_logs()
+    {
+        return $this->hasMany(InspectionLog::class,'unit_id','id');
+    }
 }

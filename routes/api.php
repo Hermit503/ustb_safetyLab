@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InspectionController;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Resources\UserCollection;
@@ -100,6 +101,8 @@ Route::group(['prefix' => '/v1'], function () {
 
     //电子巡检
     Route::get('/inspections','InspectionController@getInspections');
-
+    Route::put('/inspections/{id}','InspectionController@confirmInspection');
+    //巡检记录
+    Route::get('/inspectionRecords','InspectionController@getInspectionRecords');
 
 });
