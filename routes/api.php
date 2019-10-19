@@ -99,6 +99,10 @@ Route::group(['prefix' => '/v1'], function () {
     Route::get('/notice/receiveNotice','NoticeController@receiveNotice');
     Route::get('/notice/getHistoryMessage','NoticeController@getHistoryMessage');
 
+    //清除缓存
+    Route::get('/clearAllMessage','NoticeController@clearAllCache');
+    Route::get('/clearHistoryMessage','NoticeController@clearHistoryCache');
+
     //电子巡检
     Route::get('/inspections','InspectionController@getInspections');
     Route::put('/inspections/{id}','InspectionController@confirmInspection');
