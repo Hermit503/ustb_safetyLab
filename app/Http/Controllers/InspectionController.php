@@ -39,6 +39,12 @@ class InspectionController extends Controller
         }
     }
 
+    /**
+     * 保存电子巡检记录
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
     public function confirmInspection(Request $request)
     {
 
@@ -91,6 +97,11 @@ class InspectionController extends Controller
     }
 
 
+    /**
+     * 获取电子巡检记录
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getInspectionRecords(Request $request)
     {
         $get = $request->get("role");

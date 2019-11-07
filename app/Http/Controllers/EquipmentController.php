@@ -16,11 +16,20 @@ class EquipmentController extends Controller
      * @return json形式的仪器列表
      */
     public function getEquipment(Request $request){
+        if ($request->unit_id!="null"){
+
+
         $unit_id = $request->unit_id;
         $equipments = Equipments::where('unit_id',$unit_id)
             ->where('isDelete','=','0')
             ->paginate(15);
         return $equipments;
+        }elseif ($request->unit_id=="null"){
+            $equipments = Equipments::where([])
+                ->where('isDelete','=','0')
+                ->paginate(15);
+            return $equipments;
+        }
     }
 
     /**

@@ -158,6 +158,7 @@ class NoticeController extends Controller
         $notice->save();
 
         return "上传成功";
+    }
     /**
      * 获取已收到消息的人员姓名
      * @param Request $request

@@ -17,16 +17,23 @@ class ChemicalController extends Controller
      */
     public function getChemical(Request $request)
     {
-        $chemicalList = Chemical::where('unit_id', $request->unit_id)
-            ->with('unit')
-
-
-
-            ->with('user')
-            ->get();
-        return response()->json([
-            'chemicalList' => $chemicalList
-        ], 200);
+        if ($request->unit_id !== "null") {
+            $chemicalList = Chemical::where('unit_id', $request->unit_id)
+                ->with('unit')
+                ->with('user')
+                ->get();
+            return response()->json([
+                'chemicalList' => $chemicalList
+            ], 200);
+        } elseif ($request->unit_id == "null") {
+            $chemicalList = Chemical::where([])
+                ->with('unit')
+                ->with('user')
+                ->get();
+            return response()->json([
+                'chemicalList' => $chemicalList
+            ], 200);
+        }
     }
 
     /**  出入库的逻辑  判断危化品、药品类型 //TODO：实现五双政策
@@ -53,35 +60,35 @@ class ChemicalController extends Controller
             $chemical = Chemical::where('chemical_id', $request->chemicalId)->first();
             if (($chemical->stock + $request->stock) < 0) {
                 return response()->json('库存不够了哦  无法取出哦！', 200);
-            } else{
-            $chemicalNotice = new ChemicalsNotice();
-            $chemicalNotice->unit_id = $request->unitId;
-            $chemicalNotice->user_id_1 = $request->userId;
-            $chemicalNotice->user_name_1 = $request->userName;
-            $chemicalNotice->user_id_2 = $request->monitorId;
-            $chemicalNotice->user_name_2 =User::where("user_id",$request->userId)->get("name")[0]["name"];
-            $chemicalNotice->chemical_id = $request->chemicalId;
-            $chemicalNotice->chemical_name = Chemical::where("chemical_id",$request->chemicalId)->get("name")[0]["name"];
-            if ($request->stock>0){
-                $chemicalNotice->type = "入库";
-            }elseif($request->stock<0){
-                $chemicalNotice->type = "出库";
-            }
-            $chemicalNotice->stock = abs($request->stock);//量
-            $chemicalNotice->unit_type = $request->unitType;//单位
-            $chemicalNotice->remarks = $request->remarks;
-            $chemicalNotice->save();
-            return response()->json('需要完成双人入库操作', 200);
+            } else {
+                $chemicalNotice = new ChemicalsNotice();
+                $chemicalNotice->unit_id = $request->unitId;
+                $chemicalNotice->user_id_1 = $request->userId;
+                $chemicalNotice->user_name_1 = $request->userName;
+                $chemicalNotice->user_id_2 = $request->monitorId;
+                $chemicalNotice->user_name_2 = User::where("user_id", $request->userId)->get("name")[0]["name"];
+                $chemicalNotice->chemical_id = $request->chemicalId;
+                $chemicalNotice->chemical_name = Chemical::where("chemical_id", $request->chemicalId)->get("name")[0]["name"];
+                if ($request->stock > 0) {
+                    $chemicalNotice->type = "入库";
+                } elseif ($request->stock < 0) {
+                    $chemicalNotice->type = "出库";
+                }
+                $chemicalNotice->stock = abs($request->stock);//量
+                $chemicalNotice->unit_type = $request->unitType;//单位
+                $chemicalNotice->remarks = $request->remarks;
+                $chemicalNotice->save();
+                return response()->json('需要完成双人入库操作', 200);
             }
         }
     }
 
     /**
      * 确认出入库
-     * @author hzj
-     * @date 2019-8-26 15：12
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
+     * @author hzj
+     * @date 2019-8-26 15：12
      */
     public function inoutConfirm(Request $request)
     {
@@ -118,16 +125,11 @@ class ChemicalController extends Controller
     public function know(Request $request)
     {
         $id = $request->id;
-        $chemicalsNotice =ChemicalsNotice::where('id',$id)->first();
+        $chemicalsNotice = ChemicalsNotice::where('id', $id)->first();
         $chemicalsNotice->receive = "2";
         $chemicalsNotice->save();
-        return response('yes',200);
+        return response('yes', 200);
     }
-
-
-
-
-
 
 
 }
