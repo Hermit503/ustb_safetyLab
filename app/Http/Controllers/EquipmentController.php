@@ -222,29 +222,43 @@ class EquipmentController extends Controller
         $asset_number = $request->asset_number;
         $equipment_name = $request->equipment_name;
         $equipment_type = $request->equipment_type;
-        $laboratory_name = $request->laboratory_id;
+        
+        //教学楼
+        $laboratory_build = $request->laboratory_build;
+        //教室
+        $laboratory_class = $request->laboratory_class;
+        //实验室名称
+        $laboratory_name = $request->laboratory_room;
+        
+
+        //创建人
         $build_id = $request->build_id;
+        //单位
         $unit_id = $request->unit_id;
         $status = $request->status;
         $storage_time = $request->storage_time;
         $scrap_time = $request->scrap_time;
 
-        $laboratory = Laboratory::where('laboratory_name',$laboratory_name)->get();
+        $laboratory = Laboratory::where('building_name',$laboratory_build)
+        ->where('classroom_num',$laboratory_class)
+        ->where('laboratory_name',$laboratory_name)->get();
         $laboratory_id = $laboratory[0]['id'];
 
-        Equipments::where('id','=', $id)
+        Equipments::where('id',(int)$id)
             ->update([
                 'asset_number' => $asset_number,
                 'equipment_name' => $equipment_name,
                 'equipment_type' => $equipment_type,
-                'laboratory_id' => $laboratory_id,
-                'build_id' => $build_id,
-                'unit_id' => $unit_id,
+                'laboratory_id' => (int)$laboratory_id,
+                'build_id' => (int)$build_id,
+                'unit_id' => (int)$unit_id,
                 'status' => $status,
-                'storage_time' => $storage_time,
-                'scrap_time' => $scrap_time
+                'storage_time' => date("Y-m-d H:i:s",strtotime($storage_time)),
+                'scrap_time' => date("Y-m-d",strtotime($scrap_time))
             ]);
-        return response()->json([], 200);
+        return response()->json([
+            'result'=>'修改成功'
+        ], 200);
     }
 
     /**
