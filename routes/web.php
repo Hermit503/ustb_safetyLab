@@ -13,6 +13,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Gate;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -52,8 +53,12 @@ Route::prefix('admin')->group(function () {
     Route::get('chemicalsList', 'AdminController@getChemicalsList');
     Route::get('userList', 'AdminController@getUserList');
     Route::get('adminList','AdminController@getAdmin');
-    Route::get('hi', function () {
-        return view('admin.cate');
-    });
+    Route::get('hidden', 'AdminController@getHiddensList');
+    Route::get('message', 'AdminController@getMessagesList');
+    Route::get('log', 'AdminController@getLogList');
+    Route::get('paper', 'AdminController@getPaperList');
+    Route::get('score', 'AdminController@getScoreList');
+    Route::get('role', 'AdminController@getRolesList');
+    Route::get('permission', 'AdminController@getPermission');
     
 });

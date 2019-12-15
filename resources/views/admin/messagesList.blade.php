@@ -19,7 +19,7 @@
                 <a href="">首页</a>
                 <a href="">基本管理</a>
                 <a>
-                    <cite>药品列表</cite></a>
+                    <cite>消息列表</cite></a>
             </span>
             <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
                 <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
@@ -37,25 +37,32 @@
                             <table class="layui-table layui-form">
                                 <thead>
                                     <tr>
-                                        <th>危化品id</th>
-                                        <th>药品名</th>
-                                        <th>所属单位</th>
-                                        <th>所属实验室</th>
-                                        <th>状态</th>
-                                        <th>类型</th>
-                                        <th>库存量</th>
-                                        <th>操作</th></tr>
+                                        <th>工号</th>
+                                        <th>创建人</th>
+                                        <th>题目</th>
+                                        <th>详情</th>
+                                        <th>通知人</th>
+                                        <th>已收到的人</th>
+                                        <th>操作</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($chemicals as $chemical)
+                                    @foreach ($messages as $message)
                                     <tr>
-                                        <td>{{$chemical['chemical_id']}}</td>
-                                        <td>{{$chemical['name']}}</td>
-                                        <td>{{$chemical['unit']['unit_name']}}</td>
-                                        <td>{{$chemical['laboratories']['building_name']}} {{$chemical['laboratories']['classroom_num']}} {{$chemical['laboratories']['laboratory_name']}}</td>
-                                        <td>{{$chemical['status']}}</td>
-                                        <td>{{$chemical['type']}}</td>
-                                        <td>{{$chemical['stock']}} {{$chemical['unit_type']}}</td>
+                                        <td>{{$message['build_id']}}</td>
+                                        <td>{{$message['name']}}</td>
+                                        <td>{{$message['title']}}</td>
+                                        <td>{{$message['comment']}}</td>
+                                        <td>
+                                            @for($i = 0;$i < sizeof($message['users']);$i++)
+                                            {{$message['users'][$i]}}&nbsp;&nbsp;
+                                            @endfor
+                                        </td>
+                                        <td>
+                                            @for($i = 0;$i < sizeof($message['received_users']);$i++)
+                                                {{$message['received_users'][0]['name']}}&nbsp;&nbsp;
+                                            @endfor
+                                        </td>
                                         <td class="td-manage">
                                             <a title="查看" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">
                                                 <i class="layui-icon">&#xe63c;</i></a>
@@ -69,7 +76,7 @@
                         </div>
                         <div class="layui-card-body ">
                             <div class="page">
-                                    {{$chemicals->links()}}
+                                    {{$messages->links()}}
                             </div>
                         </div>
                     </div>

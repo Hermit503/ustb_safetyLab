@@ -31,18 +31,12 @@
                     <div class="layui-card">
                         
                         <div class="layui-card-header">
-                            <button class="layui-btn layui-btn-danger" onclick="delAll()">
-                                <i class="layui-icon"></i>批量删除</button>
                             <button class="layui-btn" onclick="xadmin.open('添加用户','./order-add.html',800,600)">
                                 <i class="layui-icon"></i>添加</button></div>
                         <div class="layui-card-body ">
                             <table class="layui-table layui-form">
                                 <thead>
                                     <tr>
-                                        <th>
-                                            <input type="checkbox" name="" lay-skin="primary">
-                                        </th>
-                                        <th>id</th>
                                         <th>单位名称</th>
                                         <th>单位类型</th>
                                         <th>创建时间</th>
@@ -52,15 +46,12 @@
                                 <tbody>
                                     @foreach ($units as $unit)
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" name="" lay-skin="primary"></td>
-                                        <td>{{$unit['id']}}</td>
                                         <td>{{$unit['unit_name']}}</td>
                                         <td>{{$unit['unit_type']}}</td>
                                         <td>{{$unit['created_at']}}</td>
                                         <td>{{$unit['updated_at']}}</td>
                                         <td class="td-manage">
-                                            <a title="查看" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">
+                                            <a title="查看" onclick="xadmin.open('编辑','unitListModify.blade.php')" href="javascript:;">
                                                 <i class="layui-icon">&#xe63c;</i></a>
                                             <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
                                                 <i class="layui-icon">&#xe640;</i></a>

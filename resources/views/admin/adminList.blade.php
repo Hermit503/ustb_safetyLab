@@ -31,18 +31,12 @@
                     <div class="layui-card">
                         
                         <div class="layui-card-header">
-                            <button class="layui-btn layui-btn-danger" onclick="delAll()">
-                                <i class="layui-icon"></i>批量删除</button>
                             <button class="layui-btn" onclick="xadmin.open('添加用户','./order-add.html',800,600)">
                                 <i class="layui-icon"></i>添加</button></div>
                         <div class="layui-card-body ">
                             <table class="layui-table layui-form">
                                 <thead>
                                     <tr>
-                                        <th>
-                                            <input type="checkbox" name="" lay-skin="primary">
-                                        </th>
-                                        <th>id</th>
                                         <th>工号</th>
                                         <th>姓名</th>
                                         <th>手机号</th>
@@ -53,14 +47,11 @@
                                 <tbody>
                                     @foreach ($admins as $admin)
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" name="" lay-skin="primary"></td>
-                                        <td>{{$admin['id']}}</td>
                                         <td>{{$admin['user_id']}}</td>
                                         <td>{{$admin['name']}}</td>
                                         <td>{{$admin['phone_number']}}</td>
                                         <td>{{$admin['email']}}</td>
-                                        <td>{{$admin['unit_id']}}</td>
+                                        <td>{{$admin['unit_name']}}</td>
                                         <td class="td-manage">
                                             <a title="查看" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">
                                                 <i class="layui-icon">&#xe63c;</i></a>

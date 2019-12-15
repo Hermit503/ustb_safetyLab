@@ -9,6 +9,8 @@ use App\Laboratory;
 use App\Unit;
 use App\User;
 use App\Notice;
+use App\Permission;
+use App\Role;
 use Illuminate\Support\Facades\Gate;
 use EasyWeChat\Kernel\Messages\Message;
 use Illuminate\Http\Request;
@@ -52,7 +54,7 @@ class AdminController extends Controller
      * 获取实验室列表
      */
     public function getLarboriesList(){
-        $larbories = Laboratory::paginate(10);
+        $larbories = Laboratory::join('units','laboratories.unit_id','=','units.id')->paginate(10);
         if(Gate::allows('access-admin',Auth::user())){
             return view('admin.larboriesList')
             ->with('larbories',$larbories);
@@ -65,7 +67,7 @@ class AdminController extends Controller
      * 获取实验室设备列表
      */
     public function getEquipmentsList(){
-        $equipments = Equipments::paginate(10);
+        $equipments = Equipments::join('laboratories','laboratory_id','=','laboratories.id')->paginate(10);
         if(Gate::allows('access-admin',Auth::user())){
             return view('admin.equipmentsList')
             ->with('equipments',$equipments);
@@ -78,7 +80,9 @@ class AdminController extends Controller
      * 获取药品列表
      */
     public function getChemicalsList(){
-        $chemicals = Chemical::paginate(10);
+        $chemicals = Chemical::with('laboratories')
+                     ->with('unit')
+                     ->paginate(10);
         if(Gate::allows('access-admin',Auth::user())){
             return view('admin.chemicalsList')
             ->with('chemicals',$chemicals);
@@ -91,7 +95,8 @@ class AdminController extends Controller
      * 获取用户列表
      */
     public function getUserList(){
-        $users = User::paginate(10);
+        // $users = User::paginate(10)->with('unit')->get();
+        $users = User::join('units','users.unit_id','=','units.id')->paginate(10);
         if(Gate::allows('access-admin',Auth::user())){
             return view('admin.userList')
             ->with('users',$users);
@@ -104,10 +109,11 @@ class AdminController extends Controller
      * 获取管理员列表
      */
     public function getAdmin(){
-        $admins = User::paginate(10);
+        $admins = User::join('units','users.unit_id','=','units.id')->where('title','=','admin')->paginate(10);
         if(Gate::allows('access-admin',Auth::user())){
             return view('admin.adminList')
             ->with('admins',$admins);
+            // return $admins;
         }
 
         abort(404);
@@ -117,7 +123,7 @@ class AdminController extends Controller
      * 隐患列表
      */
     public function getHiddensList(){
-        $hiddens = Hidden::paginate(10);
+        $hiddens = Hidden::with('user')->paginate(10);
         if(Gate::allows('access-admin',Auth::user())){
             return view('admin.hiddensList')
             ->with('hiddens',$hiddens);
@@ -127,13 +133,58 @@ class AdminController extends Controller
     }
 
     /**
+     * 人员的数组
+     */
+    public function getUser(Array $array){
+        $users = [];
+        for($i = 0 ; $i < sizeof($array) ; $i++){
+            $user = User::where('user_id',$array[$i])->get();
+            $username = $user[0]['name'];
+            array_push($users,$username);
+        }
+        return $users;
+    }
+
+    /**
+     * 收到消息的人员
+     */
+    public function getReceivedUser(String $str = ""){
+        $names = [];
+        if($str == ""){
+            return "暂无";
+        }else{
+            //将0062 0061转为数组
+            $users = explode(" ", $str);
+
+            foreach ($users as $item) {
+                $name = User::where('user_id', $item)->get(['name']);
+                array_push($names, $name[0]);
+            }
+
+            return $names;
+        }
+    }
+
+    /**
      * 消息列表
      */
     public function getMessagesList(){
-        $messages = Message::paginate(10);
+        $messages = Notice::join('users','user_id','build_id')->paginate(10);
+        
         if(Gate::allows('access-admin',Auth::user())){
+            
+            foreach($messages as $key => $message){
+                $users = $this->getUser(json_decode($message['users']));
+                $message['users'] = $users;
+                if($message['received_users'] != null){
+                    $message['received_users'] = $this->getReceivedUser($message['received_users']);
+                }else{
+                    $message['received_users'] = [];
+                }
+            }
             return view('admin.messagesList')
             ->with('messages',$messages);
+            // return $messages;
         }
 
         abort(404);
@@ -167,6 +218,33 @@ class AdminController extends Controller
     public function getScoreList(){
         if(Gate::allows('access-admin',Auth::user())){
             return view('admin.scoreList');
+        }
+
+        abort(404);
+    }
+
+    /**
+     * 角色管理
+     */
+    public function getRolesList(){
+        $roles = Role::join('users','roles.user_id','users.user_id')->paginate(10);
+        if(Gate::allows('access-admin',Auth::user())){
+            return view('admin.roleList')
+            ->with('roles',$roles);
+        }
+
+        abort(404);
+    }
+
+    /**
+     * 权限管理
+     */
+    public function getPermission(){
+        $permissions = Permission::join('users','permissions.user_id','users.user_id')->paginate(10);
+        if(Gate::allows('access-admin',Auth::user())){
+            return view('admin.permissionList')
+            ->with('permissions',$permissions);
+            
         }
 
         abort(404);

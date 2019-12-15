@@ -47,11 +47,11 @@ class User extends Authenticatable
     }
     public function unit()
     {
-        return $this->belongsTo(Unit::class);
+        return $this->belongsTo(Unit::class,'unit_id','id');
     }
     public function hiddens()
     {
-        return $this->belongsTo(Hidden::class,'user_id','user_id');
+        return $this->hasMany(Hidden::class,'user_id','user_id');
     }
     public function chemicals()
     {

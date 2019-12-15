@@ -8,7 +8,7 @@ class Permission extends Model
 {
     protected $guarded=[];
 
-    public function user()
+    public function users()
     {
         return $this->belongsTo(User::class);
     }

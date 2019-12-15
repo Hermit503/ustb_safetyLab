@@ -130,17 +130,17 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a onclick="xadmin.add_tab('隐患列表','/admin/cate')">
+                                <a onclick="xadmin.add_tab('隐患列表','/admin/hidden')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>隐患列表</cite></a>
                             </li>
                             <li>
-                                <a onclick="xadmin.add_tab('消息列表','/admin/cate')">
+                                <a onclick="xadmin.add_tab('消息列表','/admin/message')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>消息列表</cite></a>
                             </li>
                             <li>
-                                <a onclick="xadmin.add_tab('日志列表','/admin/cate')">
+                                <a onclick="xadmin.add_tab('日志列表','/admin/log')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>日志列表</cite></a>
                             </li>
@@ -154,14 +154,14 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a onclick="xadmin.add_tab('试题管理','/admin/city')">
+                                <a onclick="xadmin.add_tab('试题管理','/admin/paper')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>试题管理</cite></a>
                             </li>
                         </ul>
                         <ul class="sub-menu">
                             <li>
-                                <a onclick="xadmin.add_tab('成绩查看','/admin/city')">
+                                <a onclick="xadmin.add_tab('成绩查看','/admin/score')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>成绩查看</cite></a>
                             </li>
@@ -174,12 +174,12 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a onclick="xadmin.add_tab('角色管理','/admin/admin-role')">
+                                <a onclick="xadmin.add_tab('角色管理','/admin/role')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>角色管理</cite></a>
                             </li>
                             <li>
-                                <a onclick="xadmin.add_tab('权限管理','/admin/admin-rule')">
+                                <a onclick="xadmin.add_tab('权限管理','/admin/permission')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>权限管理</cite></a>
                             </li>

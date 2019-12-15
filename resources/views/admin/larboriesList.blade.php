@@ -31,19 +31,14 @@
                     <div class="layui-card">
                         
                         <div class="layui-card-header">
-                            <button class="layui-btn layui-btn-danger" onclick="delAll()">
-                                <i class="layui-icon"></i>批量删除</button>
                             <button class="layui-btn" onclick="xadmin.open('添加用户','./order-add.html',800,600)">
                                 <i class="layui-icon"></i>添加</button></div>
                         <div class="layui-card-body ">
                             <table class="layui-table layui-form">
                                 <thead>
                                     <tr>
-                                        <th>
-                                            <input type="checkbox" name="" lay-skin="primary">
-                                        </th>
-                                        <th>id</th>
                                         <th>实验室名称</th>
+                                        <th>实验室位置</th>
                                         <th>所属单位</th>
                                         <th>创建时间</th>
                                         <th>修改时间</th>
@@ -52,11 +47,9 @@
                                 <tbody>
                                     @foreach ($larbories as $larbory)
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" name="" lay-skin="primary"></td>
-                                        <td>{{$larbory['id']}}</td>
+                                        <td>{{$larbory['laboratory_name']}}</td>
+                                        <td>{{$larbory['building_name']}}{{$larbory['classroom_num']}}</td>
                                         <td>{{$larbory['unit_name']}}</td>
-                                        <td>{{$larbory['unit_type']}}</td>
                                         <td>{{$larbory['created_at']}}</td>
                                         <td>{{$larbory['updated_at']}}</td>
                                         <td class="td-manage">
@@ -70,11 +63,13 @@
                                 </tbody>
                             </table>
                         </div>
+
                         <div class="layui-card-body ">
                             <div class="page">
                                     {{$larbories->links()}}
                             </div>
                         </div>
+                    
                     </div>
                 </div>
             </div>
