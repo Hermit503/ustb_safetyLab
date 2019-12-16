@@ -37,6 +37,7 @@
                             <table class="layui-table layui-form">
                                 <thead>
                                     <tr>
+                                        <th>id</th>
                                         <th>实验室名称</th>
                                         <th>实验室位置</th>
                                         <th>所属单位</th>
@@ -47,9 +48,10 @@
                                 <tbody>
                                     @foreach ($larbories as $larbory)
                                     <tr>
+                                        <td>{{$larbory['id']}}</td>
                                         <td>{{$larbory['laboratory_name']}}</td>
                                         <td>{{$larbory['building_name']}}{{$larbory['classroom_num']}}</td>
-                                        <td>{{$larbory['unit_name']}}</td>
+                                        <td>{{$larbory['unit']['unit_name']}}</td>
                                         <td>{{$larbory['created_at']}}</td>
                                         <td>{{$larbory['updated_at']}}</td>
                                         <td class="td-manage">

@@ -37,6 +37,7 @@
                             <table class="layui-table layui-form">
                                 <thead>
                                     <tr>
+                                        <th>id</th>
                                         <th>资产编号</th>
                                         <th>设备名称</th>
                                         <th>所属实验室</th>
@@ -46,9 +47,10 @@
                                 <tbody>
                                     @foreach ($equipments as $equipment)
                                     <tr>
+                                        <td>{{$equipment['id']}}</td>
                                         <td>{{$equipment['asset_number']}}</td>
                                         <td>{{$equipment['equipment_name']}}</td>
-                                        <td>{{$equipment['building_name']}} {{$equipment['classroom_num']}} {{$equipment['laboratory_name']}}</td>
+                                        <td>{{$equipment['laboratories']['building_name']}} {{$equipment['laboratories']['classroom_num']}} {{$equipment['laboratories']['laboratory_name']}}</td>
                                         <td>{{$equipment['status']}}</td>
                                         <td class="td-manage">
                                             <a title="查看" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">

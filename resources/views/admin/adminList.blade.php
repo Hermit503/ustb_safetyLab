@@ -37,6 +37,7 @@
                             <table class="layui-table layui-form">
                                 <thead>
                                     <tr>
+                                        <th>id</th>
                                         <th>工号</th>
                                         <th>姓名</th>
                                         <th>手机号</th>
@@ -47,11 +48,12 @@
                                 <tbody>
                                     @foreach ($admins as $admin)
                                     <tr>
+                                        <td>{{$admin['id']}}</td>
                                         <td>{{$admin['user_id']}}</td>
                                         <td>{{$admin['name']}}</td>
                                         <td>{{$admin['phone_number']}}</td>
                                         <td>{{$admin['email']}}</td>
-                                        <td>{{$admin['unit_name']}}</td>
+                                        <td>{{$admin['unit']['unit_name']}}</td>
                                         <td class="td-manage">
                                             <a title="查看" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">
                                                 <i class="layui-icon">&#xe63c;</i></a>

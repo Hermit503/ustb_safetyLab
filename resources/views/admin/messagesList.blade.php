@@ -37,6 +37,7 @@
                             <table class="layui-table layui-form">
                                 <thead>
                                     <tr>
+                                        <th>id</th>
                                         <th>工号</th>
                                         <th>创建人</th>
                                         <th>题目</th>
@@ -49,8 +50,9 @@
                                 <tbody>
                                     @foreach ($messages as $message)
                                     <tr>
+                                        <td>{{$message['id']}}</td>
                                         <td>{{$message['build_id']}}</td>
-                                        <td>{{$message['name']}}</td>
+                                        <td>{{$message['user']['name']}}</td>
                                         <td>{{$message['title']}}</td>
                                         <td>{{$message['comment']}}</td>
                                         <td>

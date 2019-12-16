@@ -54,7 +54,7 @@ class AdminController extends Controller
      * 获取实验室列表
      */
     public function getLarboriesList(){
-        $larbories = Laboratory::join('units','laboratories.unit_id','=','units.id')->paginate(10);
+        $larbories = Laboratory::with('unit')->paginate(10);
         if(Gate::allows('access-admin',Auth::user())){
             return view('admin.larboriesList')
             ->with('larbories',$larbories);
@@ -67,7 +67,7 @@ class AdminController extends Controller
      * 获取实验室设备列表
      */
     public function getEquipmentsList(){
-        $equipments = Equipments::join('laboratories','laboratory_id','=','laboratories.id')->paginate(10);
+        $equipments = Equipments::with('laboratories')->paginate(10);
         if(Gate::allows('access-admin',Auth::user())){
             return view('admin.equipmentsList')
             ->with('equipments',$equipments);
@@ -96,7 +96,7 @@ class AdminController extends Controller
      */
     public function getUserList(){
         // $users = User::paginate(10)->with('unit')->get();
-        $users = User::join('units','users.unit_id','=','units.id')->paginate(10);
+        $users = User::with('unit')->paginate(10);
         if(Gate::allows('access-admin',Auth::user())){
             return view('admin.userList')
             ->with('users',$users);
@@ -109,7 +109,7 @@ class AdminController extends Controller
      * 获取管理员列表
      */
     public function getAdmin(){
-        $admins = User::join('units','users.unit_id','=','units.id')->where('title','=','admin')->paginate(10);
+        $admins = User::with('unit')->where('title','=','admin')->paginate(10);
         if(Gate::allows('access-admin',Auth::user())){
             return view('admin.adminList')
             ->with('admins',$admins);
@@ -169,7 +169,7 @@ class AdminController extends Controller
      * 消息列表
      */
     public function getMessagesList(){
-        $messages = Notice::join('users','user_id','build_id')->paginate(10);
+        $messages = Notice::with('user')->paginate(10);
         
         if(Gate::allows('access-admin',Auth::user())){
             
@@ -227,7 +227,7 @@ class AdminController extends Controller
      * 角色管理
      */
     public function getRolesList(){
-        $roles = Role::join('users','roles.user_id','users.user_id')->paginate(10);
+        $roles = Role::with('user')->paginate(10);
         if(Gate::allows('access-admin',Auth::user())){
             return view('admin.roleList')
             ->with('roles',$roles);
@@ -240,7 +240,7 @@ class AdminController extends Controller
      * 权限管理
      */
     public function getPermission(){
-        $permissions = Permission::join('users','permissions.user_id','users.user_id')->paginate(10);
+        $permissions = Permission::with('user')->paginate(10);
         if(Gate::allows('access-admin',Auth::user())){
             return view('admin.permissionList')
             ->with('permissions',$permissions);

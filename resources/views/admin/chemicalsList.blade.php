@@ -37,6 +37,7 @@
                             <table class="layui-table layui-form">
                                 <thead>
                                     <tr>
+                                        <th>id</th>
                                         <th>危化品id</th>
                                         <th>药品名</th>
                                         <th>所属单位</th>
@@ -49,6 +50,7 @@
                                 <tbody>
                                     @foreach ($chemicals as $chemical)
                                     <tr>
+                                        <td>{{$chemical['id']}}</td>
                                         <td>{{$chemical['chemical_id']}}</td>
                                         <td>{{$chemical['name']}}</td>
                                         <td>{{$chemical['unit']['unit_name']}}</td>

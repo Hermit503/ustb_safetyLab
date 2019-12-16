@@ -37,6 +37,7 @@
                             <table class="layui-table layui-form">
                                 <thead>
                                     <tr>
+                                        <th>id</th>
                                         <th>工号</th>
                                         <th>姓名</th>
                                         <th>角色</th>
@@ -46,8 +47,9 @@
                                 <tbody>
                                     @foreach ($roles as $role)
                                     <tr>
+                                        <td>{{$role['id']}}</td>
                                         <td>{{$role['user_id']}}</td>
-                                        <td>{{$role['name']}}</td>
+                                        <td>{{$role['user']['name']}}</td>
                                         <td>{{$role['role']}}</td>
                                         <td class="td-manage">
                                             <a title="查看" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">

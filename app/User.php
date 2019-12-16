@@ -41,6 +41,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Role::class,'user_id','user_id');
     }
+    public function notices()
+    {
+        return $this->hasMany(Notice::class,'user_id','build_id');
+    }
     public function permissions()
     {
         return $this->hasMany(Permission::class,'user_id','user_id');

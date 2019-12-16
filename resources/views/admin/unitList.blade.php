@@ -31,7 +31,7 @@
                     <div class="layui-card">
                         
                         <div class="layui-card-header">
-                            <button class="layui-btn" onclick="xadmin.open('添加用户','./order-add.html',800,600)">
+                            <button class="layui-btn" onclick="xadmin.open('添加用户','newUnit',800,600)">
                                 <i class="layui-icon"></i>添加</button></div>
                         <div class="layui-card-body ">
                             <table class="layui-table layui-form">
