@@ -41,24 +41,29 @@ Route::prefix('admin')->group(function () {
         }
         abort(404);
     });
-    Route::get('welcome','AdminController@getWelcome');
-    Route::post('login','AdminController@login');
+    Route::get('welcome','Admin\WelcomeController@getWelcome');
+    Route::post('login','Admin\LoginController@login');
     Route::get('logout',function(){
         Auth::logout();
         return redirect('/admin');
     });
-    Route::get('unitList','AdminController@getUnitList');
-    Route::get('larboriesList', 'AdminController@getLarboriesList');
-    Route::get('equipmentsList', 'AdminController@getEquipmentsList');
-    Route::get('chemicalsList', 'AdminController@getChemicalsList');
-    Route::get('userList', 'AdminController@getUserList');
-    Route::get('adminList','AdminController@getAdmin');
-    Route::get('hidden', 'AdminController@getHiddensList');
-    Route::get('message', 'AdminController@getMessagesList');
-    Route::get('log', 'AdminController@getLogList');
-    Route::get('paper', 'AdminController@getPaperList');
-    Route::get('score', 'AdminController@getScoreList');
-    Route::get('role', 'AdminController@getRolesList');
-    Route::get('permission', 'AdminController@getPermission');
-    
+    Route::get('unitList','Admin\UnitController@getUnitList');
+    Route::post('newUnit','Admin\UnitController@newUnit');
+    Route::put('modifyUnit','Admin\UnitController@modifyUnit');
+    Route::get('larboriesList', 'Admin\LaboratoryController@getLaboratoriesList');
+    Route::post('newLarborary','Admin\LaboratoryController@newLaboratory');
+    Route::put('modifyLaborary','Admin\LaboratoryController@modifyLaboratory');
+    Route::get('allUsers','UserController@getAllUsers');
+    Route::get('equipmentsList', 'Admin\EquipmentController@getEquipmentsList');
+    Route::get('chemicalsList', 'Admin\ChemicalController@getChemicalsList');
+    Route::get('userList', 'Admin\UserController@getUserList');
+    Route::get('adminList','Admin\AdminerController@getAdmin');
+    Route::get('hidden', 'Admin\HiddenController@getHiddensList');
+    Route::get('message', 'Admin\MessageController@getMessagesList');
+    Route::get('log', 'Admin\LogController@getLogList');
+    Route::get('paper', 'Admin\PaperController@getPaperList');
+    Route::get('score', 'Admin\ScoreController@getScoreList');
+    Route::get('role', 'Admin\RoleController@getRolesList');
+    Route::get('permission', 'Admin\PermissionController@getPermission');
+
 });
