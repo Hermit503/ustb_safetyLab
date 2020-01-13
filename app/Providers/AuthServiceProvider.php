@@ -26,11 +26,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('access-admin',function(){
-            if(Auth::user()->title === 'admin'){
-                return true;
-            }
-            return false;
-        });
+        Gate::define('access-admin','App\Policies\LoginPolicy@Admin');
     }
 }

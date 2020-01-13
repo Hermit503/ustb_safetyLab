@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="x-admin-sm">
-    
+
     <head>
         <meta charset="UTF-8">
         <title>欢迎页面-X-admin2.2</title>
@@ -12,7 +12,7 @@
         <script src="../lib/layui/layui.js" charset="utf-8"></script>
         <script type="text/javascript" src="../js/xadmin.js"></script>
     </head>
-    
+
     <body>
         <div class="x-nav">
             <span class="layui-breadcrumb">
@@ -29,7 +29,7 @@
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
                     <div class="layui-card">
-                        
+
                         <div class="layui-card-header">
                             <button class="layui-btn" onclick="xadmin.open('添加用户','./order-add.html',800,600)">
                                 <i class="layui-icon"></i>添加</button></div>
@@ -65,11 +65,11 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="layui-card-body ">
-                            <div class="page">
-                                    {{$admins->links()}}
-                            </div>
-                        </div>
+{{--                        <div class="layui-card-body ">--}}
+{{--                            <div class="page">--}}
+{{--                                    {{$admins->links()}}--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>
