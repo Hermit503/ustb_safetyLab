@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -28,6 +29,44 @@ class AdminerController extends Controller
                 ->with('admins',$admins);
         }
 
+        abort(404);
+    }
+
+    /**
+     * 新增管理员
+     * @param Request $request
+     * @return string
+     * @author lj
+     * @time 2020-01-20
+     */
+    public function newAdmin(Request $request){
+        $user_id = $request->new_admin_id;
+        $role = new Role;
+        $role->user_id = $user_id;
+        $role->role = '超级管理员';
+        $role->created_at = date("Y-m-d H:i:s");
+        $role->updated_at = date("Y-m-d H:i:s");
+        if(Gate::allows('access-admin',Auth::user())){
+            $role->save();
+            return "添加成功";
+        }
+
+        abort(404);
+    }
+
+    /**
+     * 删除管理员
+     * @param Request $request
+     * @return string
+     * @author lj
+     * @time 2020-01-20
+     */
+    public function deleteAdmin(Request $request){
+        $user_id = $request->user_id;
+        if(Gate::allows('access-admin',Auth::user())){
+            Role::where('user_id', $user_id)->where('role','超级管理员')->delete();
+            return "删除成功";
+        }
         abort(404);
     }
 }

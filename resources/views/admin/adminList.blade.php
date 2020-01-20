@@ -10,7 +10,45 @@
         <link rel="stylesheet" href="../css/font.css">
         <link rel="stylesheet" href="../css/xadmin.css">
         <script src="../lib/layui/layui.js" charset="utf-8"></script>
+        <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
         <script type="text/javascript" src="../js/xadmin.js"></script>
+
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <script>
+            //添加管理员
+            function openAddModak(){
+
+                layui.use(['layer'],function () {
+                    var layer = layui.layer,$=layui.$;
+                    layer.open({
+                        type:1,//类型
+                        area:['1000px','400px'],//定义宽和高
+                        title:'添加管理员',//题目
+                        shadeClose:true,//点击遮罩层关闭
+                        content: $('#addModel')//打开的内容
+                    });
+                })
+                layui.form.render('select', 'add');
+            }
+            //删除管理员
+            function openDeleteModak(that){
+                var id = $(that).attr("data-userId")
+
+                $("[id='deleteUserId']").val(id);//向模态框中赋值
+                $("[id='deleteMessage']").text("确认删除"+id+"的管理权限?");
+                layui.use(['layer'],function () {
+                    var layer = layui.layer,$=layui.$;
+                    layer.open({
+                        type:1,//类型
+                        area:['360px','200px'],//定义宽和高
+                        title:'确认删除？',//题目
+                        shadeClose:true,//点击遮罩层关闭
+                        content: $('#deleteModel')//打开的内容
+                    });
+                })
+                layui.form.render(null, 'delete');
+            }
+        </script>
     </head>
 
     <body>
@@ -31,7 +69,7 @@
                     <div class="layui-card">
 
                         <div class="layui-card-header">
-                            <button class="layui-btn" onclick="xadmin.open('添加用户','./order-add.html',800,600)">
+                            <button class="layui-btn" onclick="openAddModak()">
                                 <i class="layui-icon"></i>添加</button></div>
                         <div class="layui-card-body ">
                             <table class="layui-table layui-form">
@@ -55,9 +93,7 @@
                                         <td>{{$admin['email']}}</td>
                                         <td>{{$admin['unit']['unit_name']}}</td>
                                         <td class="td-manage">
-                                            <a title="查看" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">
-                                                <i class="layui-icon">&#xe63c;</i></a>
-                                            <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                                            <a title="删除" onclick="openDeleteModak(this)" data-userId="{{$admin['user_id']}}" href="javascript:;">
                                                 <i class="layui-icon">&#xe640;</i></a>
                                         </td>
                                     </tr>
@@ -65,87 +101,110 @@
                                 </tbody>
                             </table>
                         </div>
-{{--                        <div class="layui-card-body ">--}}
-{{--                            <div class="page">--}}
-{{--                                    {{$admins->links()}}--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $.ajax({
+                url:'/admin/allUsers',
+                data:{},
+                dataType:"text",
+                success:function(data){
+                    var result = eval("("+data+")");
+                    console.log(result)
+                    for(var index in result){
+                        $("#new").append("<option value='"+result[index]['user_id']+"'>"+result[index]['name']+" "+result[index]['user_id']+"</option>")
+                        // $("#test").append("<li>"+result[index]['name']+"</li>")
+                    }
+                },
+            });
+        </script>
+        <!--新增管理员-->
+        <div id="addModel" style="display: none;">
+            <div class="layui-container">
+                <br><br>
+                <div class="layui-row">
+                    <div class="layui-col-md10 layui-col-md-offset1">
+                        <form class="layui-form" lay-filter="add">
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">人员姓名及工号</label>
+                                <div class="layui-input-block">
+                                    <div class="layui-inline">
+                                        <select id="new" name="new_safety_head">
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" onclick="newAdmin()">立即提交</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--删除管理员-->
+        <div id="deleteModel" style="display: none;">
+            <div class="layui-container">
+                <br><br>
+                <div class="layui-row">
+                    <div class="layui-col-md10 layui-col-md-offset1">
+                        <form class="layui-form" lay-filter="delete">
+                            <p id="deleteMessage">11</p>
+                            <input type="text" id="deleteUserId" hidden>
+                            <br><br>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn  layui-btn-danger" onclick="deleteAdmin()">删除</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">取消</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </body>
-    <script>layui.use(['laydate', 'form'],
-        function() {
-            var laydate = layui.laydate;
-
-            //执行一个laydate实例
-            laydate.render({
-                elem: '#start' //指定元素
-            });
-
-            //执行一个laydate实例
-            laydate.render({
-                elem: '#end' //指定元素
-            });
+    <script>
+        layui.use('form', function(){
+            var form = layui.form;
+            // form.render(null, 'add'); //更新 lay-filter="add" 所在容器内的全部表单状态
         });
-
-        /*用户-停用*/
-        function member_stop(obj, id) {
-            layer.confirm('确认要停用吗？',
-            function(index) {
-
-                if ($(obj).attr('title') == '启用') {
-
-                    //发异步把用户状态进行更改
-                    $(obj).attr('title', '停用');
-                    $(obj).find('i').html('&#xe62f;');
-
-                    $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                    layer.msg('已停用!', {
-                        icon: 5,
-                        time: 1000
-                    });
-
-                } else {
-                    $(obj).attr('title', '启用');
-                    $(obj).find('i').html('&#xe601;');
-
-                    $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                    layer.msg('已启用!', {
-                        icon: 5,
-                        time: 1000
-                    });
-                }
-
+        function newAdmin(){
+            var new_user_id = $("#new").val()
+            $.ajax({
+                url:'/admin/newAdminer',
+                method:"POST",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data:{
+                    "new_admin_id": new_user_id
+                },
+                dataType:"text",
+                success:function(data){
+                    window.location()
+                },
             });
         }
 
-        /*用户-删除*/
-        function member_del(obj, id) {
-            layer.confirm('确认要删除吗？',
-            function(index) {
-                //发异步删除数据
-                $(obj).parents("tr").remove();
-                layer.msg('已删除!', {
-                    icon: 1,
-                    time: 1000
-                });
+        function deleteAdmin(){
+            var user_id = $("#deleteUserId").val()
+            $.ajax({
+                url:'/admin/deleteAdminer?user_id='+user_id,
+                method:"DELETE",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                dataType:"text",
+                success:function(data){
+                    window.location()
+                },
             });
         }
-
-        function delAll(argument) {
-
-            var data = tableCheck.getData();
-
-            layer.confirm('确认要删除吗？' + data,
-            function(index) {
-                //捉到所有被选中的，发异步进行删除
-                layer.msg('删除成功', {
-                    icon: 1
-                });
-                $(".layui-form-checked").not('.header').parents('tr').remove();
-            });
-        }</script>
+    </script>
 
 </html>

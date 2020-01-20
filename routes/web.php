@@ -58,6 +58,8 @@ Route::prefix('admin')->group(function () {
     Route::get('chemicalsList', 'Admin\ChemicalController@getChemicalsList');
     Route::get('userList', 'Admin\UserController@getUserList');
     Route::get('adminList','Admin\AdminerController@getAdmin');
+    Route::post('newAdminer','Admin\AdminerController@newAdmin');
+    Route::delete('deleteAdminer','Admin\AdminerController@deleteAdmin');
     Route::get('hidden', 'Admin\HiddenController@getHiddensList');
     Route::get('message', 'Admin\MessageController@getMessagesList');
     Route::get('log', 'Admin\LogController@getLogList');

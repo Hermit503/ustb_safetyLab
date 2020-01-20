@@ -221,7 +221,7 @@ class UserController extends Controller
      * 获取所有人员
      */
     public function getAllUsers(){
-        $names = User::all(['id','name']);
+        $names = User::all(['id','name','user_id']);
         return $names;
     }
 }
