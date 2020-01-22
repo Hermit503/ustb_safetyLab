@@ -60,6 +60,9 @@ Route::prefix('admin')->group(function () {
     Route::get('adminList','Admin\AdminerController@getAdmin');
     Route::post('newAdminer','Admin\AdminerController@newAdmin');
     Route::delete('deleteAdminer','Admin\AdminerController@deleteAdmin');
+    Route::post('newUser','Admin\UserController@newUser');
+    Route::put('modifyUser','Admin\UserController@modifyUser');
+    Route::delete('deleteUser','Admin\UserController@deleteUser');
     Route::get('hidden', 'Admin\HiddenController@getHiddensList');
     Route::get('message', 'Admin\MessageController@getMessagesList');
     Route::get('log', 'Admin\LogController@getLogList');
