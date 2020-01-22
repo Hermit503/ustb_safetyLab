@@ -22,7 +22,10 @@
                         area:['1000px','400px'],//定义宽和高
                         title:'添加单位',//题目
                         shadeClose:true,//点击遮罩层关闭
-                        content: $('#addModel')//打开的内容
+                        content: $('#addModel'),//打开的内容
+                        end:function (res) {
+                            $("#addModel").css("display",'none');
+                        }
                     });
                 })
             }
@@ -43,7 +46,10 @@
                         area:['1000px','400px'],//定义宽和高
                         title:'修改单位',//题目
                         shadeClose:true,//点击遮罩层关闭
-                        content: $('#modifyModel')//打开的内容
+                        content: $('#modifyModel'),//打开的内容
+                        end:function (res) {
+                            $("#modifyModel").css("display",'none');
+                        }
                     });
                 })
                 layui.form.render('select', 'modify');

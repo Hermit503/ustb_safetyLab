@@ -25,7 +25,10 @@
                         area:['1000px','400px'],//定义宽和高
                         title:'添加管理员',//题目
                         shadeClose:true,//点击遮罩层关闭
-                        content: $('#addModel')//打开的内容
+                        content: $('#addModel'),//打开的内容
+                        end:function (res) {
+                            $("#addModel").css("display",'none');
+                        }
                     });
                 })
                 layui.form.render('select', 'add');
@@ -43,7 +46,10 @@
                         area:['360px','200px'],//定义宽和高
                         title:'确认删除？',//题目
                         shadeClose:true,//点击遮罩层关闭
-                        content: $('#deleteModel')//打开的内容
+                        content: $('#deleteModel'),//打开的内容
+                        end:function (res) {
+                            $("#deleteModel").css("display",'none');
+                        }
                     });
                 })
                 layui.form.render(null, 'delete');
