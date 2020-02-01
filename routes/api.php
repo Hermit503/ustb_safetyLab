@@ -109,4 +109,8 @@ Route::group(['prefix' => '/v1'], function () {
     //巡检记录
     Route::get('/inspectionRecords','InspectionController@getInspectionRecords');
 
+    Route::post('/createClassLog','ClassLogController@createClassLog');
+    Route::get('/classLog','ClassLogController@getClassLog');
+    Route::get('/getLaboratoryList','ClassLogController@getLaboratoryList');
+
 });
