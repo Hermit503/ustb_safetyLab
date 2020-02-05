@@ -2,11 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7400d7a-ea12-4610-bf22-be1204a73317" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/ClassLog.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ClassLogController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_01_11_203216_create_class_logs_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/907e5e3d-2173-4e94-aacc-358557671545.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/907e5e3d-2173-4e94-aacc-358557671545.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/saftyLab.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/saftyLab.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_07_27_121843_create_chemicals_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_07_27_121843_create_chemicals_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,6 +68,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
@@ -182,6 +194,8 @@
       <path value="$PROJECT_DIR$/vendor/zendframework/zend-diactoros" />
       <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
       <path value="$PROJECT_DIR$/vendor/jellybool/flysystem-upyun" />
+      <path value="$PROJECT_DIR$/vendor/linfo/linfo" />
+      <path value="$PROJECT_DIR$/vendor/laramall/laravel-system-info" />
     </include_path>
   </component>
   <component name="ProjectId" id="1QgM8q6mYxLZoXU6Zhm9YQgj9RL" />
@@ -298,13 +312,23 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/storage/app/public/hiddensImage/3PYYoNqqSXAD6IZPam226sH1zqyzhGSfFNslNm4z.jpeg&#10;jpeg&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/storage/app/public/hiddensImage/3PYYoNqqSXAD6IZPam226sH1zqyzhGSfFNslNm4z.jpeg&#10;api&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/routes/api.php&#10;data&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/.idea/dataSources.xml&#10;bla&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/resources/views/register.blade.php&#10;fac&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/database/factories/UserFactory.php&#10;Us&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/app/User.php&#10;web&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/routes/web.php&#10;User&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/app/User.php&#10;.en&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/.env&#10;.e&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/.env&#10;user&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/database/migrations/2014_10_12_000000_create_users_table.php&#10;Log&#9;null&#9;null&#10;.env&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/.env&#10;Eas&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/vendor/easywechat-composer/easywechat-composer/src/EasyWeChat.php&#10;EasyWe&#9;null&#9;null&#10;Easy&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/vendor/easywechat-composer/easywechat-composer/src/EasyWeChat.php&#10;EasyWeChat&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/vendor/easywechat-composer/easywechat-composer/src/EasyWeChat.php&#10;Auth&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/config/auth.php" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../laravel-admin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -314,7 +338,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -322,15 +346,15 @@
       <recent name="C:\Users\Administrator\code\saftyLab\app\Http\Controllers" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
+  <component name="ServiceViewManager">
+    <option name="viewStates">
       <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
       </list>
     </option>
   </component>
@@ -396,6 +420,12 @@
       <workItem from="1566953656104" duration="10847000" />
       <workItem from="1568187659126" duration="776000" />
       <workItem from="1568525207234" duration="1429000" />
+      <workItem from="1578710646681" duration="9259000" />
+      <workItem from="1578729316402" duration="328000" />
+      <workItem from="1578732669458" duration="7176000" />
+      <workItem from="1578813156392" duration="1355000" />
+      <workItem from="1578825659744" duration="327000" />
+      <workItem from="1580364149157" duration="8000" />
     </task>
     <servers />
   </component>
@@ -423,6 +453,23 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="560" y="176" key="#Log_Highlighting_(ideolog)" timestamp="1578731397418">
+      <screen x="0" y="23" width="1920" height="975" />
+    </state>
+    <state x="560" y="176" key="#Log_Highlighting_(ideolog)/0.23.1920.975@0.23.1920.975" timestamp="1578731397418" />
+    <state x="469" y="149" key="SettingsEditor" timestamp="1578731417288">
+      <screen x="0" y="23" width="1920" height="975" />
+    </state>
+    <state x="469" y="149" key="SettingsEditor/0.23.1920.975@0.23.1920.975" timestamp="1578731417288" />
+    <state x="625" y="237" width="670" height="676" key="search.everywhere.popup" timestamp="1578746029894">
+      <screen x="0" y="23" width="1920" height="975" />
+    </state>
+    <state x="625" y="237" width="670" height="676" key="search.everywhere.popup/0.23.1920.975@0.23.1920.975" timestamp="1578746029894" />
   </component>
   <component name="masterDetails">
     <states>
