@@ -194,7 +194,7 @@
                 },
                 dataType:"text",
                 success:function(data){
-                    window.location()
+                    alert(data)
                 },
             });
         }
@@ -207,7 +207,7 @@
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 dataType:"text",
                 success:function(data){
-                    window.location()
+                    alert(data)
                 },
             });
         }
