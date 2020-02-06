@@ -22,6 +22,8 @@ class CreateClassLogsTable extends Migration
             $table->string('classNum')->nullable()->comment("班级号");
             $table->string('studentNum')->nullable()->comment("上课人数");
             $table->string('status')->nullable()->comment("状态");
+            $table->string('teacherName')->nullable()->comment("教师姓名");
+            $table->string('phoneNum')->nullable()->comment("手机号");
             $table->timestamps();
         });
     }
