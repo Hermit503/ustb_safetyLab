@@ -74,5 +74,8 @@ Route::prefix('admin')->group(function () {
     Route::post('newRole','Admin\RoleController@newRole');
     Route::delete('deleteRole','Admin\RoleController@deleteRole');
     Route::get('permission', 'Admin\PermissionController@getPermission');
+    Route::get('choosePermission','Admin\PermissionController@choosePermission');
+    Route::post('newPermission','Admin\PermissionController@newPermission');
+    Route::delete('deletePermission','Admin\PermissionController@deletePermission');
 
 });
