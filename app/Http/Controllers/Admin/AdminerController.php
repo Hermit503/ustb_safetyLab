@@ -41,17 +41,24 @@ class AdminerController extends Controller
      */
     public function newAdmin(Request $request){
         $user_id = $request->new_admin_id;
-        $role = new Role;
-        $role->user_id = $user_id;
-        $role->role = '超级管理员';
-        $role->created_at = date("Y-m-d H:i:s");
-        $role->updated_at = date("Y-m-d H:i:s");
-        if(Gate::allows('access-admin',Auth::user())){
-            $role->save();
-            return "添加成功";
-        }
+        $role = Role::where('user_id',$user_id)
+                ->where('role','超级管理员')
+                ->get();
+        if(count($role) != 0){
+            return "已有管理员权限";
+        }else{
+            $new_role = new Role;
+            $new_role->user_id = $user_id;
+            $new_role->role = '超级管理员';
+            $new_role->created_at = date("Y-m-d H:i:s");
+            $new_role->updated_at = date("Y-m-d H:i:s");
+            if(Gate::allows('access-admin',Auth::user())){
+                $new_role->save();
+                return "添加成功";
+            }
 
-        abort(404);
+            abort(404);
+        }
     }
 
     /**

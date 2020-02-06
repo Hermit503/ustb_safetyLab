@@ -69,6 +69,10 @@ Route::prefix('admin')->group(function () {
     Route::get('paper', 'Admin\PaperController@getPaperList');
     Route::get('score', 'Admin\ScoreController@getScoreList');
     Route::get('role', 'Admin\RoleController@getRolesList');
+    Route::get('chooseRole','Admin\RoleController@chooseRole');
+    Route::get('findRole','Admin\RoleController@findRole');
+    Route::post('newRole','Admin\RoleController@newRole');
+    Route::delete('deleteRole','Admin\RoleController@deleteRole');
     Route::get('permission', 'Admin\PermissionController@getPermission');
 
 });
