@@ -20,6 +20,8 @@ class ClassLogController extends Controller
         $classLog->classNum=$request->classNum;
         $classLog->studentNum=$request->studentNum;
         $classLog->status=$request->status;
+        $classLog->teacherName=$request->teacherName;
+        $classLog->phoneNum=$request->phoneNum;
         $classLog->save();
         return response()->json("提交成功",200);
     }
