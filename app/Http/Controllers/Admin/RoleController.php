@@ -44,11 +44,16 @@ class RoleController extends Controller
         $role_a = array('校级管理员','院级管理员','实验室管理员','教师');
         $role_b = [];
         $roles = Role::where('user_id',$user_id)->get('role');
-        foreach($roles as $role){
-            array_push($role_b,$role['role']);
+
+        if(count($roles) == count($role_a)){
+            return $role_b;
+        }else{
+            foreach($roles as $role){
+                array_push($role_b,$role['role']);
+            }
+            $result = array_diff($role_a,$role_b);
+            return $result;
         }
-        $result = array_diff($role_a,$role_b);
-        return $result;
     }
     /**
      * 添加角色
