@@ -113,4 +113,12 @@ Route::group(['prefix' => '/v1'], function () {
     Route::get('/classLog','ClassLogController@getClassLog');
     Route::get('/getLaboratoryList','ClassLogController@getLaboratoryList');
 
+    //在线考试
+    Route::get('/getQuestions','ExamController@getQuestions');
+    //提交考试成绩
+    Route::post('/submitAchievement','ExamController@submitAchievement');
+
+
+    // 测试excel
+    Route::get('/excel', 'ExamController@upload');
 });

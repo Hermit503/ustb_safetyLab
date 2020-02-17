@@ -75,4 +75,7 @@ Route::prefix('admin')->group(function () {
     Route::delete('deleteRole','Admin\RoleController@deleteRole');
     Route::get('permission', 'Admin\PermissionController@getPermission');
 
+
+
+
 });
