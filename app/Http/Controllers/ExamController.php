@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Exam;
+use App\examManage;
 use App\Imports\ExcelImport;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
@@ -39,22 +41,50 @@ class ExamController extends Controller
         return response()->json('上传成功', 200);
     }
 
+
+    /**
+     * 获取试题
+     * @author hzj
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getQuestions(Request $request)
     {
         //从Exam表随机抽50道题
-        $safe = Exam::where('type','安全通识')->inRandomOrder()->take(20)->get()->toArray();
-        $yixue = Exam::where('type','医学生物安全')->inRandomOrder()->take(10)->get()->toArray();
-        $jixie = Exam::where('type','机械建筑安全')->inRandomOrder()->take(10)->get()->toArray();
-        $dianqi = Exam::where('type','电气安全')->inRandomOrder()->take(10)->get()->toArray();
-        $answer = array_merge(array_column($safe, 'answer'),array_column($yixue, 'answer'),array_column($jixie, 'answer'),array_column($dianqi, 'answer'));
-        Cache::put($request->user_id,$answer);
-        $questions = array_merge($this->array_remove_by_key($safe),$this->array_remove_by_key($yixue),$this->array_remove_by_key($jixie),$this->array_remove_by_key($dianqi));
+        $examManage = examManage::where('unit_id',$request->unit_id)->first();
+//        Log::info($examManage);
+        $anquantongshi = Exam::where('type','安全通识')->inRandomOrder()->take($examManage->aqts)->get()->toArray();
+        $yixueshengwu = Exam::where('type','医学生物安全')->inRandomOrder()->take($examManage->yxsw)->get()->toArray();
+        $jixiejianzhu = Exam::where('type','机械建筑安全')->inRandomOrder()->take($examManage->jxjz)->get()->toArray();
+        $dianqianquan = Exam::where('type','电气安全')->inRandomOrder()->take($examManage->dqaq)->get()->toArray();
+        $huaxuepin = Exam::where('type','化学品安全')->inRandomOrder()->take($examManage->hxp)->get()->toArray();
+        $tezhongshebei = Exam::where('type','特种设备安全')->inRandomOrder()->take($examManage->tzsb)->get()->toArray();
+        $xiaofanganquan = Exam::where('type','消防安全')->inRandomOrder()->take($examManage->xfaq)->get()->toArray();
+        $answer = array_merge(
+            array_column($anquantongshi, 'answer'),
+            array_column($yixueshengwu, 'answer'),
+            array_column($jixiejianzhu, 'answer'),
+            array_column($dianqianquan, 'answer'),
+            array_column($huaxuepin, 'answer'),
+            array_column($tezhongshebei, 'answer'),
+            array_column($xiaofanganquan, 'answer')
+        );
+        Cache::forever($request->user_id,$answer);
+        $questions = array_merge(
+            $this->array_remove_by_key($anquantongshi),
+            $this->array_remove_by_key($yixueshengwu),
+            $this->array_remove_by_key($jixiejianzhu),
+            $this->array_remove_by_key($dianqianquan),
+            $this->array_remove_by_key($huaxuepin),
+            $this->array_remove_by_key($xiaofanganquan),
+            $this->array_remove_by_key($tezhongshebei)
+        );
 
         return response()->json($questions, 200);
     }
 
     /**
-     * 去除答案
+     * 从结果集去除答案字段
      * @param $arr
      * @return array
      */
@@ -65,6 +95,15 @@ class ExamController extends Controller
         },$arr);
         return $result;
     }
+
+    /**
+     *
+     * 提交答案 返回成绩
+     * @author hzj
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     *
+     */
     public function submitAchievement(Request $request)
     {
         $array = explode(",", $request->achievement);
@@ -85,7 +124,24 @@ class ExamController extends Controller
                 $trueNum++;
             }
         }
-//        Log::info($trueNum);
-        return response()->json($trueNum * 2, 200);
+        $user =  User::where('user_id',$request->user_id)->first();
+        $result = $trueNum*2>$user->exam_result?$trueNum*2:$user->exam_result;
+        if ($result>=80){
+            $user->exam_result = $result;
+            $user->save();
+            return response()->json([
+                'msg'=>'考试通过',
+                'result'=>$trueNum * 2
+            ], 200);
+        }else{
+            $user->exam_result = $result;
+            $user->save();
+            return response()->json([
+                'msg'=>'考试通过',
+                'result'=>$trueNum * 2
+            ], 200);
+        }
+
+
     }
 }

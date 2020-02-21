@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7400d7a-ea12-4610-bf22-be1204a73317" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/ClassLog.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ClassLogController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_01_11_203216_create_class_logs_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/907e5e3d-2173-4e94-aacc-358557671545.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/907e5e3d-2173-4e94-aacc-358557671545.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/examManage.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_02_21_162259_create_exam_manages_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/saftyLab.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/saftyLab.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ExamController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ExamController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_06_21_165248_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_06_21_165248_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/file/exam.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/public/file/exam.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,19 +51,6 @@
       </path>
     </expand>
     <select />
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>wec</find>
-      <find>wechat</find>
-      <find>login</find>
-      <find>wech</find>
-      <find>createT</find>
-      <find>isDe</find>
-      <find>save</find>
-      <find>getEquipment</find>
-      <find>get</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -196,6 +182,10 @@
       <path value="$PROJECT_DIR$/vendor/jellybool/flysystem-upyun" />
       <path value="$PROJECT_DIR$/vendor/linfo/linfo" />
       <path value="$PROJECT_DIR$/vendor/laramall/laravel-system-info" />
+      <path value="$PROJECT_DIR$/vendor/maatwebsite/excel" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
     </include_path>
   </component>
   <component name="ProjectId" id="1QgM8q6mYxLZoXU6Zhm9YQgj9RL" />
@@ -342,6 +332,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/file" />
       <recent name="C:\Users\Administrator\code\saftyLab\resources\views" />
       <recent name="C:\Users\Administrator\code\saftyLab\app\Http\Controllers" />
     </key>
@@ -426,17 +417,16 @@
       <workItem from="1578813156392" duration="1355000" />
       <workItem from="1578825659744" duration="327000" />
       <workItem from="1580364149157" duration="8000" />
+      <workItem from="1582005349705" duration="796000" />
+      <workItem from="1582009218118" duration="472000" />
+      <workItem from="1582015543173" duration="20000" />
+      <workItem from="1582085893566" duration="745000" />
+      <workItem from="1582086644311" duration="4574000" />
+      <workItem from="1582190289276" duration="123000" />
+      <workItem from="1582260160314" duration="2022000" />
+      <workItem from="1582273508078" duration="1903000" />
     </task>
     <servers />
-  </component>
-  <component name="TodoView" selected-index="3">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -462,14 +452,32 @@
       <screen x="0" y="23" width="1920" height="975" />
     </state>
     <state x="560" y="176" key="#Log_Highlighting_(ideolog)/0.23.1920.975@0.23.1920.975" timestamp="1578731397418" />
-    <state x="469" y="149" key="SettingsEditor" timestamp="1578731417288">
-      <screen x="0" y="23" width="1920" height="975" />
+    <state x="2364" y="357" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1582086620471">
+      <screen x="1680" y="-18" width="1920" height="1057" />
+    </state>
+    <state x="2364" y="357" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.23.1680.845/1680.-18.1920.1057@1680.-18.1920.1057" timestamp="1582086620471" />
+    <state x="469" y="149" key="SettingsEditor" timestamp="1582005363360">
+      <screen x="0" y="23" width="1920" height="977" />
     </state>
     <state x="469" y="149" key="SettingsEditor/0.23.1920.975@0.23.1920.975" timestamp="1578731417288" />
-    <state x="625" y="237" width="670" height="676" key="search.everywhere.popup" timestamp="1578746029894">
-      <screen x="0" y="23" width="1920" height="975" />
+    <state x="469" y="149" key="SettingsEditor/0.23.1920.977/1920.23.1920.1057@0.23.1920.977" timestamp="1582005363360" />
+    <state x="616" y="346" key="com.intellij.ide.util.TipDialog" timestamp="1582005353045">
+      <screen x="0" y="23" width="1920" height="977" />
+    </state>
+    <state x="616" y="346" key="com.intellij.ide.util.TipDialog/0.23.1920.977/1920.23.1920.1057@0.23.1920.977" timestamp="1582005353045" />
+    <state x="2303" y="156" width="673" height="708" key="find.popup" timestamp="1582190375207">
+      <screen x="1680" y="-18" width="1920" height="1057" />
+    </state>
+    <state x="2303" y="156" width="673" height="708" key="find.popup/0.23.1680.845/1680.-18.1920.1057@1680.-18.1920.1057" timestamp="1582190375207" />
+    <state x="2305" y="235" key="run.anything.popup" timestamp="1582273638310">
+      <screen x="1680" y="-18" width="1920" height="1057" />
+    </state>
+    <state x="2305" y="235" key="run.anything.popup/0.23.1680.846/1680.-18.1920.1057@1680.-18.1920.1057" timestamp="1582273638310" />
+    <state x="625" y="237" width="670" height="678" key="search.everywhere.popup" timestamp="1582009296839">
+      <screen x="0" y="23" width="1920" height="977" />
     </state>
     <state x="625" y="237" width="670" height="676" key="search.everywhere.popup/0.23.1920.975@0.23.1920.975" timestamp="1578746029894" />
+    <state x="625" y="237" width="670" height="678" key="search.everywhere.popup/0.23.1920.977/1920.23.1920.1057@0.23.1920.977" timestamp="1582009296839" />
   </component>
   <component name="masterDetails">
     <states>
