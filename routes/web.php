@@ -66,6 +66,7 @@ Route::prefix('admin')->group(function () {
     Route::get('hidden', 'Admin\HiddenController@getHiddensList');
     Route::get('message', 'Admin\MessageController@getMessagesList');
     Route::get('log', 'Admin\LogController@getLogList');
+    Route::get('getLogs','Admin\LogController@getLogs');
     Route::get('paper', 'Admin\PaperController@getPaperList');
     Route::get('score', 'Admin\ScoreController@getScoreList');
     Route::get('role', 'Admin\RoleController@getRolesList');
@@ -81,4 +82,7 @@ Route::prefix('admin')->group(function () {
 
 
 
+
 });
+
+

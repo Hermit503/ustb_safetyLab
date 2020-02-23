@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -57,6 +58,7 @@ class UserController extends Controller
 
         if(Gate::allows('access-admin',Auth::user())) {
             $user->save();
+            Log::info('管理员添加用户：'.$user_id."单位：".$unit_id."密码".$password);
             return "添加成功";
         }
 
@@ -82,6 +84,7 @@ class UserController extends Controller
 
         if(Gate::allows('access-admin',Auth::user())) {
             $user->save();
+            Log::info('管理员修改用户：'.$request->user_id."单位：".$request->unit_id);
             return "修改成功";
         }
         abort(404);
@@ -98,6 +101,7 @@ class UserController extends Controller
         if(Gate::allows('access-admin',Auth::user())) {
             User::where('user_id', '=', $request->user_id)
                 ->update(['isDelete' => '1']);
+            Log::alert("管理员".Auth::user()['user_id']."删除用户".$request->user_id);
             return "删除成功";
         }
         abort(404);

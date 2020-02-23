@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 
 class AdminerController extends Controller
 {
@@ -53,6 +54,7 @@ class AdminerController extends Controller
             $new_role->created_at = date("Y-m-d H:i:s");
             $new_role->updated_at = date("Y-m-d H:i:s");
             if(Gate::allows('access-admin',Auth::user())){
+                Log::info('管理员'.Auth::user()['user_id']."添加管理员".$user_id);
                 $new_role->save();
                 return "添加成功";
             }
@@ -72,6 +74,7 @@ class AdminerController extends Controller
         $user_id = $request->user_id;
         if(Gate::allows('access-admin',Auth::user())){
             Role::where('user_id', $user_id)->where('role','超级管理员')->delete();
+            Log::alert('管理员'.Auth::user()['user_id']."删除管理员".$user_id);
             return "删除成功";
         }
         abort(404);

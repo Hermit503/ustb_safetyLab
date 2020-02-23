@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 
 class PermissionController extends Controller
 {
@@ -71,6 +72,7 @@ class PermissionController extends Controller
             $newPermission->updated_at = date("Y-m-d H:i:s");
             if(Gate::allows('access-admin',Auth::user())){
                 $newPermission->save();
+                Log::info("管理员".Auth::user()['user_id']."为".$user_id."添加了".$permission."权限");
                 return "添加成功";
             }
             abort(404);
@@ -88,9 +90,11 @@ class PermissionController extends Controller
      */
     public function deletePermission(Request $request){
         $id = $request->id;
+        $permission_detail = Permission::where('id',$id)->get();
         $permission = Permission::find($id);
         if(Gate::allows('access-admin',Auth::user())){
             $permission->delete();
+            Log::alert("管理员".Auth::user()['user_id']."删除了".$permission_detail[0]['user_id']."的".$permission_detail[0]['permission']."权限");
             return "删除成功";
         }
         abort(404);

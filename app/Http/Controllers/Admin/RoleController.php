@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 
 class RoleController extends Controller
 {
@@ -79,6 +80,7 @@ class RoleController extends Controller
             $newRole->updated_at = date("Y-m-d H:i:s");
             if(Gate::allows('access-admin',Auth::user())){
                 $newRole->save();
+                Log::info('管理员'.Auth::user()['user_id']."为".$user_id."添加".$role."角色");
                 return "添加成功";
             }
             abort(404);
@@ -98,8 +100,10 @@ class RoleController extends Controller
     public function deleteRole(Request $request){
         $id = $request->id;
         $role = Role::find($id);
+        $role_detail = Role::where('id',$id)->get();
         if(Gate::allows('access-admin',Auth::user())){
             $role->delete();
+            Log::alert('管理员'.Auth::user()['user_id']."删除了".$role_detail[0]['user_id']."的".$role_detail[0]['role']."角色");
             return "删除成功";
         }
         abort(404);

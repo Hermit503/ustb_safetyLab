@@ -24,7 +24,6 @@ class RegisterController extends Controller
         $parent_id = $request->parent_id;
 
         //表单验证
-        //TODO:工号不知道几位，问一下
 
         $rules = [
             'name' => 'required',

@@ -83,7 +83,6 @@ class NoticeController extends Controller
      */
     public function saveImage(Request $request)
     {
-        Log::info($request);
         $path = $request->file('file')->store('public/noticeImage');
         return Storage::url($path);
     }
@@ -97,7 +96,6 @@ class NoticeController extends Controller
      */
     public function saveFile(Request $request)
     {
-        Log::info($request);
         $path = $request->file('file')->store('public/noticeFile');
         return Storage::url($path);
     }
@@ -500,7 +498,7 @@ class NoticeController extends Controller
     public function clearAllCache(Request $request)
     {
         $user_id = $request->user_id;
-        
+
         if (Cache::has('allMessage'.$user_id)) {
             Cache::forget('allMessage'.$user_id);
         }else{

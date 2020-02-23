@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 
 class LaboratoryController extends Controller
 {
@@ -58,6 +59,7 @@ class LaboratoryController extends Controller
 
         if(Gate::allows('access-admin',Auth::user())){
             $laboratory->save();
+            Log::info("管理员".Auth::user()['user_id']."添加了实验室：地址：".$building_name.$classroom_num.$laboratory_name .",单位：".$unit_id."，实验室类型：".$laboratory_type."，实验室属性：".$laboratory_attribute."，实验室状态：".$laboratory_status."，实验室安全负责人：".$safety_head."，实验室管理员：".$maintenance_people1."和" .$maintenance_people2);
             return "新增成功";
         }else{
             abort(404);
@@ -101,6 +103,7 @@ class LaboratoryController extends Controller
 
         if(Gate::allows('access-admin',Auth::user())){
             $laboratory->save();
+            Log::info("管理员".Auth::user()['user_id']."修改实验室：id：".$id."地址：".$building_name.$classroom_num.$laboratory_name .",单位：".$unit_id."，实验室类型：".$laboratory_type."，实验室属性：".$laboratory_attribute."，实验室状态：".$laboratory_status."，实验室安全负责人：".$safety_head."，实验室管理员：".$maintenance_people1."和" .$maintenance_people2);
             return "修改成功";
         }else{
             abort(404);

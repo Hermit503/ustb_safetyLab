@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 
 class UnitController extends Controller
 {
@@ -38,6 +39,7 @@ class UnitController extends Controller
         $unit->updated_at = $created_at;
         if(Gate::allows('access-admin',Auth::user())){
             $unit->save();
+            Log::info("管理员".Auth::user()['user_id']."添加单位：".$unit_name."(".$unit_type.")");
             return "新增成功";
         }else{
             abort(404);
@@ -59,6 +61,7 @@ class UnitController extends Controller
         $unit->updated_at = $updated_at;
         if(Gate::allows('access-admin',Auth::user())){
             $unit->save();
+            Log::info("管理员".Auth::user()['user_id']."修改单位：".$unit_name."(".$unit_type.")");
             return "修改成功";
         }else{
             abort(404);

@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.1.3",
         "fideloper/proxy": "^4.0",
+        "haruncpi/laravel-log-reader": "^1.0",
         "jellybool/flysystem-upyun": "^1.0",
         "laramall/laravel-system-info": "^1.0",
         "laravel/framework": "5.8.*",
