@@ -604,7 +604,7 @@
                     <div class="layui-col-md10 layui-col-md-offset1">
                         <form class="layui-form" lay-filter="modify">
                             @csrf
-                            <input type="text" id="modify_id">
+                            <input type="text" id="modify_id" hidden>
                             <div class="layui-form-item">
                                 <label class="layui-form-label">资产编号</label>
                                 <div class="layui-input-block">
@@ -706,7 +706,7 @@
                 <div class="layui-row">
                     <div class="layui-col-md10 layui-col-md-offset1">
                         <form class="layui-form">
-                            <input type="text" id="delete_equipment_id" name="delete_equipment_id">
+                            <input type="text" id="delete_equipment_id" name="delete_equipment_id" hidden>
                             <p>确认删除？</p>
                             <br><br>
                             <div class="layui-form-item">

@@ -61,6 +61,9 @@ Route::prefix('admin')->group(function () {
     Route::put('modifyEquipment','Admin\EquipmentController@updateEquipment');
     Route::delete('deleteEquipment','Admin\EquipmentController@deleteEquipment');
     Route::get('chemicalsList', 'Admin\ChemicalController@getChemicalsList');
+    Route::post('newChemical','Admin\ChemicalController@newChemical');
+    Route::put('modifyChemical','Admin\ChemicalController@modifyChemical');
+    Route::delete('deleteChemical','Admin\ChemicalController@deleteChemical');
     Route::get('userList', 'Admin\UserController@getUserList');
     Route::get('adminList','Admin\AdminerController@getAdmin');
     Route::post('newAdminer','Admin\AdminerController@newAdmin');

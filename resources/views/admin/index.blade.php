@@ -30,29 +30,6 @@
             <div class="left_open">
                 <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
             </div>
-            <ul class="layui-nav left fast-add" lay-filter="">
-                <li class="layui-nav-item">
-                    <a href="javascript:;">+新增</a>
-                    <dl class="layui-nav-child">
-                        <!-- 二级菜单 -->
-                        <dd>
-                            <a onclick="xadmin.open('最大化','http://www.baidu.com','','',true)">
-                                <i class="iconfont">&#xe6a2;</i>弹出最大化</a></dd>
-                        <dd>
-                            <a onclick="xadmin.open('弹出自动宽高','http://www.baidu.com')">
-                                <i class="iconfont">&#xe6a8;</i>弹出自动宽高</a></dd>
-                        <dd>
-                            <a onclick="xadmin.open('弹出指定宽高','http://www.baidu.com',500,300)">
-                                <i class="iconfont">&#xe6a8;</i>弹出指定宽高</a></dd>
-                        <dd>
-                            <a onclick="xadmin.add_tab('在tab打开','/admin/member-list')">
-                                <i class="iconfont">&#xe6b8;</i>在tab打开</a></dd>
-                        <dd>
-                            <a onclick="xadmin.add_tab('在tab打开刷新','/admin/member-del',true)">
-                                <i class="iconfont">&#xe6b8;</i>在tab打开刷新</a></dd>
-                    </dl>
-                </li>
-            </ul>
             <ul class="layui-nav right" lay-filter="">
                 <li class="layui-nav-item">
                     <a href="javascript:;">
@@ -85,19 +62,19 @@
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>单位列表</cite></a>
                             </li>
-                        
+
                             <li>
                                 <a onclick="xadmin.add_tab('实验室列表','/admin/larboriesList')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>实验室列表</cite></a>
                             </li>
-                        
+
                             <li>
                                 <a onclick="xadmin.add_tab('设备列表','/admin/equipmentsList')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>设备列表</cite></a>
                             </li>
-                        
+
                             <li>
                                 <a onclick="xadmin.add_tab('药品列表','/admin/chemicalsList')">
                                     <i class="iconfont">&#xe6a7;</i>
