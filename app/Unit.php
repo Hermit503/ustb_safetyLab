@@ -24,4 +24,8 @@ class Unit extends Model
     {
         return $this->hasMany(InspectionLog::class,'unit_id','id');
     }
+
+    public function examManager(){
+        return $this->hasOne(examManage::class,'unit_id','id');
+    }
 }

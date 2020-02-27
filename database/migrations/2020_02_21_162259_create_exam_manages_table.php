@@ -15,8 +15,8 @@ class CreateExamManagesTable extends Migration
     {
         Schema::create('exam_manages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
-            $table->string('unit_id')->unique()->comment('单位id');
+            $table->bigInteger('unit_id')->unsigned()->comment('所在单位id');
+            $table->foreign('unit_id')->references('id')->on('units');
             $table->string('aqts')->comment('安全通识题目数量');
             $table->string('dqaq')->comment('电气题目数量');
             $table->string('hxp')->comment('化学题目数量');
@@ -24,6 +24,7 @@ class CreateExamManagesTable extends Migration
             $table->string('tzsb')->comment('特种设备题目数量');
             $table->string('xfaq')->comment('消防安全题目数量');
             $table->string('yxsw')->comment('医学生物安全题目数量');
+            $table->timestamps();
         });
     }
 

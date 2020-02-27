@@ -76,6 +76,9 @@ Route::prefix('admin')->group(function () {
     Route::get('log', 'Admin\LogController@getLogList');
     Route::get('getLogs','Admin\LogController@getLogs');
     Route::get('paper', 'Admin\PaperController@getPaperList');
+    Route::post('newPaper','Admin\PaperController@newPaper');
+    Route::put('modifyPaper','Admin\PaperController@modifyPaper');
+    Route::delete('deletePaper','Admin\PaperController@deletePaper');
     Route::get('score', 'Admin\ScoreController@getScoreList');
     Route::get('role', 'Admin\RoleController@getRolesList');
     Route::get('chooseRole','Admin\RoleController@chooseRole');
