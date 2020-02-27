@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exam;
-use App\examManage;
+use App\ExamManage;
 use App\Imports\ExcelImport;
 
 use App\User;
@@ -51,7 +51,7 @@ class ExamController extends Controller
     public function getQuestions(Request $request)
     {
         //从Exam表随机抽50道题
-        $examManage = examManage::where('unit_id',$request->unit_id)->first();
+        $examManage = ExamManage::where('unit_id',$request->unit_id)->first();
 //        Log::info($examManage);
         $anquantongshi = Exam::where('type','安全通识')->inRandomOrder()->take($examManage->aqts)->get()->toArray();
         $yixueshengwu = Exam::where('type','医学生物安全')->inRandomOrder()->take($examManage->yxsw)->get()->toArray();
