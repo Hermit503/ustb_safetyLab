@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Chemical;
+use App\Equipments;
 use App\Http\Controllers\ToolController;
 use App\Hidden;
 use App\HiddensLog;
@@ -70,8 +72,8 @@ class HiddenController extends Controller
      */
     public function getHiddenDetail(Request $request)
     {
-
-        $detail = Hidden::where('user_id', $request->user_id)
+//        Log::info($request);
+        $detail = Hidden::where('id', $request->id)
             ->where('title', $request->title)
             ->with('hiddens_logs')
             ->get();
@@ -92,20 +94,32 @@ class HiddenController extends Controller
      */
     public function addHiddenLog(Request $request)
     {
-        $hidden_id = Hidden::where('user_id', $request->reportPerson)
-            ->where('title', $request->title)
-            ->get('id');
+        //修改设备药品状态
+        $number = Hidden::where('id',$request->hidden_id)->get('number');
+        $eq = Equipments::where('asset_number',$number[0]['number'])->first();
+        $cm = Chemical::where('chemical_id',$number[0]['number'])->first();
+        if($eq!=null){
+            $eq->status="正常";
+            $eq->save();
+        }
+        if($cm=null){
+            $cm->status="正常";
+            $cm->save();
+        }
         //判断改变状态
         if ($request->solveStatus == "true") {
             $hidden = Hidden::where('user_id', $request->reportPerson)
-                ->where('title', $request->title)->first();
+                ->where('title', $request->title)
+                ->where('number','<>',null)->first();
             $hidden->isSolve = 1;
+            $hidden->number = null;
             $hidden->save();
         }
-        //添加log到数据库
-        $name = (new ToolController)->getUsername($request->user_id);
+
+        //添加隐患处理日志到数据库
+        $name = (new ToolController)->getUsername($request->reportPerson);
         $hiddenLog = new HiddensLog();
-        $hiddenLog->hidden_id = $hidden_id[0]->id;
+        $hiddenLog->hidden_id = $request->hidden_id;
         $hiddenLog->user_name = $name;
         $hiddenLog->reason = $request->reason;
         if ($request->image!=null) {
@@ -116,5 +130,11 @@ class HiddenController extends Controller
         }
         $hiddenLog->save();
         return response()->json([], 201);
+
     }
+
+
+
+
+
 }

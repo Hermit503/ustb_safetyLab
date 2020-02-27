@@ -24,6 +24,7 @@ class CreateHiddensTable extends Migration
             $table->date('occurrence_time')->nullable()->comment('发现时间');
             $table->string('image')->nullable()->comment('照片url');
             $table->enum('isSolve',[1,0])->default(0)->nullable()->comment('解决状态');
+            $table->string("number")->nullable()->comment("资产编号或化学品id");
             $table->timestamps();
         });
     }
