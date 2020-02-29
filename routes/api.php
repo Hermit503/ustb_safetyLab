@@ -36,6 +36,7 @@ Route::group(['prefix' => '/v1'], function () {
     Route::get('/users/permissions/{id}','UserController@hasPermission');
     //用户搜索
     Route::get('/searchUser','UserController@searchUser');
+    Route::post('/updateUserInfo','UserController@updateUserInfo');
 
     //获取设备列表
     Route::get('/equipments', 'EquipmentController@getEquipment');

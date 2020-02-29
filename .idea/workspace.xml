@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a7400d7a-ea12-4610-bf22-be1204a73317" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ExamController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ExamController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HiddenController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HiddenController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/InspectionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/InspectionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/examManage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ExamManage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_07_09_141226_create_hiddens_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_07_09_141226_create_hiddens_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/aiwrap.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/bg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/app/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -440,6 +434,8 @@
       <workItem from="1582702350959" duration="437000" />
       <workItem from="1582702973215" duration="16950000" />
       <workItem from="1582790402471" duration="601000" />
+      <workItem from="1582888455636" duration="590000" />
+      <workItem from="1582961221207" duration="1906000" />
     </task>
     <servers />
   </component>
@@ -484,6 +480,10 @@
       <screen x="0" y="23" width="1920" height="977" />
     </state>
     <state x="616" y="346" key="com.intellij.ide.util.TipDialog/0.23.1920.977/1920.23.1920.1057@0.23.1920.977" timestamp="1582005353045" />
+    <state x="619" y="143" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1582965284679">
+      <screen x="0" y="23" width="1680" height="845" />
+    </state>
+    <state x="619" y="143" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1680.845@0.23.1680.845" timestamp="1582965284679" />
     <state x="545" y="175" width="673" height="619" key="find.popup" timestamp="1582707485224">
       <screen x="0" y="23" width="1680" height="922" />
     </state>

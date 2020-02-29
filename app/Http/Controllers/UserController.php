@@ -224,4 +224,15 @@ class UserController extends Controller
         $names = User::all(['id','name','user_id']);
         return $names;
     }
+
+    public function updateUserInfo(Request $request)
+    {
+//        Log::info($request);
+        $user = User::where('user_id',$request->user_id)->first();
+        $user->phone_number = $request->phone_number;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return response()->json([],200);
+    }
 }
