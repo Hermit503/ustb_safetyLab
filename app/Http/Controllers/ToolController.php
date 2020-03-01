@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exam;
+use App\Imports\ExcelImport;
 use App\Role;
 use App\Unit;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ToolController extends Controller
 {
@@ -71,4 +74,23 @@ class ToolController extends Controller
         return $name[0]->name;
     }
 
+    public function uploadExamQuestion(Request $request)
+    {
+        $file=$request->file('file');
+        $arrays = Excel::toArray(new ExcelImport(), $file);
+        for ($i = 0; $i < count($arrays[0]); $i++) {
+            $exam = new Exam();
+            $exam->type = $arrays[0][$i][0];
+            $exam->question = $arrays[0][$i][1];
+            $exam->option1 = $arrays[0][$i][2];
+            $exam->option2 = $arrays[0][$i][3];
+            $exam->option3 = $arrays[0][$i][4];
+            $exam->option4 = $arrays[0][$i][5];
+            $exam->answer = $arrays[0][$i][6];
+            $exam->save();
+        }
+        return response()->json([
+            "msg"=>'上传成功'
+        ],200);
+    }
 }

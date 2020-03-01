@@ -14,7 +14,7 @@
     <script type="text/javascript" src="../js/xadmin.js"></script>
     <script src="../lib/layui/lay/modules/laydate.js"></script>
     <script src="/js/common.js"></script>
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -384,12 +384,20 @@
 
         var uploadInst = upload.render({
             elem: '#file' //绑定元素
-            ,url: '/upload/' //上传接口
-            ,done: function(res){
-                //上传完毕回调
+            ,url: '/admin/uploadExamQuestion' //上传接口
+            ,method:'post'
+            ,accept:'file'
+            ,exts:'xls|xlsx'
+            ,headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+            ,auto:true
+            , done: function(res){
+                alert(res.msg)
             }
-            ,error: function(){
-                //请求异常回调
+            ,success:function (res) {
+                console.log(res)
+            }
+            ,error: function(res){
+                console.log('fail');
             }
         });
     });

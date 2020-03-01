@@ -89,6 +89,8 @@ Route::prefix('admin')->group(function () {
     Route::get('choosePermission','Admin\PermissionController@choosePermission');
     Route::post('newPermission','Admin\PermissionController@newPermission');
     Route::delete('deletePermission','Admin\PermissionController@deletePermission');
+    //上传考试题
+    Route::post('uploadExamQuestion','ToolController@uploadExamQuestion');
 
 
 

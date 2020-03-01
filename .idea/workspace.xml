@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a7400d7a-ea12-4610-bf22-be1204a73317" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ToolController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ToolController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/papersList.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/papersList.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -435,7 +436,8 @@
       <workItem from="1582702973215" duration="16950000" />
       <workItem from="1582790402471" duration="601000" />
       <workItem from="1582888455636" duration="590000" />
-      <workItem from="1582961221207" duration="1906000" />
+      <workItem from="1582961221207" duration="1951000" />
+      <workItem from="1583043406261" duration="2731000" />
     </task>
     <servers />
   </component>
@@ -467,9 +469,10 @@
       <screen x="1680" y="-18" width="1920" height="1057" />
     </state>
     <state x="2364" y="357" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.23.1680.845/1680.-18.1920.1057@1680.-18.1920.1057" timestamp="1582086620471" />
-    <state x="578" y="247" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1582719877320">
-      <screen x="0" y="23" width="1680" height="922" />
+    <state x="2341" y="221" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1583045765095">
+      <screen x="1680" y="-41" width="1920" height="1080" />
     </state>
+    <state x="2341" y="221" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1680.945/1680.-41.1920.1080@1680.-41.1920.1080" timestamp="1583045765095" />
     <state x="578" y="247" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1680.922/1680.-18.1920.980@0.23.1680.922" timestamp="1582719877320" />
     <state x="469" y="149" key="SettingsEditor" timestamp="1582005363360">
       <screen x="0" y="23" width="1920" height="977" />
@@ -484,10 +487,11 @@
       <screen x="0" y="23" width="1680" height="845" />
     </state>
     <state x="619" y="143" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1680.845@0.23.1680.845" timestamp="1582965284679" />
-    <state x="545" y="175" width="673" height="619" key="find.popup" timestamp="1582707485224">
-      <screen x="0" y="23" width="1680" height="922" />
+    <state x="2303" y="137" width="673" height="724" key="find.popup" timestamp="1583045640027">
+      <screen x="1680" y="-41" width="1920" height="1080" />
     </state>
-    <state x="2303" y="137" width="673" height="724" key="find.popup/0.0.1680.945/1680.-41.1920.1080@1680.-41.1920.1080" timestamp="1582377854403" />
+    <state x="2303" y="137" width="673" height="724" key="find.popup/0.0.1680.945/1680.-41.1920.1080@1680.-41.1920.1080" timestamp="1583045640027" />
+    <state x="545" y="162" width="673" height="568" key="find.popup/0.23.1680.845/1680.-18.1920.1057@0.23.1680.845" timestamp="1583044361329" />
     <state x="2303" y="156" width="673" height="708" key="find.popup/0.23.1680.845/1680.-18.1920.1057@1680.-18.1920.1057" timestamp="1582190375207" />
     <state x="545" y="175" width="673" height="619" key="find.popup/0.23.1680.922/1680.-18.1920.980@0.23.1680.922" timestamp="1582707485224" />
     <state x="2303" y="144" width="673" height="657" key="find.popup/0.23.1680.922/1680.-18.1920.980@1680.-18.1920.980" timestamp="1582437441522" />
