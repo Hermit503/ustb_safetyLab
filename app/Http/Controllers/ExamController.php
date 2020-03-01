@@ -126,19 +126,20 @@ class ExamController extends Controller
         }
         $user =  User::where('user_id',$request->user_id)->first();
         $result = $trueNum*2>$user->exam_result?$trueNum*2:$user->exam_result;
+        $user->residue_degree = (string)((int)$user->residue_degree-1);
+        $user->exam_result = $result;
+        $user->save();
         if ($result>=80){
-            $user->exam_result = $result;
-            $user->save();
             return response()->json([
                 'msg'=>'考试通过',
-                'result'=>$trueNum * 2
+                'result'=>$trueNum * 2,
+                'residue_degree'=>$user->residue_degree--
             ], 200);
         }else{
-            $user->exam_result = $result;
-            $user->save();
             return response()->json([
-                'msg'=>'考试通过',
-                'result'=>$trueNum * 2
+                'msg'=>'考试未通过',
+                'result'=>$trueNum * 2,
+                'residue_degree'=>$user->residue_degree--
             ], 200);
         }
 
