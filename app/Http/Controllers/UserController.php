@@ -46,7 +46,7 @@ class UserController extends Controller
         }
         $userid = $request->userid;
         $userPwd = $request->userpwd;
-        Log::info($request->userid."的openid：".$openId.",session_key：".$sessionKey);
+//        Log::info($request->userid."的openid：".$openId.",session_key：".$sessionKey);
         $nickname = $request->nickname;
         //判断是否存在工号
         $user = User::where('user_id', $userid)->first();
