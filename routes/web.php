@@ -98,5 +98,5 @@ Route::prefix('admin')->group(function () {
 
 
 });
-
+//Route::get('fixname','ToolController@fixName');
 
