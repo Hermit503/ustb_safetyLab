@@ -160,13 +160,13 @@ class UserController extends Controller
         $user->unit_id = $request->unit_id;
         $user->title = $request->title;
         $user->save();
-        $str_permission = $request->permission;
-        $permissions = explode(",", $str_permission);
-        foreach ($permissions as $permission) {
-            Permission::updateOrCreate(
-                ['user_id' => $request->user_id, 'permission' => $permission]
-            );
-        }
+//        $str_permission = $request->permission;
+//        $permissions = explode(",", $str_permission);
+//        foreach ($permissions as $permission) {
+//            Permission::updateOrCreate(
+//                ['user_id' => $request->user_id, 'permission' => $permission]
+//            );
+//        }
 //        Log::alert('All', $request->all());
 //        Log::info($permission);
         return response()->json([], 200);
