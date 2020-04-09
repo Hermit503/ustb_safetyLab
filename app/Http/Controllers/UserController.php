@@ -28,18 +28,25 @@ class UserController extends Controller
      */
     public function wxLogin(Request $request)
     {
-      	Log::info("工号：".$request->userid.",微信昵称：".$request->nickname."登陆成功");
+
         $code = $request->code;
         $miniProgram = \EasyWeChat::miniProgram();
         //获取openid session_key
         $data = $miniProgram->auth->session($code);
+        $openId = $data['openid'];
+        $sessionKey = $data['session_key'];
+        $u = User::where('open_id',$openId)->first();
+        if ($u!=null){
+            $u->open_id=null;
+            $u->session_key=null;
+            $u->save();
+        }
         if (isset($data['errcode'])) {
             return $this->response->errorUnauthorized('code已过期或不正确');
         }
         $userid = $request->userid;
         $userPwd = $request->userpwd;
-        $openId = $data['openid'];
-        $sessionKey = $data['session_key'];
+        Log::info($request->userid."的openid：".$openId.",session_key：".$sessionKey);
         $nickname = $request->nickname;
         //判断是否存在工号
         $user = User::where('user_id', $userid)->first();
@@ -60,6 +67,7 @@ class UserController extends Controller
                 $createToken->token->expires_at = Carbon::now()->addDays(30);
                 $createToken->token->save();
                 $token = $createToken->accessToken;
+                Log::info("工号：".$request->userid.",微信昵称：".$request->nickname."登陆成功");
                 return response()->json([
                     'access_token' => $token,
                     'token_type' => "Bearer",
