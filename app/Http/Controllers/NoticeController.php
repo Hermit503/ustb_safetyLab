@@ -26,6 +26,7 @@ class NoticeController extends Controller
      */
     public function getList(Request $request)
     {
+
         $unit_id = $request->unit_id;
         $id = $request->user_id;
         $result = [];
@@ -62,7 +63,8 @@ class NoticeController extends Controller
         } elseif (strpos($request->roles, '实验室管理员') !== false) {
             //实验室管理员向教师发通知
             //所属单位一致，roles为教师，parent_id为自己的id
-            $teachers = User::where('unit_id', $unit_id)->where('parent_id', $id)->get();
+            Log::info($request);
+            $teachers = User::where('unit_id', $unit_id)->where('title', '教师')->get();
             $i = 0;
             for ($j = 0; $j < count($teachers); $j++) {
                 if (Role::where('user_id', $teachers[$j]->user_id)->where('role', '教师')->get('user_id')->isNotEmpty()) {
@@ -155,7 +157,7 @@ class NoticeController extends Controller
 
         $notice->save();
 
-        return "上传成功";
+        return "下发成功";
     }
     /**
      * 获取已收到消息的人员姓名
@@ -408,11 +410,10 @@ class NoticeController extends Controller
             return $value;
         } else {
             //传入的参数到月份 如2019-09
-            $startDate = $request->startDate;
-            $endDate = $request->endDate;
+            $startDate = $request->startDate."-01";
+            $endDate = $request->endDate."-31";
 
             $result = [];
-
             $chemicalList = ChemicalsNotice::where([
                 ["user_id_2", $request->user_id],
                 ["receive", "!=", "0"]

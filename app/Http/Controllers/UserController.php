@@ -81,13 +81,15 @@ class UserController extends Controller
      */
     public function getUser(Request $request)
     {
+        Log::info($request);
         if (strpos($request->role, '校级管理员') !== false) {
             return User::where('isDelete', '0')->with('unit')->paginate(15);
 
         } elseif (strpos($request->role, '院级管理员') !== false) {
             return User::where('unit_id', $request->unit_id)
                 ->where('isDelete', '0')
-                ->where('parent_id', $request->id)
+                ->where('title','<>','院级管理员')
+//                ->where('parent_id', $request->id)
                 ->with('unit')
                 ->paginate(15);
         }

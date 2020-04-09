@@ -140,7 +140,7 @@
                             <li>
                                 <a onclick="xadmin.add_tab('成绩查看','/admin/score')">
                                     <i class="iconfont">&#xe6a7;</i>
-                                    <cite>成绩查看</cite></a>
+                                    <cite>成绩管理</cite></a>
                             </li>
                         </ul>
                     </li>

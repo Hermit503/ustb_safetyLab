@@ -8,6 +8,7 @@ use App\Http\Controllers\ToolController;
 use App\Hidden;
 use App\HiddensLog;
 use App\User;
+use mysql_xdevapi\Exception;
 use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -108,12 +109,13 @@ class HiddenController extends Controller
         }
         //判断改变状态
         if ($request->solveStatus == "true") {
-            $hidden = Hidden::where('user_id', $request->reportPerson)
-                ->where('title', $request->title)
-                ->where('number','<>',null)->first();
-            $hidden->isSolve = 1;
-            $hidden->number = null;
-            $hidden->save();
+                $hidden =Hidden::where('user_id', $request->reportPerson)
+                    ->where('title', $request->title)
+//                    ->where('number','<>',null)
+                    ->first();
+                $hidden->isSolve = 1;
+                $hidden->number = null;
+                $hidden->save();
         }
 
         //添加隐患处理日志到数据库

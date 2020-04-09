@@ -80,6 +80,7 @@ Route::prefix('admin')->group(function () {
     Route::put('modifyPaper','Admin\PaperController@modifyPaper');
     Route::delete('deletePaper','Admin\PaperController@deletePaper');
     Route::get('score', 'Admin\ScoreController@getScoreList');
+    Route::put('modifyScore','Admin\ScoreController@modifyScore');
     Route::get('role', 'Admin\RoleController@getRolesList');
     Route::get('chooseRole','Admin\RoleController@chooseRole');
     Route::get('findRole','Admin\RoleController@findRole');

@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7400d7a-ea12-4610-bf22-be1204a73317" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/images/bg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/scoreList.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ExamController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ExamController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_06_21_165248_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_06_21_165248_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ScoreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ScoreController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HiddenController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HiddenController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NoticeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NoticeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -313,7 +320,7 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/storage/app/public/hiddensImage/3PYYoNqqSXAD6IZPam226sH1zqyzhGSfFNslNm4z.jpeg&#10;jpeg&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/storage/app/public/hiddensImage/3PYYoNqqSXAD6IZPam226sH1zqyzhGSfFNslNm4z.jpeg&#10;api&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/routes/api.php&#10;data&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/.idea/dataSources.xml&#10;bla&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/resources/views/register.blade.php&#10;fac&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/database/factories/UserFactory.php&#10;Us&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/app/User.php&#10;web&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/routes/web.php&#10;User&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/app/User.php&#10;.en&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/.env&#10;.e&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/.env&#10;user&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/database/migrations/2014_10_12_000000_create_users_table.php&#10;Log&#9;null&#9;null&#10;.env&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/.env&#10;Eas&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/vendor/easywechat-composer/easywechat-composer/src/EasyWeChat.php&#10;EasyWe&#9;null&#9;null&#10;Easy&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/vendor/easywechat-composer/easywechat-composer/src/EasyWeChat.php&#10;EasyWeChat&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/vendor/easywechat-composer/easywechat-composer/src/EasyWeChat.php&#10;Auth&#9;FILE&#9;file://C:/Users/Administrator/code/saftyLab/config/auth.php" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/storage/app/public" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -326,14 +333,14 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/storage/app/public" />
-      <recent name="$PROJECT_DIR$/public/images" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/file" />
       <recent name="C:\Users\Administrator\code\saftyLab\resources\views" />
       <recent name="C:\Users\Administrator\code\saftyLab\app\Http\Controllers" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/images" />
+      <recent name="$PROJECT_DIR$/storage/app/public" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -436,7 +443,18 @@
       <workItem from="1582790402471" duration="601000" />
       <workItem from="1582888455636" duration="590000" />
       <workItem from="1582961221207" duration="1951000" />
-      <workItem from="1583043406261" duration="5673000" />
+      <workItem from="1583043406261" duration="6056000" />
+      <workItem from="1583297536435" duration="11000" />
+      <workItem from="1583299315323" duration="20000" />
+      <workItem from="1583300892103" duration="11000" />
+      <workItem from="1583568228736" duration="547000" />
+      <workItem from="1583679719805" duration="1066000" />
+      <workItem from="1584787686993" duration="1098000" />
+      <workItem from="1584788891083" duration="567000" />
+      <workItem from="1584791043029" duration="2228000" />
+      <workItem from="1584961895392" duration="498000" />
+      <workItem from="1586393898925" duration="1658000" />
+      <workItem from="1586405776166" duration="6051000" />
     </task>
     <servers />
   </component>
@@ -464,6 +482,10 @@
       <screen x="0" y="23" width="1920" height="975" />
     </state>
     <state x="560" y="176" key="#Log_Highlighting_(ideolog)/0.23.1920.975@0.23.1920.975" timestamp="1578731397418" />
+    <state x="2104" y="172" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584791049766">
+      <screen x="1680" y="-18" width="1920" height="1057" />
+    </state>
+    <state x="2104" y="172" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1680.843/1680.-18.1920.1057@1680.-18.1920.1057" timestamp="1584791049766" />
     <state x="2364" y="357" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1582086620471">
       <screen x="1680" y="-18" width="1920" height="1057" />
     </state>
@@ -473,6 +495,10 @@
     </state>
     <state x="2341" y="221" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1680.945/1680.-41.1920.1080@1680.-41.1920.1080" timestamp="1583045765095" />
     <state x="578" y="247" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1680.922/1680.-18.1920.980@0.23.1680.922" timestamp="1582719877320" />
+    <state x="661" y="399" key="NewPhpFileDialog" timestamp="1586410334699">
+      <screen x="0" y="0" width="1680" height="945" />
+    </state>
+    <state x="661" y="399" key="NewPhpFileDialog/0.0.1680.945/1680.-41.1920.1080@0.0.1680.945" timestamp="1586410334698" />
     <state x="469" y="149" key="SettingsEditor" timestamp="1582005363360">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
