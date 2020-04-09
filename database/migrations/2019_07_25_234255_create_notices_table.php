@@ -21,7 +21,7 @@ class CreateNoticesTable extends Migration
             $table->string('pictures')->nullable()->comment('通知图片');
             $table->string('file')->nullable()->comment('附件');
 
-            $table->string('build_id')->comment('创建人工号');
+            $table->string('build_id',20)->comment('创建人工号');
             $table->foreign('build_id')->references('user_id')->on('users');
 
             $table->text('received_users')->nullable()->comment('已收到的人');
