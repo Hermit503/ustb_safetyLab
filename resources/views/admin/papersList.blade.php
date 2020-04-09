@@ -28,7 +28,7 @@
             var layer = layui.layer,$=layui.$;
             layer.open({
                 type:1,//类型
-                area:['1000px','400px'],//定义宽和高
+                area:['1000px','550px'],//定义宽和高
                 title:'添加用户',//题目
                 shadeClose:true,//点击遮罩层关闭
                 content: $('#addModel'),//打开的内容

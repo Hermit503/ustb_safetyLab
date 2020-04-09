@@ -28,6 +28,7 @@ class UserController extends Controller
      */
     public function wxLogin(Request $request)
     {
+      	Log::info("工号：".$request->userid.",微信昵称：".$request->nickname."登陆成功");
         $code = $request->code;
         $miniProgram = \EasyWeChat::miniProgram();
         //获取openid session_key
@@ -81,7 +82,6 @@ class UserController extends Controller
      */
     public function getUser(Request $request)
     {
-        Log::info($request);
         if (strpos($request->role, '校级管理员') !== false) {
             return User::where('isDelete', '0')->with('unit')->paginate(15);
 
