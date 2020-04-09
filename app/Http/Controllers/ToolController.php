@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
+use Faker\Generator as Faker;
 
 class ToolController extends Controller
 {
@@ -92,5 +93,25 @@ class ToolController extends Controller
         return response()->json([
             "msg"=>'上传成功'
         ],200);
+    }
+
+    /**
+     * 修改测试用户数据
+     * @param Request $request
+     * @param Faker $faker
+     */
+    public function fixName(Request $request,Faker $faker)
+    {
+        for ($i=0;$i<200;$i++){
+            $user = User::where('user_id',$i)->first();
+            if($user!=null){
+                $user->name=$faker->name;
+                $user->phone_number=$faker->phoneNumber;
+                $user->email=$faker->email;
+                $user->save();
+            }else{
+                continue;
+            }
+        }
     }
 }
