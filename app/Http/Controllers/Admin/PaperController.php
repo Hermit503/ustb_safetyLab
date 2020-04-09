@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\examManage;
+use App\ExamManage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +15,7 @@ class PaperController extends Controller
      * 试题管理
      */
     public function getPaperList(){
-        $exam = examManage::with('units')->paginate(10);
+        $exam = ExamManage::with('units')->paginate(10);
         if(Gate::allows('access-admin',Auth::user())){
             return view('admin.papersList')->with('exams',$exam);
         }
@@ -38,7 +38,7 @@ class PaperController extends Controller
         $xfaq = $request->xfaq;
         $yxsw = $request->yxsw;
 
-        $examManage = new examManage();
+        $examManage = new ExamManage();
 
         $examManage->unit_id = $unit_id;
         $examManage->aqts = $aqts;
@@ -73,7 +73,7 @@ class PaperController extends Controller
         $yxsw = $request->yxsw;
 
         if(Gate::allows('access-admin',Auth::user())) {
-            examManage::where('id',$id)
+            ExamManage::where('id',$id)
                 ->update([
                     'aqts' => $aqts,
                     'dqaq' => $dqaq,
@@ -99,7 +99,7 @@ class PaperController extends Controller
     public function deletePaper(Request $request){
         $id = $request->id;
         if(Gate::allows('access-admin',Auth::user())) {
-            examManage::find($id)->delete();
+            ExamManage::find($id)->delete();
             Log::alert('管理员'.Auth::user()['user_id']."删除了id为".$id."的记录");
             return "删除成功";
         }
