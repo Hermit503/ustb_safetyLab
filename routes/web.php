@@ -93,6 +93,9 @@ Route::prefix('admin')->group(function () {
     //上传考试题
     Route::post('uploadExamQuestion','ToolController@uploadExamQuestion');
 
+    //巡检记录
+    Route::get('/inspection','Admin\InspectionController@getInspectionRecords');
+
 
 
 

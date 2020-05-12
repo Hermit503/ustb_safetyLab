@@ -112,6 +112,11 @@
                                     <cite>隐患列表</cite></a>
                             </li>
                             <li>
+                                <a onclick="xadmin.add_tab('巡检记录','/admin/inspection')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>巡检记录</cite></a>
+                            </li>
+                            <li>
                                 <a onclick="xadmin.add_tab('消息列表','/admin/message')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>消息列表</cite></a>
