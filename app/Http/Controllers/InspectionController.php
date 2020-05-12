@@ -51,7 +51,7 @@ class InspectionController extends Controller
     {
 
         $datetime = new \DateTime;
-        Log::info($request);
+        // Log::info($request );
         $log = new InspectionLog();
         $user = User::where("user_id", $request->repair_user)->first();
         if ($request->type == "chemical") {

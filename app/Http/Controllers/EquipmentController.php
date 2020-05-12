@@ -275,7 +275,8 @@ class EquipmentController extends Controller
         $id = $request->id;
         Equipments::where('id','=', $id)
             ->update(['isDelete' => '1']);
-        Log::alert('有设备信息被删除 ', $request->all());
+        $equipment = Equipments::where('id',$id)->get();
+        Log::alert("有设备被删除：资产编号".$equipment[0]['asset_number']);
         return response('Deleted',204);
     }
 

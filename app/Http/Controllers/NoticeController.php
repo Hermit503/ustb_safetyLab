@@ -63,7 +63,7 @@ class NoticeController extends Controller
         } elseif (strpos($request->roles, '实验室管理员') !== false) {
             //实验室管理员向教师发通知
             //所属单位一致，roles为教师，parent_id为自己的id
-            Log::info($request);
+            // Log::info($request );
             $teachers = User::where('unit_id', $unit_id)->where('title', '教师')->get();
             $i = 0;
             for ($j = 0; $j < count($teachers); $j++) {

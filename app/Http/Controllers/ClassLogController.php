@@ -11,7 +11,8 @@ class ClassLogController extends Controller
 {
     public function createClassLog(Request $request)
     {
-        Log::info($request);
+        Log::info("教师".$request->teacherName."(".$request->phoneNum.")创建课堂日志，具体内容：在".$request->buildingName.$request->classroomNum.
+        "为".$request->className."系".$request->classNum."班(".$request->studentNum.'人)上了"'.$request->experimentalName.'"的实验，状态：'.$request->status);
         $classLog = new ClassLog();
         $classLog->experimentalName=$request->experimentalName;
         $classLog->buildingName=$request->buildingName;

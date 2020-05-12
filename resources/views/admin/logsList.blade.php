@@ -173,21 +173,7 @@
                         "<td>" + result['data']['logs'][i]['message'] + "</td>" +
                         "</tr>")
                 }
-            }
-        }
-    })
-    // $(document).ready(function() {
-        //获取有日志的日期
-        $.ajax({
-            url: '/admin/getLogs',
-            dataType: "text",
-            data: {
-                'date': '2020-02-22'
-            },
-            success: function (data) {
-                var result = eval("(" + data + ")");
-                var i = 0;
-                var flag = 0;
+
                 for (i = 0; i < result['data']['available_log_dates'].length; i++) {
                     $("#date").append("<option value='" + result['data']['available_log_dates'][i] + "'>" + result['data']['available_log_dates'][i] + "</option>")
                     if(result['data']['available_log_dates'][i] == tody){
@@ -202,10 +188,8 @@
                 }
                 layui.form.render('select', 'selectDate');
             }
-        // })
+        }
     })
-
-
 
 
     layui.use(['laydate', 'form'],
