@@ -15,8 +15,8 @@ class CreateChemicalsTable extends Migration
     {
         Schema::create('chemicals', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('chemical_id')->unique()->comment('危化品id编号');
-            $table->bigInteger('unit_id')->unsigned()->comment('所在单位id');
+            $table->string('chemical_id',40)->unique()->comment('危化品id编号');
+            $table->bigInteger('unit_id')->unsigned()->nullable()->comment('所在单位id');
             $table->foreign('unit_id')->references('id')->on('units');
             $table->string('user_id',20)->comment('管理员');
             $table->bigInteger('laboratory_id')->unsigned()->comment('实验室id');

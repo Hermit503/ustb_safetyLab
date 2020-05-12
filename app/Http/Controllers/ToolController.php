@@ -105,9 +105,10 @@ class ToolController extends Controller
         for ($i=0;$i<200;$i++){
             $user = User::where('user_id',$i)->first();
             if($user!=null){
-                $user->name=$faker->name;
-                $user->phone_number=$faker->phoneNumber;
-                $user->email=$faker->email;
+                //$user->name=$faker->name;
+                //$user->phone_number=$faker->phoneNumber;
+                //$user->email=$faker->email;
+              		$user->exam_result=85;
                 $user->save();
             }else{
                 continue;

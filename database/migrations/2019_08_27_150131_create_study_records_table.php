@@ -16,7 +16,7 @@ class CreateStudyRecordsTable extends Migration
         Schema::create('study_records', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->string('user_id');
+            $table->string('user_id',20);
             $table->foreign('user_id')->references('user_id')->on('users');
 
             $table->bigInteger('content_id')->unsigned()->comment('contents表的id');

@@ -34,7 +34,7 @@ class PermissionController extends Controller
      */
     public function choosePermission(Request $request){
         $user_id = $request->user_id;
-        $permission_a = array('createUser','updateUser','deleteUser','createEquipment','updateEquipment','deleteEquipment');
+        $permission_a = array('createUser','updateUser','deleteUser','createEquipment','updateEquipment','deleteEquipment','createChemical','deleteChemical','inoutChemical');
         $permission_b = [];
         $permissions = Permission::where('user_id',$user_id)->get('permission');
 
