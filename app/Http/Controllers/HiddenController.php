@@ -45,7 +45,11 @@ class HiddenController extends Controller
      */
     public function getHidden(Request $request)
     {
-        $hidden = Hidden::orderBy('created_at', 'desc')->paginate(15);
+        $hidden = Hidden::join('users','users.user_id','hiddens.user_id')
+                ->select('hiddens.*','users.unit_id')
+                ->where('unit_id',$request->unit_id)
+                ->orderBy('created_at','desc')
+                ->paginate(15);
         return response()->json([
             'hidden' => $hidden
         ], 200);
