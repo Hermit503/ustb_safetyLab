@@ -32,13 +32,15 @@ class NoticeController extends Controller
         $result = [];
         if (strpos($request->roles, '校级管理员') !== false) {
             //校级管理员向所有unit发通知
-            $laborary_users = User::all();
-
+            $laborary_users = User::where([])->with('unit')->get();
+            Log::info($laborary_users);
             $i = 0;
             for ($j = 0; $j < count($laborary_users); $j++) {
                 if (Role::where('user_id', $laborary_users[$j]->user_id)->where('role', '院级管理员')->get('user_id')->isNotEmpty()) {
                     $result[$i]['name'] = $laborary_users[$j]->name;
                     $result[$i]['id'] = $laborary_users[$j]->user_id;
+                    $result[$i]['unit'] = $laborary_users[$j]->unit['unit_name'];
+                    $result[$i]['role'] = $laborary_users[$j]->title;
                     $i++;
                 }
             }
@@ -52,9 +54,10 @@ class NoticeController extends Controller
 
             $i = 0;
             for ($j = 0; $j < count($laborary_users); $j++) {
-                if (Role::where('user_id', $laborary_users[$j]->user_id)->where('role', '实验室管理员')->get('user_id')->isNotEmpty()) {
+                if (Role::where('user_id', $laborary_users[$j]->user_id)->whereIn('role',["教师","实验室管理员"])->get('user_id')->isNotEmpty()) {
                     $result[$i]['name'] = $laborary_users[$j]->name;
                     $result[$i]['id'] = $laborary_users[$j]->user_id;
+                    $result[$i]['role'] = $laborary_users[$j]->title;
                     $i++;
                 }
             }
@@ -70,6 +73,7 @@ class NoticeController extends Controller
                 if (Role::where('user_id', $teachers[$j]->user_id)->where('role', '教师')->get('user_id')->isNotEmpty()) {
                     $result[$i]['name'] = $teachers[$j]->name;
                     $result[$i]['id'] = $teachers[$j]->user_id;
+                    $result[$i]['role'] = $teachers[$j]->title;
                     $i++;
                 }
             }
