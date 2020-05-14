@@ -33,7 +33,7 @@ class NoticeController extends Controller
         if (strpos($request->roles, '校级管理员') !== false) {
             //校级管理员向所有unit发通知
             $laborary_users = User::where([])->with('unit')->get();
-            Log::info($laborary_users);
+            //Log::info($laborary_users);
             $i = 0;
             for ($j = 0; $j < count($laborary_users); $j++) {
                 if (Role::where('user_id', $laborary_users[$j]->user_id)->where('role', '院级管理员')->get('user_id')->isNotEmpty()) {

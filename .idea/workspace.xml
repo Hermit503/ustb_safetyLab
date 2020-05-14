@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a7400d7a-ea12-4610-bf22-be1204a73317" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/PermissionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/PermissionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NoticeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NoticeController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -448,6 +447,7 @@
       <workItem from="1584961895392" duration="498000" />
       <workItem from="1586393898925" duration="1658000" />
       <workItem from="1586405776166" duration="14112000" />
+      <workItem from="1589468343775" duration="96000" />
     </task>
     <servers />
   </component>
@@ -471,10 +471,6 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="560" y="176" key="#Log_Highlighting_(ideolog)" timestamp="1578731397418">
-      <screen x="0" y="23" width="1920" height="975" />
-    </state>
-    <state x="560" y="176" key="#Log_Highlighting_(ideolog)/0.23.1920.975@0.23.1920.975" timestamp="1578731397418" />
     <state x="2104" y="172" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584791049766">
       <screen x="1680" y="-18" width="1920" height="1057" />
     </state>
@@ -495,7 +491,6 @@
     <state x="469" y="149" key="SettingsEditor" timestamp="1582005363360">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state x="469" y="149" key="SettingsEditor/0.23.1920.975@0.23.1920.975" timestamp="1578731417288" />
     <state x="469" y="149" key="SettingsEditor/0.23.1920.977/1920.23.1920.1057@0.23.1920.977" timestamp="1582005363360" />
     <state x="616" y="346" key="com.intellij.ide.util.TipDialog" timestamp="1582005353045">
       <screen x="0" y="23" width="1920" height="977" />
@@ -505,10 +500,11 @@
       <screen x="0" y="23" width="1680" height="845" />
     </state>
     <state x="619" y="143" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1680.845@0.23.1680.845" timestamp="1582965284679" />
-    <state x="2303" y="137" width="673" height="724" key="find.popup" timestamp="1583045640027">
-      <screen x="1680" y="-41" width="1920" height="1080" />
+    <state x="545" y="162" width="687" height="571" key="find.popup" timestamp="1589468432798">
+      <screen x="0" y="22" width="1680" height="851" />
     </state>
     <state x="2303" y="137" width="673" height="724" key="find.popup/0.0.1680.945/1680.-41.1920.1080@1680.-41.1920.1080" timestamp="1583045640027" />
+    <state x="545" y="162" width="687" height="571" key="find.popup/0.22.1680.851/1680.-19.1920.1058@0.22.1680.851" timestamp="1589468432798" />
     <state x="545" y="162" width="673" height="568" key="find.popup/0.23.1680.845/1680.-18.1920.1057@0.23.1680.845" timestamp="1583044361329" />
     <state x="2303" y="156" width="673" height="708" key="find.popup/0.23.1680.845/1680.-18.1920.1057@1680.-18.1920.1057" timestamp="1582190375207" />
     <state x="545" y="175" width="673" height="619" key="find.popup/0.23.1680.922/1680.-18.1920.980@0.23.1680.922" timestamp="1582707485224" />
@@ -521,7 +517,6 @@
       <screen x="1680" y="-41" width="1920" height="1080" />
     </state>
     <state x="2305" y="196" width="670" height="750" key="search.everywhere.popup/0.0.1680.945/1680.-41.1920.1080@1680.-41.1920.1080" timestamp="1582377842903" />
-    <state x="625" y="237" width="670" height="676" key="search.everywhere.popup/0.23.1920.975@0.23.1920.975" timestamp="1578746029894" />
     <state x="625" y="237" width="670" height="678" key="search.everywhere.popup/0.23.1920.977/1920.23.1920.1057@0.23.1920.977" timestamp="1582009296839" />
   </component>
   <component name="masterDetails">
