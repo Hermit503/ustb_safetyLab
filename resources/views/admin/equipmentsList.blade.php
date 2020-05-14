@@ -427,7 +427,11 @@
 
                         <div class="layui-card-header">
                             <button class="layui-btn" onclick="openAddModak()">
-                                <i class="layui-icon"></i>添加</button></div>
+                                <i class="layui-icon"></i>添加</button>
+                                <button type="button" class="layui-btn" id="file" style="float:right;margin-right: 0px;margin-top: 5px;">
+                                    <i class="layui-icon">&#xe67c;</i>上传文件
+                                </button> 
+                            </div>
                         <div class="layui-card-body ">
                             <table class="layui-table layui-form">
                                 <thead>
@@ -760,6 +764,29 @@
             laydate.render({
                 elem: '#modify_fix_time', //指定元素
                 trigger: 'click'
+            });
+        });
+
+        layui.use('upload', function(){
+            var upload = layui.upload;
+
+            var uploadInst = upload.render({
+                elem: '#file' //绑定元素
+                ,url: '/admin/uploadExamQuestion' //上传接口
+                ,method:'post'
+                ,accept:'file'
+                ,exts:'xls|xlsx'
+                ,headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+                ,auto:true
+                , done: function(res){
+                    alert(res.msg)
+                }
+                ,success:function (res) {
+                    console.log(res)
+                }
+                ,error: function(res){
+                    console.log('fail');
+                }
             });
         });
 
