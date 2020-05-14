@@ -21,10 +21,11 @@ class ToolController extends Controller
      * $user_id 用户工号
      *
      * */
-    public function getRole($user_id){
-        $result = Role::where('user_id',$user_id)->get(['role']);
-        foreach ($result as $value){
-            if($value->role != "教师"){
+    public function getRole($user_id)
+    {
+        $result = Role::where('user_id', $user_id)->get(['role']);
+        foreach ($result as $value) {
+            if ($value->role != "教师") {
                 return true;
             }
         }
@@ -33,13 +34,14 @@ class ToolController extends Controller
 
     /**
      * 获取单位列表
-     * @author lj
-     * @time 2019-06-21
      * @param null
      * @return json单位列表
      *
+     * @author lj
+     * @time 2019-06-21
      */
-    public function getUnitList(){
+    public function getUnitList()
+    {
         $units = Unit::all();
         $allUnit = [];
         foreach ($units as $item) {
@@ -62,7 +64,7 @@ class ToolController extends Controller
         $allUser = [];
         $user = User::where('unit_id', '=', $unit_id)->get();
         foreach ($user as $item) {
-            if($this->getRole($item->user_id)){
+            if ($this->getRole($item->user_id)) {
                 $allUser[$item->id] = $item->name;
             }
         }
@@ -71,13 +73,13 @@ class ToolController extends Controller
 
     public function getUserName($user_id)
     {
-        $name = User::where('user_id',$user_id)->get('name');
+        $name = User::where('user_id', $user_id)->get('name');
         return $name[0]->name;
     }
 
     public function uploadExamQuestion(Request $request)
     {
-        $file=$request->file('file');
+        $file = $request->file('file');
         $arrays = Excel::toArray(new ExcelImport(), $file);
         for ($i = 0; $i < count($arrays[0]); $i++) {
             $exam = new Exam();
@@ -91,8 +93,8 @@ class ToolController extends Controller
             $exam->save();
         }
         return response()->json([
-            "msg"=>'上传成功'
-        ],200);
+            "msg" => '上传成功'
+        ], 200);
     }
 
     /**
@@ -100,19 +102,20 @@ class ToolController extends Controller
      * @param Request $request
      * @param Faker $faker
      */
-    public function fixName(Request $request,Faker $faker)
+    public function fixName(Request $request, Faker $faker)
     {
-        for ($i=0;$i<200;$i++){
-            $user = User::where('user_id',$i)->first();
-            if($user!=null){
+        for ($i = 0; $i < 200; $i++) {
+            $user = User::where('user_id', $i)->first();
+            if ($user != null) {
                 //$user->name=$faker->name;
                 //$user->phone_number=$faker->phoneNumber;
                 //$user->email=$faker->email;
-              		$user->exam_result=85;
+                $user->exam_result = 85;
                 $user->save();
-            }else{
+            } else {
                 continue;
             }
         }
     }
+
 }

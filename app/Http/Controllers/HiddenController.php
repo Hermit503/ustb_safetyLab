@@ -17,10 +17,10 @@ use Illuminate\Support\Facades\Storage;
 class HiddenController extends Controller
 {
     /** 隐患上传
-     * @author hzj
-     * @date 2019-07-10
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @author hzj
+     * @date 2019-07-10
      */
     public function addHidden(Request $request)
     {
@@ -38,28 +38,34 @@ class HiddenController extends Controller
     }
 
     /**返回隐患列表 倒序输出
-     * @author hzj
-     * @date 2019-07-22
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
+     * @author hzj
+     * @date 2019-07-22
      */
     public function getHidden(Request $request)
     {
-        $hidden = Hidden::join('users','users.user_id','hiddens.user_id')
-                ->select('hiddens.*','users.unit_id')
-                ->where('unit_id',$request->unit_id)
-                ->orderBy('created_at','desc')
+
+        if($request->unit_id==null){
+            $hidden = Hidden::where([])->orderBy('created_at', 'desc')
+                ->all()
                 ->paginate(15);
+        }else{
+            $hidden = Hidden::whereNull('unit')->orWhere('unit',$request->unit_id)->orderBy('created_at', 'desc')
+                ->paginate(15);
+
+        }
         return response()->json([
             'hidden' => $hidden
         ], 200);
+
     }
 
     /**保存图片 返回路径
-     * @author hzj
-     * @date 2019-07-11
      * @param Request $request
      * @return mixed
+     * @author hzj
+     * @date 2019-07-11
      */
     public function saveHiddenImage(Request $request)
     {
@@ -71,9 +77,9 @@ class HiddenController extends Controller
     /**
      * 获取单个隐患详情
      * @date 2019-07-21
-     * @author hzj
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
+     * @author hzj
      */
     public function getHiddenDetail(Request $request)
     {
@@ -93,33 +99,34 @@ class HiddenController extends Controller
     /***
      * 处理隐患  生成记录
      * @date 2019-07-24
-     * @author hzj
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
+     * @author hzj
      */
     public function addHiddenLog(Request $request)
     {
         //修改设备药品状态
-        $number = Hidden::where('id',$request->hidden_id)->get('number');
-        $eq = Equipments::where('asset_number',$number[0]['number'])->first();
-        $cm = Chemical::where('chemical_id',$number[0]['number'])->first();
-        if($eq!=null){
-            $eq->status="正常";
+        $number = Hidden::where('id', $request->hidden_id)->get('number');
+        $eq = Equipments::where('asset_number', $number[0]['number'])->first();
+        $cm = Chemical::where('chemical_id', $number[0]['number'])->first();
+
+        if ($eq != null) {
+            $eq->status = "正常";
             $eq->save();
         }
-        if($cm=null){
-            $cm->status="正常";
+        if ($cm = null) {
+            $cm->status = "正常";
             $cm->save();
         }
         //判断改变状态
         if ($request->solveStatus == "true") {
-                $hidden =Hidden::where('user_id', $request->reportPerson)
-                    ->where('title', $request->title)
+            $hidden = Hidden::where('id', $request->hidden_id)
+//                    ->where('title', $request->title)
 //                    ->where('number','<>',null)
-                    ->first();
-                $hidden->isSolve = 1;
-                $hidden->number = null;
-                $hidden->save();
+                ->first();
+            $hidden->isSolve = 1;
+            $hidden->number = null;
+            $hidden->save();
         }
 
         //添加隐患处理日志到数据库
@@ -128,19 +135,16 @@ class HiddenController extends Controller
         $hiddenLog->hidden_id = $request->hidden_id;
         $hiddenLog->user_name = $name;
         $hiddenLog->reason = $request->reason;
-        if ($request->image!=null) {
-            $hiddenLog->image = env('APP_URL') .$request->image;
+        if ($request->image != null) {
+            $hiddenLog->image = env('APP_URL') . $request->image;
             $hiddenLog->isSolve = '1';
-        } else{
+        } else {
             $hiddenLog->image = null;
         }
         $hiddenLog->save();
         return response()->json([], 201);
 
     }
-
-
-
 
 
 }

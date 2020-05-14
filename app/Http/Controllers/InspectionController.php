@@ -23,16 +23,19 @@ class InspectionController extends Controller
      */
     public function getInspections(Request $request)
     {
-//        Log::info(Equipments::with('laboratories')->get());
-        $inspection = Chemical::where('chemical_id', $request->id)
+
+        $inspection = Chemical::where('chemical_id', $request->id)->where('unit_id', $request->unit_id)
             ->with('laboratories')
             ->get()->toArray();
         if (count($inspection) == 0) {
-            $inspection = Equipments::where("asset_number", $request->id)
+            $inspection = Equipments::where("asset_number", $request->id)->where('unit_id', $request->unit_id)
                 ->with('laboratories')
                 ->get()->toArray();
             if (count($inspection) == 0) {
-                return response()->json("该二维码不存在", 200);
+                return response()->json([
+                    'canInspection' => 'no',
+                    'msg' => "该二维码不存在或无权巡检"
+                ], 200);
             } else {
                 return response()->json($inspection[0], 200);
             }
@@ -51,7 +54,6 @@ class InspectionController extends Controller
     {
 
         $datetime = new \DateTime;
-        // Log::info($request );
         $log = new InspectionLog();
         $user = User::where("user_id", $request->repair_user)->first();
         if ($request->type == "chemical") {
@@ -104,6 +106,7 @@ class InspectionController extends Controller
                 $hidden->title = $request->position . $name;
                 $hidden->detail = $request->detail;
                 $hidden->image = env('APP_URL') . $request->image;
+                $hidden->unit = $request->unit_id;
                 $hidden->occurrence_time = now();
                 $hidden->number = $request->inspection_id;
                 $hidden->save();
@@ -146,6 +149,7 @@ class InspectionController extends Controller
      */
     public function getInspectionRecords(Request $request)
     {
+//        Log::info($request);
         $get = $request->get("role");
         $str = explode('"', $get);
         $arr = array();
