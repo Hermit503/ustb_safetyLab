@@ -140,8 +140,6 @@ class InspectionController extends Controller
             if ($request->image != null) {
                 $hiddenLog->image = env('APP_URL') . $request->image;
                 $hiddenLog->isSolve = '1';
-            } else {
-                $hiddenLog->image = '';
             }
             $hiddenLog->save();
         }
