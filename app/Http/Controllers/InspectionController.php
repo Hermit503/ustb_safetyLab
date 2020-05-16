@@ -109,6 +109,7 @@ class InspectionController extends Controller
      */
     public function fixHiddenStatus($request,$name)
     {
+        Log::info($request);
         if ($request->up == 1) {
             $hidden = new Hidden();
             $hidden->user_id = $request->repair_user;
@@ -124,24 +125,43 @@ class InspectionController extends Controller
         }
         if ($request->up == 0) {
             $hidden_id = Hidden::where('number', $request->inspection_id)
-                ->where('position', $request->position)
-                ->get('id');
-            //判断改变状态
-            $hidden = Hidden::where('number', $request->inspection_id)->first();
-            $hidden->isSolve = 1;
-            $hidden->number = null;
-            $hidden->save();
-            //添加log到数据库
-            $name = (new ToolController)->getUsername($request->repair_user);
-            $hiddenLog = new HiddensLog();
-            $hiddenLog->hidden_id = $hidden_id[0]['id'];
-            $hiddenLog->user_name = $name;
-            $hiddenLog->reason = $request->detail;
-            if ($request->image != null) {
-                $hiddenLog->image = env('APP_URL') . $request->image;
-                $hiddenLog->isSolve = '1';
+                ->where('position',$request->position)
+                ->first();
+                Log::info($hidden_id);
+            Log::info($hidden_id['id']);
+            if ($hidden_id!=null&&$request->status=='正常'){
+                //判断改变状态
+                $hidden = Hidden::where('number', $request->inspection_id)->first();
+                $hidden->isSolve = 1;
+                $hidden->number = null;
+                $hidden->save();
+
+                //添加log到数据库
+
+                $name = (new ToolController)->getUsername($request->repair_user);
+                $hiddenLog = new HiddensLog();
+                $hiddenLog->hidden_id = $hidden_id['id'];
+                $hiddenLog->user_name = $name;
+                $hiddenLog->reason = $request->detail;
+                if ($request->image != null) {
+                    $hiddenLog->image = env('APP_URL') . $request->image;
+                    $hiddenLog->isSolve = '1';
+                }else{
+                    $hiddenLog->image=null;
+                }
+                $hiddenLog->save();
+            }else if($hidden_id!=null&&$request->status!='正常'){
+                $name = (new ToolController)->getUsername($request->repair_user);
+                $hiddenLog = new HiddensLog();
+                $hiddenLog->hidden_id = $hidden_id['id'];
+                $hiddenLog->user_name = $name;
+                $hiddenLog->reason = "巡检但未处理成功！";
+                $hiddenLog->isSolve = '0';
+                $hiddenLog->image=null;
+                $hiddenLog->save();
             }
-            $hiddenLog->save();
+
+
         }
     }
 
