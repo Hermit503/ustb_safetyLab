@@ -109,12 +109,11 @@ class HiddenController extends Controller
         $number = Hidden::where('id', $request->hidden_id)->get('number');
         $eq = Equipments::where('asset_number', $number[0]['number'])->first();
         $cm = Chemical::where('chemical_id', $number[0]['number'])->first();
-
         if ($eq != null) {
             $eq->status = "正常";
             $eq->save();
         }
-        if ($cm = null) {
+        if ($cm != null) {
             $cm->status = "正常";
             $cm->save();
         }
