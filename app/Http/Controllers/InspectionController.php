@@ -74,11 +74,10 @@ class InspectionController extends Controller
                 $log->log = $content;
                 $log->save();
                 $chemical->save();
-                $this->fixHiddenStatus($request,$name);
+                $this->fixHiddenStatus($request, $name);
             }
-
-
             return response()->json('检修完成', 200);
+
         } elseif ($request->type == "equipment") {
             $equipment = Equipments::where('asset_number', $request->id)->first();
             $name = $equipment->equipment_name;
@@ -98,8 +97,9 @@ class InspectionController extends Controller
                 $log->log = $content;
                 $log->save();
                 $equipment->save();
+                $this->fixHiddenStatus($request, $name);
             }
-            $this->fixHiddenStatus($request,$name);
+
             return response()->json('检修完成', 200);
         }
 
@@ -108,8 +108,11 @@ class InspectionController extends Controller
     /**
      * 修改hidden状态
      */
-    public function fixHiddenStatus($request,$name)
+    public function fixHiddenStatus($request, $name)
     {
+//        Log::info($request);
+
+        //需要上报到问题中
         if ($request->up == 1) {
             $hidden = new Hidden();
             $hidden->user_id = $request->repair_user;
@@ -123,13 +126,14 @@ class InspectionController extends Controller
             $hidden->number = $request->inspection_id;
             $hidden->save();
         }
+        //不需要上报的先查询是否存在这个问题，若存在更新问题状态 删除number
         if ($request->up == 0) {
             $hidden_id = Hidden::where('number', $request->inspection_id)
-                ->where('position',$request->position)
+                ->where('position', $request->position)
                 ->first();
 //                Log::info($hidden_id);
 //            Log::info($hidden_id['id']);
-            if ($hidden_id!=null&&$request->status=='正常'){
+            if ($hidden_id != null && $request->status == '正常') {
                 //判断改变状态
                 $hidden = Hidden::where('number', $request->inspection_id)->first();
                 $hidden->isSolve = 1;
@@ -146,18 +150,18 @@ class InspectionController extends Controller
                 if ($request->image != null) {
                     $hiddenLog->image = env('APP_URL') . $request->image;
                     $hiddenLog->isSolve = '1';
-                }else{
-                    $hiddenLog->image=null;
+                } else {
+                    $hiddenLog->image = null;
                 }
                 $hiddenLog->save();
-            }else if($hidden_id!=null&&$request->status!='正常'){
+            } else if ($hidden_id != null && $request->status != '正常') {
                 $name = (new ToolController)->getUsername($request->repair_user);
                 $hiddenLog = new HiddensLog();
                 $hiddenLog->hidden_id = $hidden_id['id'];
                 $hiddenLog->user_name = $name;
                 $hiddenLog->reason = "巡检但未处理成功！";
                 $hiddenLog->isSolve = '0';
-                $hiddenLog->image=null;
+                $hiddenLog->image = null;
                 $hiddenLog->save();
             }
 
