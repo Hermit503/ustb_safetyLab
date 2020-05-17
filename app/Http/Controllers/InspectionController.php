@@ -74,8 +74,9 @@ class InspectionController extends Controller
                 $log->log = $content;
                 $log->save();
                 $chemical->save();
+                $this->fixHiddenStatus($request,$name);
             }
-            $this->fixHiddenStatus($request,$name);
+
 
             return response()->json('检修完成', 200);
         } elseif ($request->type == "equipment") {
