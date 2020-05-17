@@ -110,7 +110,6 @@ class InspectionController extends Controller
      */
     public function fixHiddenStatus($request,$name)
     {
-        Log::info($request);
         if ($request->up == 1) {
             $hidden = new Hidden();
             $hidden->user_id = $request->repair_user;
@@ -128,8 +127,8 @@ class InspectionController extends Controller
             $hidden_id = Hidden::where('number', $request->inspection_id)
                 ->where('position',$request->position)
                 ->first();
-                Log::info($hidden_id);
-            Log::info($hidden_id['id']);
+//                Log::info($hidden_id);
+//            Log::info($hidden_id['id']);
             if ($hidden_id!=null&&$request->status=='正常'){
                 //判断改变状态
                 $hidden = Hidden::where('number', $request->inspection_id)->first();
