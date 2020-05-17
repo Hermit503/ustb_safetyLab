@@ -85,7 +85,6 @@ class InspectionController extends Controller
         $datetime = new \DateTime;
 
         $user = User::where("user_id", $request->repair_user)->first();
-        Log::info($request);
         if ($request->type == "chemical") {
             $chemical = Chemical::where('chemical_id', $request->id)->first();
             $name = $chemical->name;
@@ -98,14 +97,15 @@ class InspectionController extends Controller
                     $chemical->fix_time = $datetime->format('Y-m-d H:i:s');
                     $chemical->save();
                     $this->createInspectionLog($request, $chemical, $type = 'chemical');
+                    Log::info($name."将".$chemical->name."(".$chemical->chemical_id.")"."：状态：由正常改为存在问题，并自动提交为问题");
                 } else if ($request->up == 0) {
                     //检修过后还是处于存在问题状态
                     $this->noHandled($request);
                     $this->createInspectionLog($request, $chemical, $type = 'chemical');
+                    Log::info($name."将".$chemical->name."(".$chemical->chemical_id.")"."：状态：未处理成功,存在问题");
                 }
             } else if ($request->status == '正常') {
                 if ($request->up == 1) {
-                    Log::info("药品由不正常转为正常");
                     //修改问题状态
                     $hidden = Hidden::where('number', $request->inspection_id)->first();
                     $hidden->isSolve = 1;
@@ -115,9 +115,10 @@ class InspectionController extends Controller
                     $chemical->fix_time = $datetime->format('Y-m-d H:i:s');
                     $this->createHiddenRecode($request, $hidden['id']);
                     $this->createInspectionLog($request, $chemical, $type = 'chemical');
+                    Log::info($name."将".$chemical->name."(".$chemical->chemical_id.")"."：状态：由存在问题改为正常");
                 } else if ($request->up == 0) {
-                    Log::info("药品依旧正常");
                     $this->createInspectionLog($request, $chemical, $type = 'chemical');
+                    Log::info($name."巡检".$chemical->name."(".$chemical->chemical_id.")"."：状态：正常");
                 }
 
             }
@@ -134,14 +135,15 @@ class InspectionController extends Controller
                     $equipment->fix_time = $datetime->format('Y-m-d H:i:s');
                     $equipment->save();
                     $this->createInspectionLog($request, $equipment, $type = 'equipment');
+                    Log::info($name."将". $equipment->equipment_name."(".$equipment->asset_number.")"."：状态：由正常改为维修状态，并自动提交为问题");
                 } else if ($request->up == 0) {
                     //检修过后还是处于维修状态
                     $this->noHandled($request);
                     $this->createInspectionLog($request, $equipment, $type = 'equipment');
+                    Log::info($name."将".$equipment->equipment_name."(".$equipment->asset_number.")"."：状态：处理状态：未处理成功");
                 }
             } else if ($request->status == '正常') {
                 if ($request->up == 1) {
-                    Log::info("设备由维修转为正常");
                     $hidden = Hidden::where('number', $request->inspection_id)->first();
                     $hidden->isSolve = 1;
                     $hidden->number = null;
@@ -151,9 +153,10 @@ class InspectionController extends Controller
                     $equipment->save();
                     $this->createHiddenRecode($request, $hidden['id']);
                     $this->createInspectionLog($request, $equipment, $type = 'equipment');
+                    Log::info($name."将". $equipment->equipment_name."(".$equipment->asset_number.")"."：状态：由维修状态转为正常");
                 } else if ($request->up == 0) {
-                    Log::info("设备依旧正常");
                     $this->createInspectionLog($request, $equipment, $type = 'equipment');
+                    Log::info($name."将". $equipment->equipment_name."(".$equipment->asset_number.")"."：状态：正常");
                 }
             }
         }
