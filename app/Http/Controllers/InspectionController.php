@@ -113,6 +113,7 @@ class InspectionController extends Controller
                     $hidden->save();
                     $chemical->status = "正常";
                     $chemical->fix_time = $datetime->format('Y-m-d H:i:s');
+                    $chemical->save();
                     $this->createHiddenRecode($request, $hidden['id']);
                     $this->createInspectionLog($request, $chemical, $type = 'chemical');
                     Log::info($name."将".$chemical->name."(".$chemical->chemical_id.")"."：状态：由存在问题改为正常");
